@@ -16,4 +16,8 @@ UI is built using bootstrap and jquery, and all the files needed are embedded in
 
 The project is composed of two parts, the server (Esp_mad_Server directory) and the client (Esp_mad_Client directory).
 
+Two extra libraries are used in the project : i2clibdev and MPU6050 from jrowberg (https://github.com/jrowberg/i2cdevlib).
+
+These libraries are in the extra_components directrory of the project. Take care to update the Makefile given in Esp_mad_Client & Server regarding your own configuration.
+
 Enjoy !
