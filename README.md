@@ -1,4 +1,4 @@
-s# GliderThrow_Meter
+# GliderThrow_Meter
 
 This project propose a simple digital Angle/Throw meter and ... Differentials, using two esp32 and two MPU 6050 6 DOFFS components.
 
