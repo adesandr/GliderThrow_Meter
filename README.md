@@ -1,6 +1,6 @@
 s# GliderThrow_Meter
 
-This project propose a simple digital Angle/Throw meter and ... Differentials, using two esp32 and two MPU 6050 6 DOFFS components.
+This project proposes a simple digital Angle/Throw meter and ... Differentials, using two esp32 and two MPU 6050 6 DOFFS components.
 
 GliderThrow meter is composed by two device, each using one esp32 and one MPU 6050.
 
