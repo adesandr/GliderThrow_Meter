@@ -50,10 +50,11 @@ int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
 MPU6050 mpu = MPU6050();
 
 /**
- * 	/fn			void meansensors(void)
- *	/brief		average sensors reading 
- * 	/param[in]	void
- *	/return		void
+ * 	\fn			void meansensors(void)
+ *	\brief		average sensors reading 
+ * 	\param[in]	void
+ *	\return		void
+ *
  */
 void meansensors(void){
   long i=0,buff_ax=0,buff_ay=0,buff_az=0,buff_gx=0,buff_gy=0,buff_gz=0;
@@ -70,6 +71,7 @@ void meansensors(void){
       buff_gy=buff_gy+gy;
       buff_gz=buff_gz+gz;
     }
+
     if (i==(buffersize+100)){
       mean_ax=buff_ax/buffersize;
       mean_ay=buff_ay/buffersize;
@@ -84,10 +86,10 @@ void meansensors(void){
 } /* End meansensors() */
 
 /**
- *	/fn 		void calibration(void)
- *	/brief		MPU6050 calibration
- * 	/param[in]	void
- *	/return		void
+ *	\fn 		void calibration(void)
+ *	\brief		MPU6050 calibration
+ * 	\param[in]	void
+ *	\return		void
  *
  */
 void calibration(void){
@@ -134,10 +136,10 @@ void calibration(void){
 } /* End calibration */
 
 /**
- *	/fn 		void InitMPU6050(void)
- *  /brief		MPU6050 Initialisation	
- *	/param[in]	void
- *	/return		void	
+ *	\fn 		void InitMPU6050(void)
+ *  \brief		MPU6050 Initialisation	
+ *	\param[in]	void
+ *	\return		void	
  * 
  */
 void InitMPU6050(void)
@@ -187,17 +189,17 @@ void InitMPU6050(void)
 } /* End Init() */
 
 /**
- *	/fn 		void task_measure(void*)
- *  /brief		MPU6050 periodicall compute	
- *	/param[in]	void*
- *	/return		void	
+ *	\fn 		void task_measure(void*)
+ *  \brief		MPU6050 periodicall compute	
+ *	\param[in]	void*
+ *	\return		void	
  * 
  */
 void task_measure(void*){
 
 	static const char tagd[] = "task_measure->";
 
-	    /*--- I2C Configuration and initialization ---*/
+	/*--- I2C Configuration and initialization ---*/
 	i2c_config_t conf;
 	conf.mode = I2C_MODE_MASTER;
 	conf.sda_io_num = (gpio_num_t)PIN_SDA;
@@ -229,7 +231,7 @@ void task_measure(void*){
     	/*--- see  http://www.pieter-jan.com/node/11 for more information regarding the complementary filter  ---*/
     	/*--- or https://delta-iot.com/la-theorie-du-filtre-complementaire/ (in french)                       ---*/
     	/*--- Basically complementary filter avoid used of kallman filter, quiet difficult to implement in    ---*/
-    	/*--- arduino platform. Gyro are used for fast motion as accelero are used for slow motion.           ---*/                                 
+    	/*--- small platform. Gyro are used for fast motion as accelero are used for slow motion.             ---*/                                 
     	mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
     	angle=0.98*(angle+float(gy)*0.01/131) + 0.02*atan2((double)ax,(double)az)*180/PI;
 
