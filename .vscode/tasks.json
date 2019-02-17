@@ -63,7 +63,7 @@
             "label": "monitor",
             "type": "process",
             "windows": {
-                "command": "c:/esp-idf/msys32/mingw32.exe",
+                "command": "c:/Alain/msys32/mingw32.exe",
                 "args": [
                     "make",
                     "monitor"
@@ -78,7 +78,7 @@
             "label": "menuconfig",
             "type": "process",
             "windows": {
-                "command": "c:/esp-idf/msys32/mingw32.exe",
+                "command": "c:/Alain/msys32/mingw32.exe",
                 "args": [
                     "make",
                     "menuconfig"
