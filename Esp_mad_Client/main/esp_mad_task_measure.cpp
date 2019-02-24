@@ -20,10 +20,7 @@
 #include "MPU6050_6Axis_MotionApps20.h"
 #include "sdkconfig.h"
 #include "math.h"
-
-#define PI 3.14116
-#define PIN_SDA 23
-#define PIN_CLK 19
+#include <Esp_mad.h>
 
 int chordControlSurface = 50;             // Chord in mm. 50 mm by default.
 

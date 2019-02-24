@@ -6,3 +6,5 @@
 COMPONENT_ADD_INCLUDEDIRS=. WebsiteFiles ..
 
 COMPONENT_EMBED_FILES := WebsiteFiles/esp.html WebsiteFiles/bootstrap.min.css WebsiteFiles/bootstrap.min.js WebsiteFiles/jquery-3.3.1.min.js
+
+COMPONENT_EXTRA_INCLUDES= C:/Alain/msys32/home/Robin/GliderThrow_Meter/Includes

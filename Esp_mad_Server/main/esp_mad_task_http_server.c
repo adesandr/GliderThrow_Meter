@@ -32,8 +32,7 @@
 #include <freertos/event_groups.h>
 #include <stdlib.h>
 #include <math.h>
-
-#define PI 3.14116
+#include <Esp_mad.h>
 
 float travel2   = 0.0;
 float angle2    = 0.0;

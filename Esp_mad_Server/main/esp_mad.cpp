@@ -21,8 +21,7 @@
 #include "sdkconfig.h"
 #include <esp_log.h>
 #include <esp_err.h>
-
-#define BLINK_GPIO 5		/* Led Builtin for Lolin 32 (5) for Lolin lite (22) */
+#include <Esp_mad.h>
 
 extern "C" {
 	void app_main(void);

@@ -21,8 +21,7 @@
 #include "freertos/task.h"
 #include <esp_log.h>
 #include <esp_err.h>
-
-#define BLINK_GPIO 22
+#include <Esp_mad.h>
 
 extern "C" {
 	void app_main(void);

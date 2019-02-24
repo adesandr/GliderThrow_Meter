@@ -22,8 +22,7 @@
 #include <esp_http_client.h>
 #include <string.h>
 #include <stdlib.h>
-
-#define ESP_MAD_WIFI_SSID "ESP_MAD"
+#include <Esp_mad.h>
 
 extern float angle;
 extern bool BInit;
@@ -125,7 +124,7 @@ static void initialise_wifi(void *arg)
 
         .sta = {
 
-            .ssid = ESP_MAD_WIFI_SSID,
+            .ssid = AP_WIFI_SSID,
 
         },
 

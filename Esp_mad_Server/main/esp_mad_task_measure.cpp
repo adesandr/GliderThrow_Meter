@@ -23,10 +23,7 @@
 #include "sdkconfig.h"
 #include <driver/i2c.h>
 #include "math.h"
-
-#define PI 3.14116
-#define PIN_SDA 22
-#define PIN_CLK 21
+#include <Esp_mad.h>
 
 int chordControlSurface = 50;             // Chord in mm. 50 mm by default.
 
