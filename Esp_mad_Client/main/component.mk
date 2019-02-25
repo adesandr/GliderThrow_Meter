@@ -5,4 +5,4 @@
 
 COMPONENT_ADD_INCLUDEDIRS=.
 
-COMPONENT_EXTRA_INCLUDES= $(PROJECT_PATH)/GliderThrow_Meter/Includes
+COMPONENT_EXTRA_INCLUDES= C:/Alain/msys32/home/Robin/GliderThrow_Meter/Includes
