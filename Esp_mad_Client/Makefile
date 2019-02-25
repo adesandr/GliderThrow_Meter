@@ -9,5 +9,7 @@ EXTRA_COMPONENT_DIRS := C:/Alain/msys32/home/Robin/GliderThrow_Meter/extra_compo
 
 COMPONENT_ADD_INCLUDEDIRS := components/include
 
+PROJECT_VER="1.0.0"
+
 include $(IDF_PATH)/make/project.mk
 
