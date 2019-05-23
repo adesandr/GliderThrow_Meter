@@ -7,6 +7,8 @@
  *  \brief      Various define used by esp-mad project
  *  \details    This file is shared by Esp_mad_server and Esp_mad_clients
  * 
+ *              Version History :
+ *                  - 23/05/2019 - V1.0.1 - new gpio management
  */
  
 #ifndef  _ESP_MAD_H_
@@ -19,19 +21,19 @@
 #ifdef X_ESP32
     #define PIN_SDA 15
     #define PIN_CLK 14
-    #define BLINK_GPIO  13
+    #define BLINK_GPIO  GPIO_NUM_13
 #endif
 
 #ifdef LOLIN_32_LITE
     #define PIN_SDA 23
     #define PIN_CLK 19
-    #define BLINK_GPIO  22
+    #define BLINK_GPIO  GPIO_NUM_22
 #endif
 
 #ifdef LOLIN_32
     #define PIN_SDA 22
     #define PIN_CLK 21
-    #define BLINK_GPIO  5
+    #define BLINK_GPIO  GPIO_NUM_5
 #endif
 
 #define AP_WIFI_SSID        "ESP_MAD" 

@@ -3,10 +3,11 @@
         {
             "name": "ESP32-Win",
             "includePath": [
-                "${workspaceRoot}",
+                "${workspaceRoot}/**",
                 "${workspaceRoot}/components",
                 "${workspaceRoot}/build",
                 "${workspaceRoot}/build/include",
+                "${env:IDF_PATH}/components/bt/bluedroid/**",
                 "${env:IDF_PATH}/components/bt/bluedroid/utils/include",
                 "${env:IDF_PATH}/components/bt/bluedroid/stack/smp/include",
                 "${env:IDF_PATH}/components/bt/bluedroid/stack/sdp/include",
@@ -125,11 +126,11 @@
                 "${env:IDF_PATH}/components/wpa_supplicant/include/wpa2/tls",
                 "${env:IDF_PATH}/components/wpa_supplicant/include/wpa2/utils",
                 "${env:IDF_PATH}/components/xtensa-debug-module/include",
-                "C:/Alain/msys32/opt/xtensa-esp32-elf/lib/gcc/xtensa-esp32-elf/5.2.0/include",
-                "C:/Alain/msys32/opt/xtensa-esp32-elf/lib/gcc/xtensa-esp32-elf/5.2.0/include-fixed",
-                "C:/Alain/msys32/opt/xtensa-esp32-elf/xtensa-esp32-elf/include",
-                "C:/Alain/msys32/opt/xtensa-esp32-elf/xtensa-esp32-elf/sysroot/usr/include",
-                "C:/Alain/msys32/home/Robin/esp/esp-idf/components"
+                "C:/esp-idf/msys32/opt/xtensa-esp32-elf/lib/gcc/xtensa-esp32-elf/5.2.0/include",
+                "C:/esp-idf/msys32/opt/xtensa-esp32-elf/lib/gcc/xtensa-esp32-elf/5.2.0/include-fixed",
+                "C:/esp-idf/msys32/opt/xtensa-esp32-elf/xtensa-esp32-elf/include",
+                "C:/esp-idf/msys32/opt/xtensa-esp32-elf/xtensa-esp32-elf/sysroot/usr/include",
+                "C:/esp-idf/msys32/home/Eliot/esp/esp-idf/components"
             ],
             "intelliSenseMode": "clang-x64",
             "browse": {
@@ -256,11 +257,11 @@
                     "${env:IDF_PATH}/components/wpa_supplicant/include/wpa2/tls",
                     "${env:IDF_PATH}/components/wpa_supplicant/include/wpa2/utils",
                     "${env:IDF_PATH}/components/xtensa-debug-module/include",
-                    "C:/Alain/msys32/opt/xtensa-esp32-elf/lib/gcc/xtensa-esp32-elf/5.2.0/include",
-                    "C:/Alain/msys32/opt/xtensa-esp32-elf/lib/gcc/xtensa-esp32-elf/5.2.0/include-fixed",
-                    "C:/Alain/msys32/opt/xtensa-esp32-elf/xtensa-esp32-elf/include",
-                    "C:/Alain/msys32/opt/xtensa-esp32-elf/xtensa-esp32-elf/sysroot/usr/include",
-                    "C:/Alain/msys32/home/Robin/esp/esp-idf/components"
+                    "C:/esp-idf/msys32/opt/xtensa-esp32-elf/lib/gcc/xtensa-esp32-elf/5.2.0/include",
+                    "C:/esp-idf/msys32/opt/xtensa-esp32-elf/lib/gcc/xtensa-esp32-elf/5.2.0/include-fixed",
+                    "C:/esp-idf/msys32/opt/xtensa-esp32-elf/xtensa-esp32-elf/include",
+                    "C:/esp-idf/msys32/opt/xtensa-esp32-elf/xtensa-esp32-elf/sysroot/usr/include",
+                    "C:/esp-idf/msys32/home/Eliot/esp/esp-idf/components"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "${workspaceRoot}/.vscode/browse.vc.db"
