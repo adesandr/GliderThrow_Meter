@@ -1,1 +1,0 @@
-8041c56-dirty esp_mad_client v3.3-beta1-136-g97eecfa1b
