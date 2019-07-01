@@ -12,6 +12,6 @@ EXTRA_COMPONENT_DIRS := C:/esp-idf/msys32/home/Eliot/esp/GliderThrow_Meter/extra
 
 COMPONENT_ADD_INCLUDEDIRS := components/include
 
-PROJECT_VER="1.0.1"
+PROJECT_VER="1.0.2"
 
 include $(IDF_PATH)/make/project.mk

@@ -22,13 +22,13 @@
         <!-- A nice jumbotron for the page header -->
         <div class="col-lg-12">
             <div class="jumbotron">
-                <h1 style="font-size:50px">Glider Throw</h1><span style="font-size:25px">The simpliest way to setup your Glider</span>
+                <h1 style="font-size:100px">Glider Throw</h1><span style="font-size:50px">The simpliest way to setup your Glider</span>
             </div>
         </div>
 
         <!-- Navigation bar with three option : Travel, angle and setting -->
         <div class="col-lg-12">    
-            <nav class="navbar navbar-default" style="font-size:35px">
+            <nav class="navbar navbar-default" style="font-size:50px">
                 <ul class="nav nav-tabs">
                     <li><a class="nav-item nav-link active" href="#p1" data-toggle="tab">Travel</a></li>
                     <li><a class="nav-item nav-link" href="#p2" data-toggle="tab">Angle</a></li>
@@ -48,21 +48,49 @@
                         mm</p>
                     </div>
                 </div>
-                           
+
+                <div class="col-lg-12" >
+                    <div style="background:linear-gradient(to right, #ff5db1 0%,#ef017c 100%);border-radius:10px">
+                        <p class="text-center" style="color:white;font-size:50px">Sensor 1 maxi. travel : &nbsp;<span id="maxiTravelSensor1" name="maxiTravelSensor1"></span>
+                        mm</p>
+                    </div>
+                </div>          
+                
+                <div class="col-lg-12" >
+                    <div style="background:linear-gradient(to right, #ff5db1 0%,#ef017c 100%);border-radius:10px">
+                        <p class="text-center" style="color:white;font-size:50px">Sensor 1 mini. travel : &nbsp;<span id="miniTravelSensor1" name="miniTravelSensor1"></span>
+                        mm</p>
+                    </div>
+                </div>        
+
                 <div class="col-lg-12">
                     <div  style="background:linear-gradient(to right, #a9e4f7 0%,#0fb4e7 100%);border-radius:10px">
                         <p class="text-center" style="color:white;font-size:50px">Sensor 2 travel : &nbsp;<span id="travel2" name="travel2"></span>
                         mm</p>             
                     </div>
                 </div>
-                
+
+                <div class="col-lg-12">
+                    <div  style="background:linear-gradient(to right, #a9e4f7 0%,#0fb4e7 100%);border-radius:10px">
+                        <p class="text-center" style="color:white;font-size:50px">Sensor 2 maxi. travel : &nbsp;<span id="maxitravelSensor2" name="maxiTravelSensor2"></span>
+                        mm</p>             
+                    </div>
+                </div>                
+
+                <div class="col-lg-12">
+                    <div  style="background:linear-gradient(to right, #a9e4f7 0%,#0fb4e7 100%);border-radius:10px">
+                        <p class="text-center" style="color:white;font-size:50px">Sensor 2 mini. travel : &nbsp;<span id="miniTravelSensor2" name="miniTravelSensor2"></span>
+                        mm</p>             
+                    </div>
+                </div>     
+
                 <div class="col-lg-12" >
                     <div style="background:linear-gradient(to right, #5ef59d 0%,#06d606 100%);border-radius:10px">
                         <p class="text-center" style="color:white;font-size:50px">Delta travel : &nbsp;<span id="DeltaTravel" name="DeltaTravel"></span>
                         mm</p>
                     </div>
                 </div>
-                
+
             </div>
             
             <!-- Angle tab-content -->
@@ -117,14 +145,22 @@
                             $("#DeltaTravel").text(obj.DeltaTravel);                                                        
                             $("#angle1").text(obj.angle1);
                             $("#angle2").text(obj.angle2);
-                            $("#DeltaAngle").text(obj.DeltaAngle);                                                        
+                            $("#DeltaAngle").text(obj.DeltaAngle);
+                            $("#maxiTravelSensor1").text(obj.maxiTravelSensor1)
+                            $("#miniTravelSensor1").text(obj.miniTravelSensor1)
+                            $("#maxiTravelSensor2").text(obj.maxiTravelSensor2)
+                            $("#miniTravelSensor2").text(obj.miniTravelSensor2)         
                         } else {
                             $("#travel1").text("?");
                             $("#travel2").text("?");
                             $("#DeltaTravel").text("?");                                                        
                             $("#angle1").text("?");
                             $("#angle2").text("?");
-                            $("#DeltaAngle").text("?");     
+                            $("#DeltaAngle").text("?");
+                            $("#maxiTravelSensor1").text("?"); 
+                            $("#miniTravelSensor1").text("?");
+                            $("#maxiTravelSensor2").text("?");
+                            $("#miniTravelSensor2").text("?");          
                         }
                     }).fail(function() {
                         console.log("The was a problem retrieving the data.");

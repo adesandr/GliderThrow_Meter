@@ -16,6 +16,9 @@
  *          Uris are embedded in the .rodata DRAM segment (see component.mk)
  *          Main HTML page is WebsiteFiles/esp.html and used bootstrap framework and jquery.
  *          Ressources for bootstrap and jquery are minified version in WebsiteFiles/ 
+ *
+ *          Version history
+ *              01/07/2019 : maxi, mini travel for both sensors added
  *          
  */
 
@@ -36,6 +39,11 @@
 
 float travel2   = 0.0;
 float angle2    = 0.0;
+
+float maxiTravelSensor1 = 0.0;
+float miniTravelSensor1 = 0.0;
+float maxiTravelSensor2 = 0.0;
+float miniTravelSensor2 = 0.0;
 
 extern float travel;
 extern float angle;
@@ -228,14 +236,25 @@ esp_err_t sensors_get_handler(httpd_req_t *req)
 
     }
 
-    buf = malloc(100);
+    buf = malloc(200);
 
     memset(buf,0,sizeof(buf)-1);
 
+    /*--- Compute Min, Max and Deltas for both sensors ---*/
     DeltaTravel = travel - travel2;
     DeltaAngle = angle - angle2;
 
-    sprintf(buf,"{\"travel1\":%0.1f,\"travel2\":%0.1f,\"DeltaTravel\":%0.1f,\"angle1\":%0.1f,\"angle2\":%0.1f,\"DeltaAngle\":%0.1f}",travel, travel2, DeltaTravel, angle, angle2, DeltaAngle);
+    if (travel > maxiTravelSensor1)
+        maxiTravelSensor1 = travel;
+    if (travel < miniTravelSensor1)
+        miniTravelSensor1 = travel;
+
+    if (travel2 > maxiTravelSensor2)
+        maxiTravelSensor2 = travel2;
+    if (travel2 < miniTravelSensor2)
+        miniTravelSensor2 = travel2; 
+
+    sprintf(buf,"{\"travel1\":%0.1f,\"travel2\":%0.1f,\"DeltaTravel\":%0.1f,\"angle1\":%0.1f,\"angle2\":%0.1f,\"DeltaAngle\":%0.1f, \"maxiTravelSensor1\":%0.1f, \"miniTravelSensor1\":%0.1f,\"maxiTravelSensor2\":%0.1f,\"miniTravelSensor2\":%0.1f}",travel, travel2, DeltaTravel, angle, angle2, DeltaAngle, maxiTravelSensor1, miniTravelSensor1, maxiTravelSensor2, miniTravelSensor2);
 
  	ESP_LOGI(TAG, "[len = %d]  \n", strlen(buf));
 
@@ -672,7 +691,7 @@ static void initialise_wifi_in_ap(void *arg)
 
 /**
  *	\fn 	    task_http_server.
- *	\brief 		task launch the function to initialize wize .
+ *	\brief 		task launch the function to initialize the http server .
  *	\param[in]	void*
  *	\return		void.
  */
