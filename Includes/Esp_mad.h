@@ -31,8 +31,8 @@
 #endif
 
 #ifdef LOLIN_32
-    #define PIN_SDA 22
-    #define PIN_CLK 21
+    #define PIN_SDA 21
+    #define PIN_CLK 22
     #define BLINK_GPIO  GPIO_NUM_5
 #endif
 
