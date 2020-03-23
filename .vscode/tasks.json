@@ -2,23 +2,18 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "command": "bash",
-    "args": [
-        "-c"
-    ],
-    "echoCommand": true,
-    
     "tasks": [
         {
-            "label": "build app",
-            "group": "build",
-            "command": "make",
+            "label": "Build - Build project",
             "type": "shell",
-            "args": [
-                "app"
-            ],
-            "presentation": {
-                "reveal": "always"
+            "command": "${config:idf.pythonBinPath} ${config:idf.espIdfPath}/tools/idf.py build",
+            "windows": {
+                "command": "${config:idf.pythonBinPathWin} ${config:idf.espIdfPathWin}\\tools\\idf.py build"
+            },
+            "options": {
+                "env": {
+                    "PATH": "${config:idf.customExtraPaths}"
+                }
             },
             "problemMatcher": {
                 "owner": "cpp",
@@ -30,64 +25,124 @@
                     "column": 3,
                     "severity": 4,
                     "message": 5
-                }
+                } 
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
             }
         },
         {
-            "label": "clean app",
-            "command": "make",
+            "label": "Set ESP-IDF Target",
             "type": "shell",
-            "args": [
-                "app-clean"
-            ],
-            "presentation": {
-                "reveal": "always"
+            "command": "${command:espIdf.setTarget}",
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(.*):(//d+):(//d+)://s+(warning|error)://s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                } 
             },
-            "problemMatcher": [
-                "$gcc"
-            ]
         },
         {
-            "label": "flash app",
-            "command": "make",
+            "label": "Clean - Clean the project",
             "type": "shell",
-            "args": [
-                "app-flash"
-            ],
-            "presentation": {
-                "reveal": "always"
+            "command": "${config:idf.pythonBinPath} ${config:idf.espIdfPath}/tools/idf.py fullclean",
+            "windows": {
+                "command": "${config:idf.pythonBinPathWin} ${config:idf.espIdfPathWin}\\tools\\idf.py fullclean"
             },
-            "problemMatcher": []
+            "options": {
+                "env": {
+                    "PATH": "${config:idf.customExtraPaths}"
+                }
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                } 
+            },
         },
         {
-            "label": "monitor",
-            "type": "process",
+            "label": "Flash - Flash the device",
+            "type": "shell",
+            "command": "${config:idf.pythonBinPath} ${config:idf.espIdfPath}/tools/idf.py -p ${config:idf.port} -b ${config:idf.baudRate} flash",
             "windows": {
-                "command": "c:/esp-idf/msys32/mingw32.exe",
-                "args": [
-                    "make",
-                    "monitor"
-                ]
+                "command": "${config:idf.pythonBinPathWin} ${config:idf.espIdfPathWin}\\tools\\idf.py flash -p ${config:idf.portWin} -b ${config:idf.baudRate}"
             },
-            "presentation": {
-                "reveal": "always"
+            "options": {
+                "env": {
+                    "PATH": "${config:idf.customExtraPaths}"
+                }
             },
-            "problemMatcher": []
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                } 
+            },
         },
         {
-            "label": "menuconfig",
-            "type": "process",
+            "label": "Monitor: Start the monitor",
+            "type": "shell",
+            "dependsOn": "Flash - Flash the device",
+            "command": "${config:idf.pythonBinPath} ${config:idf.espIdfPath}/tools/idf.py -p ${config:idf.port} -b ${config:idf.baudRate} monitor",
             "windows": {
-                "command": "c:/esp-idf/msys32/mingw32.exe",
-                "args": [
-                    "make",
-                    "menuconfig"
-                ]
+                "command": "${config:idf.pythonBinPathWin} ${config:idf.espIdfPathWin}\\tools\\idf.py monitor -p ${config:idf.portWin} -b ${config:idf.baudRate}"
             },
+            "options": {
+                "env": {
+                    "PATH": "${config:idf.customExtraPaths}"
+                }
+            },
+        },
+        {
+            "label":"OpenOCD: Start openOCD",
+            "type":"shell",
             "presentation": {
-                "reveal": "always"
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel":"new"
             },
-            "problemMatcher": []
-        }
+            "command":"openocd -s ${command:espIdf.getOpenOcdScriptValue} ${command:espIdf.getOpenOcdConfigs}",
+            "windows": {
+                "command": "openocd.exe -s ${command:espIdf.getOpenOcdScriptValue} ${command:espIdf.getOpenOcdConfigs}"
+            },
+            "options": {
+                "env": {
+                    "PATH": "${config:idf.customExtraPaths}"
+                }
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                } 
+            },
+        },
     ]
 }

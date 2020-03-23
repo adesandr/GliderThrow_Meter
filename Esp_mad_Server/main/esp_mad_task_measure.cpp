@@ -25,7 +25,7 @@
 #include "math.h"
 #include <Esp_mad.h>
 
-int chordControlSurface = 50;             // Chord in mm. 50 mm by default.
+int chordControlSurface = 50;         // Chord in mm. 50 mm by default.
 
 int16_t ax, ay, az;                       // raw measure
 int16_t gx, gy, gz;

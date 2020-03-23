@@ -16,7 +16,7 @@
 
 #define PI  3.14159265359
 
-#define X_ESP32                 /* Update to LOLIN_32_LITE or LOLIN_32 depending your ESP32 dev. board */
+#define LOLIN_32                 /* Update to LOLIN_32_LITE or LOLIN_32 depending your ESP32 dev. board */
 
 #ifdef X_ESP32
     #define PIN_SDA 15

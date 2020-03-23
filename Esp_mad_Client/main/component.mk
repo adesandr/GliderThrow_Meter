@@ -5,4 +5,4 @@
 
 COMPONENT_ADD_INCLUDEDIRS=.
 
-COMPONENT_EXTRA_INCLUDES= C:/esp-idf/msys32/home/Eliot/esp/GliderThrow_Meter/Includes
+COMPONENT_EXTRA_INCLUDES= C:/Users/Robin/esp/GliderThrow_Meter/Includes

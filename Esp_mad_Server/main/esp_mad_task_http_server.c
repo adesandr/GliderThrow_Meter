@@ -121,7 +121,7 @@ esp_err_t bootstrap_min_css_handler(httpd_req_t *req)
     
 } /* end bootstrap_min_css_handler() */
 
-httpd_uri_t bootstrap_min_css = {
+httpd_uri_t bootstrap_min_css_uri = {
 
     .uri       = "/bootstrap.min.css",
 
@@ -153,7 +153,7 @@ esp_err_t bootstrap_min_js_handler(httpd_req_t *req)
     
 } /* end bootstrap_min_js_handler() */
 
-httpd_uri_t bootstrap_min_js = {
+httpd_uri_t bootstrap_min_js_uri = {
 
     .uri       = "/bootstrap.min.js",
 
@@ -185,7 +185,7 @@ esp_err_t jquery_3_3_1_min_js_handler(httpd_req_t *req)
     
 } /* end jquery_3_3_1_min_js_handler() */
 
-httpd_uri_t jquery_3_3_1_min_js = {
+httpd_uri_t jquery_3_3_1_min_js_uri = {
 
     .uri       = "/jquery-3.3.1.min.js",
 
@@ -369,7 +369,7 @@ httpd_uri_t sensor2 = {
 esp_err_t chord_post_handler(httpd_req_t *req)
 {
 
-    char buf[40];
+    char buf[50];
 
     char param[3];
 
@@ -478,11 +478,11 @@ httpd_handle_t start_webserver(void)
 
         httpd_register_uri_handler(server, &main_page);
 
-        httpd_register_uri_handler(server, &bootstrap_min_css);
+        httpd_register_uri_handler(server, &bootstrap_min_css_uri);
 
-        httpd_register_uri_handler(server, &bootstrap_min_js);
+        httpd_register_uri_handler(server, &bootstrap_min_js_uri);
 
-        httpd_register_uri_handler(server, &jquery_3_3_1_min_js);
+        httpd_register_uri_handler(server, &jquery_3_3_1_min_js_uri);
 
         httpd_register_uri_handler(server, &chord);
 
