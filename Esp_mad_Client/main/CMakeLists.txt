@@ -1,2 +1,2 @@
 idf_component_register(SRCS "esp_mad_client.cpp" "esp_mad_task_http_client.c" "esp_mad_task_measure.cpp"
-                    INCLUDE_DIRS "" "C:/Users/Robin/esp/GliderThrow_Meter/Includes" "C:/Users/Robin/esp/GliderThrow_Meter/extra_components/MPU6050")
+                    INCLUDE_DIRS "" "${PROJECT_DIR}/../Includes" "${PROJECT_DIR}/../extra_components/MPU6050")

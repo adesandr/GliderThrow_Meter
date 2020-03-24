@@ -13,12 +13,14 @@
  *              - dhcp server intialisation
  *              - wifi driver initialisation in soft AP mode
  *              - when AP station is started, the http server is launched and the uri handles are setup
- *          Uris are embedded in the .rodata DRAM segment (see component.mk)
+ *          Uris are embedded in the .rodata DRAM segment (see CMakeList.txt)
  *          Main HTML page is WebsiteFiles/esp.html and used bootstrap framework and jquery.
  *          Ressources for bootstrap and jquery are minified version in WebsiteFiles/ 
  *
  *          Version history
- *              01/07/2019 : maxi, mini travel for both sensors added
+ *              01/07/2019 : maxi, mini, travel for both sensors added
+ *              24/03/2020 : http_uri_t variables declaration post-fixed by "_uri" to insure compatibility with ESP-IDF 4.0 and CMake build System
+ *                           buffer buf[] in chord_post_handler pass to 50 bytes.
  *          
  */
 
