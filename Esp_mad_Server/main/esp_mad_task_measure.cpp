@@ -47,10 +47,10 @@ int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
 MPU6050 mpu = MPU6050();
 
 /**
- * 	\fn			void meansensors(void)
- *	\brief		average sensors reading 
- * 	\param[in]	void
- *	\return		void
+ * 	@fn			void meansensors(void)
+ *	@brief		average sensors reading 
+ * 	@param[in]	void
+ *	@return		void
  *
  */
 void meansensors(void){
@@ -83,10 +83,10 @@ void meansensors(void){
 } /* End meansensors() */
 
 /**
- *	\fn 		void calibration(void)
- *	\brief		MPU6050 calibration
- * 	\param[in]	void
- *	\return		void
+ *	@fn 		void calibration(void)
+ *	@brief		MPU6050 calibration
+ * 	@param[in]	void
+ *	@return		void
  *
  */
 void calibration(void){
@@ -133,10 +133,10 @@ void calibration(void){
 } /* End calibration */
 
 /**
- *	\fn 		void InitMPU6050(void)
- *  \brief		MPU6050 Initialisation	
- *	\param[in]	void
- *	\return		void	
+ *	@fn 		void InitMPU6050(void)
+ *  @brief		MPU6050 Initialisation	
+ *	@param[in]	void
+ *	@return		void	
  * 
  */
 void InitMPU6050(void)
@@ -186,10 +186,10 @@ void InitMPU6050(void)
 } /* End Init() */
 
 /**
- *	\fn 		void task_measure(void*)
- *  \brief		MPU6050 periodicall compute	
- *	\param[in]	void*
- *	\return		void	
+ *	@fn 		void task_measure(void*)
+ *  @brief		MPU6050 periodicall compute	
+ *	@param[in]	void*
+ *	@return		void	
  * 
  */
 void task_measure(void*){

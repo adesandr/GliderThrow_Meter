@@ -1,11 +1,11 @@
 /**
- * \file    esp_mad.cpp
- * \author  Alain Désandré
- * \version 1.0
- * \date    28 octobre 2018
- * \brief   esp_mad project main files.
+ * @file    esp_mad.cpp
+ * @author  Alain Désandré
+ * @version 1.0.3
+ * @date    28 octobre 2018
+ * @brief   esp_mad project main files.
  *
- * \details The MAD application is intended to provide a ESP32-based tool
+ * @details The MAD application is intended to provide a ESP32-based tool
  *          for visualizing the deflection (in mm and degree) of control surface
  *          on a remote-controlled model.
  *          ESP_MAD is composed of four files :
@@ -38,10 +38,10 @@ extern void task_http_server(void*);
 extern bool BInit;
 
 /**
- *	\fn 	    app_main(void)
- *	\brief 		esp_mad project entry point function.
- *	\param[in]	void*
- *	\return		void.
+ *	@fn 	    app_main(void)
+ *	@brief 		esp_mad project entry point function.
+ *	@param[in]	void*
+ *	@return		void.
  */
 void app_main(void)
 {

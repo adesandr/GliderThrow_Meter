@@ -1,11 +1,11 @@
 /**
- * \file    esp_mad_task_http_server.c
- * \author  Alain Désandré - alain.desandre@wanadoo.fr
- * \version 1.0
- * \date    November 18th 2018
- * \brief   This file include all the code to deal with a simple http server.
+ * @file    esp_mad_task_http_server.c
+ * @author  Alain Désandré - alain.desandre@wanadoo.fr
+ * @version 1.0
+ * @date    November 18th 2018
+ * @brief   This file include all the code to deal with a simple http server.
  *
- * \details HTTP server deal with the various http request from the clients.
+ * @details HTTP server deal with the various http request from the clients.
  *			At the fist reception of an http get from one client, the server
  *			respond with the requested uri (see WebsiteFiles/ for the various uri).
  *          esp_mad_task_http_server deals with :
@@ -72,10 +72,10 @@ const int CLIENT_DISCONNECTED_BIT = BIT1;
 static const char *TAG="APP";
 
 /**
- *	\fn 	    esp_err_t main_page_get_handler (httpd_req_t *req)
- *	\brief 		An HTTP GET handler for the main esp.html page.
- *	\param[in]	*req : un http_req_t pointer.
- *	\return		ESP_OK.
+ *	@fn 	    esp_err_t main_page_get_handler (httpd_req_t *req)
+ *	@brief 		An HTTP GET handler for the main esp.html page.
+ *	@param[in]	*req : un http_req_t pointer.
+ *	@return		ESP_OK
  */
 esp_err_t main_page_get_handler(httpd_req_t *req)
 {
@@ -104,10 +104,10 @@ httpd_uri_t main_page = {
 };
 
 /**
- *	\fn 	    esp_err_t bootstrap_min_css_handler (httpd_req_t *req)
- *	\brief 		An HTTP GET handler for bootstrap.min.css uri.
- *	\param[in]	*req : un http_req_t pointer.
- *	\return		ESP_FAIL ou ESP_OK.
+ *	@fn 	    esp_err_t bootstrap_min_css_handler (httpd_req_t *req)
+ *	@brief 		An HTTP GET handler for bootstrap.min.css uri.
+ *	@param[in]	*req : un http_req_t pointer.
+ *	@return		ESP_OK
  */
 esp_err_t bootstrap_min_css_handler(httpd_req_t *req)
 {
@@ -136,10 +136,10 @@ httpd_uri_t bootstrap_min_css_uri = {
 };
 
 /**
- *	\fn 	    esp_err_t bootstrap_min_js_handler (httpd_req_t *req)
- *	\brief 		An HTTP GET handler for bootstrap.min.js uri.
- *	\param[in]	*req : un http_req_t pointer.
- *	\return		ESP_FAIL ou ESP_OK.
+ *	@fn 	    esp_err_t bootstrap_min_js_handler (httpd_req_t *req)
+ *	@brief 		An HTTP GET handler for bootstrap.min.js uri.
+ *	@param[in]	*req : un http_req_t pointer.
+ *	@return		ESP_OK.
  */
 esp_err_t bootstrap_min_js_handler(httpd_req_t *req)
 {
@@ -168,10 +168,10 @@ httpd_uri_t bootstrap_min_js_uri = {
 };
 
 /**
- *	\fn 	    esp_err_t jquery_3_3_1_min_js_handler (httpd_req_t *req)
- *	\brief 		An HTTP GET handler for jquery.3.3.1.min.js uri.
- *	\param[in]	*req : un http_req_t pointer.
- *	\return		ESP_FAIL ou ESP_OK.
+ *	@fn 	    esp_err_t jquery_3_3_1_min_js_handler (httpd_req_t *req)
+ *	@brief 		An HTTP GET handler for jquery.3.3.1.min.js uri.
+ *	@param[in]	*req : un http_req_t pointer.
+ *	@return		ESP_OK.
  */
 esp_err_t jquery_3_3_1_min_js_handler(httpd_req_t *req)
 {
@@ -199,10 +199,10 @@ httpd_uri_t jquery_3_3_1_min_js_uri = {
 };
 
 /**
- *	\fn 	    esp_err_t sensors_get_handler (httpd_req_t *req)
- *	\brief 		An HTTP GET handler to serve, travel, angle and delta of both sensors
- *	\param[in]	*req : un http_req_t pointer.
- *	\return		ESP_OK.
+ *	@fn 	    esp_err_t sensors_get_handler (httpd_req_t *req)
+ *	@brief 		An HTTP GET handler to serve, travel, angle and delta of both sensors
+ *	@param[in]	*req : an http_req_t pointer.
+ *	@return		ESP_OK
  */
 esp_err_t sensors_get_handler(httpd_req_t *req)
 {
@@ -287,10 +287,12 @@ httpd_uri_t sensors = {
 };
 
 /**
- *	\fn 	    esp_err_t chord_post_handler (httpd_req_t *req)
- *	\brief 		An HTTP POST handler.
- *	\param[in]	*req : un http_req_t pointer.
- *	\return		ESP_FAIL ou ESP_OK.
+ *	@fn 	    esp_err_t chord_post_handler (httpd_req_t *req)
+ *	@brief 		An HTTP POST handler.
+ *	@param[in]	*req : un http_req_t pointer.
+ *	@return		
+ *      - ESP_OK
+ *      - ESP_FAIL
  */
 esp_err_t sensor2_post_handler(httpd_req_t *req)
 {
@@ -363,10 +365,12 @@ httpd_uri_t sensor2 = {
 };
 
 /**
- *	\fn 	    esp_err_t chord_post_handler (httpd_req_t *req)
- *	\brief 		An HTTP POST handler.
- *	\param[in]	*req : un http_req_t pointer.
- *	\return		ESP_FAIL ou ESP_OK.
+ *	@fn 	    esp_err_t chord_post_handler (httpd_req_t *req)
+ *	@brief 		An HTTP POST handler.
+ *	@param[in]	*req : un http_req_t pointer.
+ *	@return		
+ *      - ESP_OK
+ *      - ESP_FAIL
  */
 esp_err_t chord_post_handler(httpd_req_t *req)
 {
@@ -456,10 +460,10 @@ httpd_uri_t chord = {
 };
 
 /**
- *	\fn 	    httpd_handle_t start_webserver (void)
- *	\brief 		Start the http server and stet the uris handles
- *	\param[in]	void
- *	\return		NULL or a pointer on http_handle_t server.
+ *	@fn 	    httpd_handle_t start_webserver (void)
+ *	@brief 		Start the http server and stet the uris handles
+ *	@param[in]	void
+ *	@return		NULL or a pointer on http_handle_t server.
  */
 httpd_handle_t start_webserver(void)
 {
@@ -503,10 +507,10 @@ httpd_handle_t start_webserver(void)
 }
 
 /**
- *	\fn 	    vod stop_webserver (httpd_handle_t server)
- *	\brief 		stop the httpd web server.
- *	\param[in]	http_handle_t server.
- *	\return		void.
+ *	@fn 	    vod stop_webserver (httpd_handle_t server)
+ *	@brief 		stop the httpd web server.
+ *	@param[in]	http_handle_t server.
+ *	@return		void.
  */
 void stop_webserver(httpd_handle_t server)
 {
@@ -518,11 +522,11 @@ void stop_webserver(httpd_handle_t server)
 } /* end stop_webserver() */
 
 /**
- *	\fn 	    esp_err_t event_handler(void *ctx, system_event_t *event).
- *	\brief 		task launch the function to initialize wize .
- *	\param[in]	*ctx : httpd_handler_t pointer.
- *	\param[in]	*event : system_event_t event pointer.
- *	\return		ESP_OK
+ *	@fn 	    esp_err_t event_handler(void *ctx, system_event_t *event).
+ *	@brief 		task launch the function to initialize wize .
+ *	@param[in]	*ctx : httpd_handler_t pointer.
+ *	@param[in]	*event : system_event_t event pointer.
+ *	@return		ESP_OK
  */
  static esp_err_t event_handler(void *ctx, system_event_t *event)
 {
@@ -602,10 +606,10 @@ void stop_webserver(httpd_handle_t server)
 } /* end event_handler() */
 
 /**
- *	\fn 	    static void start_dhcp_server(void *arg);
- *	\brief 		DHCP Server initialisation.
- *	\param[in]	void*
- *	\return		void.
+ *	@fn 	    static void start_dhcp_server(void *arg);
+ *	@brief 		DHCP Server initialisation.
+ *	@param[in]	void*
+ *	@return		void.
  */
 static void start_dhcp_server(){ 
 
@@ -640,10 +644,10 @@ static void start_dhcp_server(){
 }
 
 /**
- *	\fn 	    static void initialise_wifi_in_ap(void *arg);
- *	\brief 		wifi initialisation.
- *	\param[in]	void*
- *	\return		void.
+ *	@fn 	    static void initialise_wifi_in_ap(void *arg);
+ *	@brief 		wifi initialisation.
+ *	@param[in]	void*
+ *	@return		void.
  */
 static void initialise_wifi_in_ap(void *arg)
 {
@@ -692,10 +696,10 @@ static void initialise_wifi_in_ap(void *arg)
 } /* end initialise wifi */
 
 /**
- *	\fn 	    task_http_server.
- *	\brief 		task launch the function to initialize the http server .
- *	\param[in]	void*
- *	\return		void.
+ *	@fn 	    task_http_server.
+ *	@brief 		task launch the function to initialize the http server .
+ *	@param[in]	void*
+ *	@return		void.
  */
 void task_http_server(void *ignore)
 
