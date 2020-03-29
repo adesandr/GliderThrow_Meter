@@ -9,11 +9,10 @@
  *          for visualizing the deflection (in mm and degree) of control surface
  *          on a remote-controlled model.
  *          ESP_MAD is composed of four files :
- *              . esp_mad.ccp : main function.
- *              . esp_mad_task_measure.cpp : MPU6050 management
- *              . esp_mad_task_http_server.c : http server
- *              . esp_mad.h : Globals define
- *              . esp_html.h : HTML page and Jquery/Javascript function.
+ *              - esp_mad_client.ccp : main function.
+ *              - esp_mad_task_measure.cpp : MPU6050 management
+ *              - esp_mad_task_http_client.c : http client
+ *              - esp_mad.h : Globals define
  */
 
 #include "freertos/FreeRTOS.h"
@@ -37,7 +36,7 @@ extern void task_http_client(void*);
 /**
  *	@fn 	    app_main(void)
  *	@brief 		esp_mad project entry point function.
- *	@param[in]	void*
+ *	@param[in]	void
  *	@return		void.
  */
 void app_main(void)
