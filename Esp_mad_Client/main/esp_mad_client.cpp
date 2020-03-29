@@ -1,11 +1,11 @@
 /**
- * \file    esp_mad_client.cpp
- * \author  Alain Désandré
- * \version 1.0
- * \date    28 octobre 2018
- * \brief   esp_mad project main files.
+ * @file    esp_mad_client.cpp
+ * @author  Alain Désandré
+ * @version 1.0
+ * @date    28 octobre 2018
+ * @brief   esp_mad project main files.
  *
- * \details The MAD application is intended to provide a ESP32-based tool
+ * @details The MAD application is intended to provide a ESP32-based tool
  *          for visualizing the deflection (in mm and degree) of control surface
  *          on a remote-controlled model.
  *          ESP_MAD is composed of four files :
@@ -14,9 +14,6 @@
  *              . esp_mad_task_http_server.c : http server
  *              . esp_mad.h : Globals define
  *              . esp_html.h : HTML page and Jquery/Javascript function.
- * 
- *          Version History :
- *              - 23/05/2019 - V1.0.1 - New gpio management
  */
 
 #include "freertos/FreeRTOS.h"
@@ -38,10 +35,10 @@ extern void task_measure(void*);
 extern void task_http_client(void*);
 
 /**
- *	\fn 	    app_main(void)
- *	\brief 		esp_mad project entry point function.
- *	\param[in]	void*
- *	\return		void.
+ *	@fn 	    app_main(void)
+ *	@brief 		esp_mad project entry point function.
+ *	@param[in]	void*
+ *	@return		void.
  */
 void app_main(void)
 {

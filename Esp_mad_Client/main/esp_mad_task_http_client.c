@@ -1,11 +1,11 @@
 /**
- * \file    esp_mad_task_http_client.c
- * \author  Alain Désandré
- * \version 1.0
- * \date    November 18th 2018
- * \brief   This file include all the code to deal with a simple http server.
+ * @file    esp_mad_task_http_client.c
+ * @author  Alain Désandré
+ * @version 1.0
+ * @date    November 18th 2018
+ * @brief   This file include all the code to deal with a simple http server.
  *
- * \details HTTP server deal with the various http request from the client.
+ * @details HTTP server deal with the various http request from the client.
  *			At the fist reception of an http get from one client, the server
  *			respond with the esp_mad HTML page (see esp_html.h).
  *          
@@ -42,11 +42,11 @@ const int CONNECTED_BIT = BIT0;
 static const char *TAG="Esp_Client";
 
 /**
- *	\fn 	    esp_err_t event_handler(void *ctx, system_event_t *event).
- *	\brief 		task launch the function to initialize wize .
- *	\param[in]	*ctx : httpd_handler_t pointer.
- *	\param[in]	*event : system_event_t event pointer.
- *	\return		ESP_OK
+ *	@fn 	    esp_err_t event_handler(void *ctx, system_event_t *event).
+ *	@brief 		task launch the function to initialize wize .
+ *	@param[in]	*ctx : httpd_handler_t pointer.
+ *	@param[in]	*event : system_event_t event pointer.
+ *	@return		ESP_OK
  */
 static esp_err_t event_handler(void *ctx, system_event_t *event)
 {
@@ -100,10 +100,10 @@ static esp_err_t event_handler(void *ctx, system_event_t *event)
 
 
 /**
- *	\fn 	    static void initialise_wifi(void *arg);
- *	\brief 		wifi initialisation.
- *	\param[in]	void*
- *	\return		void.
+ *	@fn 	    static void initialise_wifi(void *arg);
+ *	@brief 		wifi initialisation.
+ *	@param[in]	void*
+ *	@return		void.
  */
 static void initialise_wifi(void *arg)
 {
@@ -140,8 +140,13 @@ static void initialise_wifi(void *arg)
 
 } /* end initialise wifi */
 
+/**
+ *	@fn 	    esp_err_t _http_event_handler(esp_http_client_event_t *evt)
+ *	@brief 		catch the http event
+ *	@param[in]	esp_http_client_event_t *evt
+ *	@return		void.
+ */
 esp_err_t _http_event_handler(esp_http_client_event_t *evt)
-
 {
 
     switch(evt->event_id) {
@@ -202,10 +207,10 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 } /* end _http_event_handler() */
 
 /**
- *	\fn 	    task_http_server.
- *	\brief 		task launch the function to initialize wize .
- *	\param[in]	void*
- *	\return		void.
+ *	@fn 	    task_http_server.
+ *	@brief 		task launch the function to initialize wize .
+ *	@param[in]	void*
+ *	@return		void.
  */
 void task_http_client(void *ignore)
 

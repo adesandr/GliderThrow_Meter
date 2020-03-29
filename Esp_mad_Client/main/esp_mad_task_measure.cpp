@@ -1,11 +1,11 @@
 /**
- * \file      esp_mad_task_measure.cpp
- * \author    Alain Désandré
- * \version   1.0
- * \date      28 octobre 2018
- * \brief     This task process the measure and calibration of the MPU6050
+ * @file      esp_mad_task_measure.cpp
+ * @author    Alain Désandré
+ * @version   1.0.3
+ * @date      28 octobre 2018
+ * @brief     This task process the measure and calibration of the MPU6050
  *
- * \details   This task handles the periodicall MPU6050 measurement and computes the 
+ * @details   This task handles the periodicall MPU6050 measurement and computes the 
  *            angle and travel of the wing surface. This file is part of the esp_mad
  *            project.
  */
@@ -129,10 +129,10 @@ void calibration(void){
 } /* End calibration */
 
 /**
- *	\fn 		void InitMPU6050(void)
- *  \brief		MPU6050 Initialisation	
- *	\param[in]	void
- *	\return		void	
+ *	@fn 		void InitMPU6050(void)
+ *  @brief		MPU6050 Initialisation	
+ *	@param[in]	void
+ *	@return		void	
  * 
  */
 void InitMPU6050(void)
@@ -181,11 +181,10 @@ void InitMPU6050(void)
 } /* End Init() */
 
 /**
- *	\fn 		void task_measure(void*)
- *  \brief		MPU6050 periodicall compute	
- *	\param[in]	void*
- *	\return		void	
- * 
+ *	@fn 		void task_measure(void*)
+ *  @brief		MPU6050 periodicall compute	
+ *	@param[in]	void*
+ *	@return		void	
  */
 void task_measure(void*){
 
