@@ -1,11 +1,11 @@
 /**
  * 
- *  \file       Esp_mad.h
- *  \author     Alain Désandré - alain.desandre@wanadoo.fr
- *  \version    1.0
- *  \date       28 octobre 2018
- *  \brief      Various define used by esp-mad project
- *  \details    This file is shared by Esp_mad_server and Esp_mad_clients
+ *  @file       Esp_mad.h
+ *  @author     Alain Désandré - alain.desandre@wanadoo.fr
+ *  @version    1.0
+ *  @date       28 octobre 2018
+ *  @brief      Various define used by esp-mad project
+ *  @details    This file is shared by Esp_mad_server and Esp_mad_clients
  * 
  *              Version History :
  *                  - 23/05/2019 - V1.0.1 - new gpio management
