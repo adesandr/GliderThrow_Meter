@@ -41,9 +41,9 @@ This project is published under the `MIT license <https://github.com/adesandr/Gl
 Enjoy !
 
 ==================  ==================  ==================
-|Get Started|_      |Software Design|_  |API Reference|_
+|Get Started|_      |Software Design|_  |Hardware Design|_
 ------------------  ------------------  ------------------
-`Get Started`_      `Software Design`_  `API Reference`_
+`Get Started`_      `Software Design`_  `Hardware Design`_
 ==================  ==================  ==================
 
 .. |Get Started| image:: /_static/get-started.png
@@ -52,15 +52,15 @@ Enjoy !
 .. |Software Design| image:: /_static/software-design.png
 .. _Software Design: software-design/index.html
 
-.. |API Reference| image:: /_static/api-reference.png
-.. _API Reference: api-reference/index.html
+.. |Hardware Design| image:: /_static/hardware-design.png
+.. _Hardware Design: hardware-design/index.html
 
 .. toctree::
    :hidden:
 
    Get Started <get-started/index>
    Sotfware Design <software-design/index>
-   API Reference <api-reference/index>
+   Hardware Design <hardware-design/index>
 
 
 Indices and tables

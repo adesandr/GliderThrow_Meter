@@ -89,8 +89,8 @@ The last board in this table has a Wemos marking, but does not appear to come fr
 
 .. warning:: On some ESP32 boards, in particular the Wemos clone, it is essential to switch the card to "boot" mode during the software loading operation. This board has two buttons, an "EN" button which is actually the reboot button, and a "Boot" button which allows you to switch the board to "Boot" mode when you launch an "idf.py flash" command.
 
-Basic connection diagram
-========================
+First stage of prototyping : Basic connection diagram
+=====================================================
 
 I used this basic setup to develop the first version of the code, starting with the code for the "Server" board, then the code for the "Client" board. If you want to test it, you'll have to use two "big" breadboards (one for the "Serveur", the other for the "Client) or 4 small ones (two for the "Serveur" and two for the "Client").
 
@@ -112,7 +112,7 @@ pin 5V->   pin VCC
 pin GND->  pin GND
 =========  =========
 
-.. note:: The ESP32 allows you to change the assignments of the I2C pins. To test this feature, I used different assignments on my three boards. These mappings are integrated in the `esp_mad.h file <https://github.com/adesandr/GliderThrow_Meter/blob/master/Includes/Esp_mad.h>`_. The figure above shows the connection diagram used with the Lolin 32 demoboard.
+.. note:: The ESP32 allows you to change the assignments of the I2C pins. To test this feature, I used different assignments on my three demoboards. These mappings are integrated in the `esp_mad.h file <https://github.com/adesandr/GliderThrow_Meter/blob/master/Includes/Esp_mad.h>`_. The figure above shows the connection diagram used with the Lolin 32 demoboard.
 
 After completing this assembly, you must download the file esp-mad-server.bin obtained after compilation into your ESP32 demo card.
 
@@ -126,3 +126,20 @@ The procedure for using the UI is as follows:
  #. Type in the URL bar of your browser "http://192.1.1.1".
  #. The main page of the UI of the GliderThrow_Meter project will appear,
  #. If you move the breadboard on which the MPU6050 is connected, the deflection values (positive and negative) will be displayed.
+
+Second stage of prototyping
+===========================
+
+After this first step, I integrated on a small PCB, a Lolin32 Lite demoboard, an MPU6050 demoboard and a 1A 5V Micro USB Module Charger Module Board with Protection (ref. TP4056).
+
+.. image:: /_static/prototype-lolin-lite.jpg
+
+The result is encouraging and works perfectly, but the board has a form factor of 55 mm x 55 m (i.e. a casing close to 60 mm side) which is off target compared to the initial requirement.
+
+Finally, I tried to integrate the "clone Wemos" demoboard which is more compact by stacking a PCB that integrates the MPU6050 board and the TP4056 board. We arrive at a form factor (excluding the casing) of 38mm x 38mm x 45mm, which is close to the target,but not totally satisfactory in terms of integration.
+
+.. image:: /_static/prototype-stack.jpg
+
+Following these two tests, I came to the conclusion that the integration of off-the-shelf boards would inevitably lead to a form factor that not stick the requirement and a low comfort of implementation. 
+
+However, this second prototyping stage enabled me to target the components needed for the integration of the boards, And I decided to design a new PCB integrating all of the components. So go to the Hardware Design section.
