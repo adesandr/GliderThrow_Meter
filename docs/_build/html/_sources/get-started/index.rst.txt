@@ -61,13 +61,13 @@ These components can be easily found on the internet (Bandgood, Alliexpress, etc
 Breadboard         Lolin32 demoboard  MPU6050 demoboard  Prototyping Wires
 =================  =================  =================  =================
 
-.. |Breadboard| image:: /_static/breadboard.jpg
+.. |Breadboard| image:: /_static/breadboard.png
 
-.. |Lolin32| image:: /_static/lolin32.jpg
+.. |Lolin32| image:: /_static/lolin32.png
 
-.. |MPU6050| image:: /_static/mpu6050-board.jpg
+.. |MPU6050| image:: /_static/mpu6050-board.png
  
-.. |Wires| image:: /_static/prototype-wires.jpg
+.. |Wires| image:: /_static/prototype-wires.png
  
 Several demonstration boards based on ESP-WROOM-32 can be used
 
@@ -79,11 +79,11 @@ I personally used the following boards without any problem.
 Wemos Lolin 32       Wemos Lolin 32 lite  Wemos clone   
 ===================  ===================  ==================
 
-.. |Lolin 32| image:: /_static/lolin32.jpg
+.. |Lolin 32| image:: /_static/lolin32.png
 
-.. |Lolin 32 Lite| image:: /_static/lolin32-lite.jpg
+.. |Lolin 32 Lite| image:: /_static/lolin32-lite.png
 
-.. |Wemos X| image:: /_static/clone-wemos.jpg
+.. |Wemos X| image:: /_static/clone-wemos.png
 
 The last board in this table has a Wemos marking, but does not appear to come from the company of the same name. However, it works very well and is a little smaller than the two Lolin 32 Wemos (But this board, unlike the Lolin cards, has no battery connector and therefore no charging circuit). You can easily find this board by doing a search on the net of the type "compact ESP32 board".
 
@@ -96,7 +96,8 @@ I used this basic setup to develop the first version of the code, starting with 
 
 The ESP32 demoboard is easily connected to the MPU6050 board using I2C.
 
-.. image:: /_static/demoboard-connexion.jpg
+.. image:: /_static/demoboard-connexion.png
+   :align: center
 
 So,
 
@@ -132,13 +133,13 @@ Second stage of prototyping
 
 After this first step, I integrated on a small PCB, a Lolin32 Lite demoboard, an MPU6050 demoboard and a 1A 5V Micro USB Module Charger Module Board with Protection (ref. TP4056).
 
-.. image:: /_static/prototype-lolin-lite.jpg
+.. image:: /_static/prototype-lolin-lite.png
 
 The result is encouraging and works perfectly, but the board has a form factor of 55 mm x 55 m (i.e. a casing close to 60 mm side) which is off target compared to the initial requirement.
 
 Finally, I tried to integrate the "clone Wemos" demoboard which is more compact by stacking a PCB that integrates the MPU6050 board and the TP4056 board. We arrive at a form factor (excluding the casing) of 38mm x 38mm x 45mm, which is close to the target,but not totally satisfactory in terms of integration.
 
-.. image:: /_static/prototype-stack.jpg
+.. image:: /_static/prototype-stack.png
 
 Following these two tests, I came to the conclusion that the integration of off-the-shelf boards would inevitably lead to a form factor that not stick the requirement and a low comfort of implementation. 
 
