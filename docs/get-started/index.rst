@@ -124,7 +124,7 @@ The procedure for using the UI is as follows:
  #. If your board is equipped with an embedded led, this led will blink very quickly to indicate that the system is in calibration phase of the MPU6050 (leave the breadboard flat during this phase). After a few seconds, the LED will switch to a slower flashing mode to indicate that the MPU6050 has completed its calibration,
  #. Connect your PC or mobile phone to the Wifi network of SSID "ESP_MAD",
  #. Launch your internet browser,
- #. Type in the URL bar of your browser "http://192.1.1.1".
+ #. Type in the URL bar of your browser "http://192.168.1.1".
  #. The main page of the UI of the GliderThrow_Meter project will appear,
  #. If you move the breadboard on which the MPU6050 is connected, the deflection values (positive and negative) will be displayed.
 
