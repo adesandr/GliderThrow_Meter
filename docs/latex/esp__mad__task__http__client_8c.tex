@@ -1,0 +1,73 @@
+\hypertarget{esp__mad__task__http__client_8c}{}\doxysection{C\+:/\+Users/\+Robin/esp/\+Glider\+Throw\+\_\+\+Meter/\+Esp\+\_\+mad\+\_\+\+Client/main/esp\+\_\+mad\+\_\+task\+\_\+http\+\_\+client.c File Reference}
+\label{esp__mad__task__http__client_8c}\index{C:/Users/Robin/esp/GliderThrow\_Meter/Esp\_mad\_Client/main/esp\_mad\_task\_http\_client.c@{C:/Users/Robin/esp/GliderThrow\_Meter/Esp\_mad\_Client/main/esp\_mad\_task\_http\_client.c}}
+
+
+This file include all the code to deal with a simple http server.  
+
+
+{\ttfamily \#include $<$esp\+\_\+wifi.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+event\+\_\+loop.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+log.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+system.\+h$>$}\newline
+{\ttfamily \#include $<$nvs\+\_\+flash.\+h$>$}\newline
+{\ttfamily \#include $<$sys/param.\+h$>$}\newline
+{\ttfamily \#include $<$freertos/event\+\_\+groups.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+http\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$Esp\+\_\+mad.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__mad__task__http__client_8c_ae7c4f5057d30a650919c74c7f9e7d67c}{\+\_\+http\+\_\+event\+\_\+handler}} (esp\+\_\+http\+\_\+client\+\_\+event\+\_\+t $\ast$evt)
+\begin{DoxyCompactList}\small\item\em catch the http event \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{esp__mad__task__http__client_8c_a4a2dd9bb4db6e9841844f4e161e577c6}\label{esp__mad__task__http__client_8c_a4a2dd9bb4db6e9841844f4e161e577c6}} 
+void {\bfseries task\+\_\+http\+\_\+client} (void $\ast$ignore)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__client_8c_ab8ef1bf8a70cc07c6d55823c390a7e76}\label{esp__mad__task__http__client_8c_ab8ef1bf8a70cc07c6d55823c390a7e76}} 
+float {\bfseries angle}
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__client_8c_a606c498c0cd8ba4477abfeb6f4f62e00}\label{esp__mad__task__http__client_8c_a606c498c0cd8ba4477abfeb6f4f62e00}} 
+bool {\bfseries B\+Init}
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__client_8c_a8e79444b3d77ee14e3edc32c0017480d}\label{esp__mad__task__http__client_8c_a8e79444b3d77ee14e3edc32c0017480d}} 
+const int {\bfseries C\+O\+N\+N\+E\+C\+T\+E\+D\+\_\+\+B\+IT} = B\+I\+T0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file include all the code to deal with a simple http server. 
+
+\begin{DoxyAuthor}{Author}
+Alain Désandré 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 18th 2018
+\end{DoxyDate}
+H\+T\+TP server deal with the various http request from the client. At the fist reception of an http get from one client, the server respond with the esp\+\_\+mad H\+T\+ML page (see esp\+\_\+html.\+h). 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{esp__mad__task__http__client_8c_ae7c4f5057d30a650919c74c7f9e7d67c}\label{esp__mad__task__http__client_8c_ae7c4f5057d30a650919c74c7f9e7d67c}} 
+\index{esp\_mad\_task\_http\_client.c@{esp\_mad\_task\_http\_client.c}!\_http\_event\_handler@{\_http\_event\_handler}}
+\index{\_http\_event\_handler@{\_http\_event\_handler}!esp\_mad\_task\_http\_client.c@{esp\_mad\_task\_http\_client.c}}
+\doxysubsubsection{\texorpdfstring{\_http\_event\_handler()}{\_http\_event\_handler()}}
+{\footnotesize\ttfamily esp\+\_\+err\+\_\+t \+\_\+http\+\_\+event\+\_\+handler (\begin{DoxyParamCaption}\item[{esp\+\_\+http\+\_\+client\+\_\+event\+\_\+t $\ast$}]{evt }\end{DoxyParamCaption})}
+
+
+
+catch the http event 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em esp\+\_\+http\+\_\+client\+\_\+event\+\_\+t} & $\ast$evt \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}

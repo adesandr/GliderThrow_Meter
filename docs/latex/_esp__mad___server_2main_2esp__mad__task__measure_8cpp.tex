@@ -1,0 +1,158 @@
+\hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp}{}\doxysection{C\+:/\+Users/\+Robin/esp/\+Glider\+Throw\+\_\+\+Meter/\+Esp\+\_\+mad\+\_\+\+Server/main/esp\+\_\+mad\+\_\+task\+\_\+measure.cpp File Reference}
+\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp}\index{C:/Users/Robin/esp/GliderThrow\_Meter/Esp\_mad\_Server/main/esp\_mad\_task\_measure.cpp@{C:/Users/Robin/esp/GliderThrow\_Meter/Esp\_mad\_Server/main/esp\_mad\_task\_measure.cpp}}
+
+
+This task process the measure and calibration of the \mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}}.  
+
+
+{\ttfamily \#include $<$esp\+\_\+log.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+err.\+h$>$}\newline
+{\ttfamily \#include $<$freertos/\+Free\+R\+T\+O\+S.\+h$>$}\newline
+{\ttfamily \#include $<$freertos/task.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}mpu6050.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}I2\+Cdev.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}M\+P\+U6050\+\_\+6\+Axis\+\_\+\+Motion\+Apps20.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sdkconfig.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$driver/i2c.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}math.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Esp\+\_\+mad.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a0cf760766df0992c7405ca9ba8a50648}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a0cf760766df0992c7405ca9ba8a50648}} 
+void {\bfseries meansensors} (void)
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a0b6a0b24c6bd8af032a6778166201f7e}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a0b6a0b24c6bd8af032a6778166201f7e}} 
+void {\bfseries calibration} (void)
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a10bb971054713d3bcb53263e3b938597}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a10bb971054713d3bcb53263e3b938597}} 
+void {\bfseries Init\+M\+P\+U6050} (void)
+\item 
+void \mbox{\hyperlink{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a808de11bdd8c22cac9d32cd1dfb9ceff}{task\+\_\+measure}} (void $\ast$)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}} periodicall compute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aadf5d6cdc83e6198c1279fbb0edf2677}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aadf5d6cdc83e6198c1279fbb0edf2677}} 
+int {\bfseries chord\+Control\+Surface} = 50
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aebedd0a48fe876cce3d3f14326e4ca66}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aebedd0a48fe876cce3d3f14326e4ca66}} 
+int16\+\_\+t {\bfseries ax}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a46d26903f1874d06875a974dfa1a9d3c}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a46d26903f1874d06875a974dfa1a9d3c}} 
+int16\+\_\+t {\bfseries ay}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a41e60f9324f9d4fd9e916e964370fb2f}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a41e60f9324f9d4fd9e916e964370fb2f}} 
+int16\+\_\+t {\bfseries az}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a4524555b50a829ee7628cf5e5806f227}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a4524555b50a829ee7628cf5e5806f227}} 
+int16\+\_\+t {\bfseries gx}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a8bd44b73dc5745833a8dd8d2a6240613}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a8bd44b73dc5745833a8dd8d2a6240613}} 
+int16\+\_\+t {\bfseries gy}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aa61e9778c784ec4695029ed2cc769a61}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aa61e9778c784ec4695029ed2cc769a61}} 
+int16\+\_\+t {\bfseries gz}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ab9ffa6ba0a6378a43ce678604715a138}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ab9ffa6ba0a6378a43ce678604715a138}} 
+uint8\+\_\+t {\bfseries Accel\+\_\+range}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ac06e3fab6a28aefa40384213bdaed46d}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ac06e3fab6a28aefa40384213bdaed46d}} 
+uint8\+\_\+t {\bfseries Gyro\+\_\+range}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a3dcb0e6bd4cbf80d0f163555cdb41c0c}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a3dcb0e6bd4cbf80d0f163555cdb41c0c}} 
+float {\bfseries travel} = 0.\+0
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ab8ef1bf8a70cc07c6d55823c390a7e76}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ab8ef1bf8a70cc07c6d55823c390a7e76}} 
+float {\bfseries angle} =0.\+0
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a606c498c0cd8ba4477abfeb6f4f62e00}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a606c498c0cd8ba4477abfeb6f4f62e00}} 
+bool {\bfseries B\+Init} = 0
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a5b335f59629a300a4448c78981350df6}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a5b335f59629a300a4448c78981350df6}} 
+int {\bfseries buffersize} =1000
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a2422062516ec140db1386483de9159b6}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a2422062516ec140db1386483de9159b6}} 
+int {\bfseries acel\+\_\+deadzone} =8
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a12131ffdad8ced9a6cf0daa51eb856a7}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a12131ffdad8ced9a6cf0daa51eb856a7}} 
+int {\bfseries giro\+\_\+deadzone} =1
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aeb4503e370715838e3dec2598c5a4d3b}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aeb4503e370715838e3dec2598c5a4d3b}} 
+int {\bfseries mean\+\_\+ax}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_af3d14ed6b50438f0e8b0d186ff4d371f}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_af3d14ed6b50438f0e8b0d186ff4d371f}} 
+int {\bfseries mean\+\_\+ay}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a4d8d3ab5e7d88aa96a1422872c8db3e6}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a4d8d3ab5e7d88aa96a1422872c8db3e6}} 
+int {\bfseries mean\+\_\+az}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a8590dfb5434b45dd8a7f53cd732d6bb2}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a8590dfb5434b45dd8a7f53cd732d6bb2}} 
+int {\bfseries mean\+\_\+gx}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a928e91f84c486e70682223657395e775}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a928e91f84c486e70682223657395e775}} 
+int {\bfseries mean\+\_\+gy}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a81a87a04a46718f73800cc0178f95b26}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a81a87a04a46718f73800cc0178f95b26}} 
+int {\bfseries mean\+\_\+gz}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a89f234133d3efe315836311cbf21c64b}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a89f234133d3efe315836311cbf21c64b}} 
+int {\bfseries state} =0
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ada3bcb02de18347378014666c8c5ea33}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ada3bcb02de18347378014666c8c5ea33}} 
+int {\bfseries ax\+\_\+offset}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ac3a7ade515e901d36494a1b282f26252}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_ac3a7ade515e901d36494a1b282f26252}} 
+int {\bfseries ay\+\_\+offset}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aec549c596b9aaea8755d19c35f744125}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_aec549c596b9aaea8755d19c35f744125}} 
+int {\bfseries az\+\_\+offset}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a88fef46f85655bfe6fc140e86cc5341e}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a88fef46f85655bfe6fc140e86cc5341e}} 
+int {\bfseries gx\+\_\+offset}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a6ae7a4d08a05e8dcffa34a641a899f0c}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a6ae7a4d08a05e8dcffa34a641a899f0c}} 
+int {\bfseries gy\+\_\+offset}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a26bcf2fca91d6fb0376899505780742e}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a26bcf2fca91d6fb0376899505780742e}} 
+int {\bfseries gz\+\_\+offset}
+\item 
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a88c170d7ee5608442cacbd97992d5ed8}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a88c170d7ee5608442cacbd97992d5ed8}} 
+\mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}} {\bfseries mpu} = \mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This task process the measure and calibration of the \mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}}. 
+
+\begin{DoxyAuthor}{Author}
+Alain Désandré -\/ \href{mailto:alain.desandre@wanadoo.fr}{\texttt{ alain.\+desandre@wanadoo.\+fr}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28 octobre 2018
+\end{DoxyDate}
+This task handles the periodicall \mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}} measurement and computes the angle and travel of the wing surface. This file is part of the esp\+\_\+mad project. travel, chord\+Surface and angle are globals and used by the task\+\_\+server (see \mbox{\hyperlink{esp__mad__task__http__server_8c}{esp\+\_\+mad\+\_\+task\+\_\+http\+\_\+server.\+c}}) to respond to the periodical ajax script \textquotesingle{}get\textquotesingle{} request done by the esp.\+html page. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a808de11bdd8c22cac9d32cd1dfb9ceff}\label{_esp__mad___server_2main_2esp__mad__task__measure_8cpp_a808de11bdd8c22cac9d32cd1dfb9ceff}} 
+\index{esp\_mad\_task\_measure.cpp@{esp\_mad\_task\_measure.cpp}!task\_measure@{task\_measure}}
+\index{task\_measure@{task\_measure}!esp\_mad\_task\_measure.cpp@{esp\_mad\_task\_measure.cpp}}
+\doxysubsubsection{\texorpdfstring{task\_measure()}{task\_measure()}}
+{\footnotesize\ttfamily void task\+\_\+measure (\begin{DoxyParamCaption}\item[{void $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}} periodicall compute. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em void$\ast$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void ~\newline
+ 
+\end{DoxyReturn}

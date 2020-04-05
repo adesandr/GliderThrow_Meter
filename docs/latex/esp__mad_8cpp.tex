@@ -1,0 +1,69 @@
+\hypertarget{esp__mad_8cpp}{}\doxysection{C\+:/\+Users/\+Robin/esp/\+Glider\+Throw\+\_\+\+Meter/\+Esp\+\_\+mad\+\_\+\+Server/main/esp\+\_\+mad.cpp File Reference}
+\label{esp__mad_8cpp}\index{C:/Users/Robin/esp/GliderThrow\_Meter/Esp\_mad\_Server/main/esp\_mad.cpp@{C:/Users/Robin/esp/GliderThrow\_Meter/Esp\_mad\_Server/main/esp\_mad.cpp}}
+
+
+esp\+\_\+mad project main files.  
+
+
+{\ttfamily \#include \char`\"{}freertos/\+Free\+R\+T\+O\+S.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}freertos/task.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sdkconfig.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$esp\+\_\+log.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+err.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}driver/gpio.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Esp\+\_\+mad.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{esp__mad_8cpp_a630544a7f0a2cc40d8a7fefab7e2fe70}\label{esp__mad_8cpp_a630544a7f0a2cc40d8a7fefab7e2fe70}} 
+void {\bfseries app\+\_\+main} (void)
+\item 
+\mbox{\Hypertarget{esp__mad_8cpp_a5f6d4d4d2c54bf377d4809a1f4231e9a}\label{esp__mad_8cpp_a5f6d4d4d2c54bf377d4809a1f4231e9a}} 
+void {\bfseries task\+\_\+http\+\_\+server} (void $\ast$)
+\item 
+void \mbox{\hyperlink{esp__mad_8cpp_a808de11bdd8c22cac9d32cd1dfb9ceff}{task\+\_\+measure}} (void $\ast$)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}} periodicall compute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{esp__mad_8cpp_a606c498c0cd8ba4477abfeb6f4f62e00}\label{esp__mad_8cpp_a606c498c0cd8ba4477abfeb6f4f62e00}} 
+bool {\bfseries B\+Init}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+esp\+\_\+mad project main files. 
+
+\begin{DoxyAuthor}{Author}
+Alain Désandré 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0.\+3 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28 octobre 2018
+\end{DoxyDate}
+The M\+AD application is intended to provide a E\+S\+P32-\/based tool for visualizing the deflection (in mm and degree) of control surface on a remote-\/controlled model. E\+S\+P\+\_\+\+M\+AD is composed of four files \+: . esp\+\_\+mad.\+ccp \+: main function. . esp\+\_\+mad\+\_\+task\+\_\+measure.\+cpp \+: \mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}} management . \mbox{\hyperlink{esp__mad__task__http__server_8c}{esp\+\_\+mad\+\_\+task\+\_\+http\+\_\+server.\+c}} \+: http server . \mbox{\hyperlink{_esp__mad_8h}{esp\+\_\+mad.\+h}} \+: Globals define . esp\+\_\+html.\+h \+: H\+T\+ML page and Jquery/\+Javascript function.
+
+Version history 23/05/2019 \+: new version of gpio management, post V3.\+3 esp-\/idf 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{esp__mad_8cpp_a808de11bdd8c22cac9d32cd1dfb9ceff}\label{esp__mad_8cpp_a808de11bdd8c22cac9d32cd1dfb9ceff}} 
+\index{esp\_mad.cpp@{esp\_mad.cpp}!task\_measure@{task\_measure}}
+\index{task\_measure@{task\_measure}!esp\_mad.cpp@{esp\_mad.cpp}}
+\doxysubsubsection{\texorpdfstring{task\_measure()}{task\_measure()}}
+{\footnotesize\ttfamily void task\+\_\+measure (\begin{DoxyParamCaption}\item[{void $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}} periodicall compute. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em void$\ast$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void ~\newline
+ 
+\end{DoxyReturn}

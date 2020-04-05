@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to GliderThrow_Meter’s documentation! &#8212; Documentation GliderThrow_Meter V1.0.2</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Get Started" href="get-started/index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-gliderthrow-meter-s-documentation">
+<h1>Welcome to GliderThrow_Meter’s documentation!<a class="headerlink" href="#welcome-to-gliderthrow-meter-s-documentation" title="Lien permanent vers ce titre">¶</a></h1>
+<p>This is the documentation for the GliderThrow_Meter’s project (<a class="reference external" href="https://github.com/adesandr/GliderThrow_Meter">GliderThrow_Meter</a>).</p>
+<p>GliderThrow is primary design for setting the control surface of a model glider but you will find that it can be used on most
+every airplane and for a variety of applications as Measuring a dihedral angle of a wing, Measuring Model Airplane Incidence angle , etc.</p>
+<p>GliderThrow meter is made up of two device, each using one <a class="reference external" href="https://www.espressif.com/en/products/hardware/esp32/overview">ESP32</a> SOC
+and one <a class="reference external" href="https://invensense.tdk.com/products/motion-tracking/6-axis/mpu-6050/">MPU 6050</a> 6 doffs component.</p>
+<p>Each device can measure the deflections in degrees / millimeters with a resolution of 0.1 degrees and can measure the differential when
+working together with a second unit since GliderThrow is a system that comprises two sensors, one for each wing or surface control pair of your airplane.</p>
+<p>Using a dual system very much simplifies the throw setting of your model by having a direct view of « equivalent » control surfaces at the same time (left and right Aileron, or flap).</p>
+<p>As the first device embedded a small http server, the data can be viewed through any web browser on a smartphone (Android, iOS, etc.), PC or MAC.</p>
+<p>UI is built using bootstrap and jquery, and all the files needed are embedded in the .rodata segment of the first device.</p>
+<p>The project is made up of two parts, the server (Esp_mad_Server directory) and the client (Esp_mad_Client directory).</p>
+<p>Two extras libraries are used in the project : i2clibdev and MPU6050 from <a class="reference external" href="https://github.com/jrowberg/i2cdevlib">jrowberg</a>.</p>
+<p>These libraries are in the extra_components directrory of the project.</p>
+<p>This project is build using the ESP-IDF 4.0 CMake Build System. Please refer to the
+<a class="reference external" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html">espressif documentation</a>
+for more information to setup an ESP-IDF environnement.</p>
+<p>I highly recommande you to use the <a class="reference external" href="https://code.visualstudio.com/download">Vscode</a> IDE and the
+<a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension">expressif ESP-IDF Vscode Extension</a> to build the project.</p>
+<p>This project is published under the <a class="reference external" href="https://github.com/adesandr/GliderThrow_Meter/blob/master/LICENCE">MIT license</a>.</p>
+<p>Enjoy !</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="get-started/index.html"><img alt="Get Started" src="_images/get-started.png" /></a></p></td>
+<td><p><a class="reference external" href="software-design/index.html"><img alt="Software Design" src="_images/software-design.png" /></a></p></td>
+<td><p><a class="reference external" href="hardware-design/index.html"><img alt="Hardware Design" src="_images/hardware-design.png" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="get-started/index.html">Get Started</a></p></td>
+<td><p><a class="reference external" href="software-design/index.html">Software Design</a></p></td>
+<td><p><a class="reference external" href="hardware-design/index.html">Hardware Design</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Lien permanent vers ce titre">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Index du module</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Page de recherche</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">GliderThrow_Meter</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software-design/index.html">Sotfware Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardware-design/index.html">Hardware Design</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="get-started/index.html" title="Chapitre suivant">Get Started</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Alain Désandré.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

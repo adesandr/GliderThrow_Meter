@@ -1,0 +1,448 @@
+\hypertarget{esp__mad__task__http__server_8c}{}\doxysection{C\+:/\+Users/\+Robin/esp/\+Glider\+Throw\+\_\+\+Meter/\+Esp\+\_\+mad\+\_\+\+Server/main/esp\+\_\+mad\+\_\+task\+\_\+http\+\_\+server.c File Reference}
+\label{esp__mad__task__http__server_8c}\index{C:/Users/Robin/esp/GliderThrow\_Meter/Esp\_mad\_Server/main/esp\_mad\_task\_http\_server.c@{C:/Users/Robin/esp/GliderThrow\_Meter/Esp\_mad\_Server/main/esp\_mad\_task\_http\_server.c}}
+
+
+This file include all the code to deal with a simple http server.  
+
+
+{\ttfamily \#include $<$esp\+\_\+wifi.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+event\+\_\+loop.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+log.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+system.\+h$>$}\newline
+{\ttfamily \#include $<$nvs\+\_\+flash.\+h$>$}\newline
+{\ttfamily \#include $<$sys/param.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+http\+\_\+server.\+h$>$}\newline
+{\ttfamily \#include $<$freertos/\+Free\+R\+T\+O\+S.\+h$>$}\newline
+{\ttfamily \#include $<$freertos/task.\+h$>$}\newline
+{\ttfamily \#include $<$freertos/event\+\_\+groups.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$Esp\+\_\+mad.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a8788b3254f36ef3994b2d8d74b359699}\label{esp__mad__task__http__server_8c_a8788b3254f36ef3994b2d8d74b359699}} 
+\#define {\bfseries A\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+S\+ID}~\char`\"{}E\+S\+P\+\_\+\+M\+AD\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_adbd28d93eb8c5eb8956b0713f8166c6a}\label{esp__mad__task__http__server_8c_adbd28d93eb8c5eb8956b0713f8166c6a}} 
+const uint8\+\_\+t esp\+\_\+html\+\_\+start\mbox{[}$\,$\mbox{]} {\bfseries asm} (\char`\"{}\+\_\+binary\+\_\+esp\+\_\+html\+\_\+start\char`\"{})
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_aa254d0ae38e820dc351ec8fe162b754a}\label{esp__mad__task__http__server_8c_aa254d0ae38e820dc351ec8fe162b754a}} 
+const uint8\+\_\+t esp\+\_\+html\+\_\+end\mbox{[}$\,$\mbox{]} {\bfseries asm} (\char`\"{}\+\_\+binary\+\_\+esp\+\_\+html\+\_\+end\char`\"{})
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a661311931a3e044d085e520dd638269f}\label{esp__mad__task__http__server_8c_a661311931a3e044d085e520dd638269f}} 
+const uint8\+\_\+t bootstrap\+\_\+min\+\_\+css\+\_\+start\mbox{[}$\,$\mbox{]} {\bfseries asm} (\char`\"{}\+\_\+binary\+\_\+bootstrap\+\_\+min\+\_\+css\+\_\+start\char`\"{})
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a7cf3fa001f7166bdcd85cfdac7244918}\label{esp__mad__task__http__server_8c_a7cf3fa001f7166bdcd85cfdac7244918}} 
+const uint8\+\_\+t bootstrap\+\_\+min\+\_\+css\+\_\+end\mbox{[}$\,$\mbox{]} {\bfseries asm} (\char`\"{}\+\_\+binary\+\_\+bootstrap\+\_\+min\+\_\+css\+\_\+end\char`\"{})
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a220ff2bf4e840af5a30e9b10397bf8e3}\label{esp__mad__task__http__server_8c_a220ff2bf4e840af5a30e9b10397bf8e3}} 
+const uint8\+\_\+t bootstrap\+\_\+min\+\_\+js\+\_\+start\mbox{[}$\,$\mbox{]} {\bfseries asm} (\char`\"{}\+\_\+binary\+\_\+bootstrap\+\_\+min\+\_\+js\+\_\+start\char`\"{})
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a4391d4ba52417e3a0d3f66601b2d934d}\label{esp__mad__task__http__server_8c_a4391d4ba52417e3a0d3f66601b2d934d}} 
+const uint8\+\_\+t bootstrap\+\_\+min\+\_\+js\+\_\+end\mbox{[}$\,$\mbox{]} {\bfseries asm} (\char`\"{}\+\_\+binary\+\_\+bootstrap\+\_\+min\+\_\+js\+\_\+end\char`\"{})
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a795dd6206fc24f78f30ea1d832968d71}\label{esp__mad__task__http__server_8c_a795dd6206fc24f78f30ea1d832968d71}} 
+const uint8\+\_\+t jquery\+\_\+3\+\_\+3\+\_\+1\+\_\+min\+\_\+js\+\_\+start\mbox{[}$\,$\mbox{]} {\bfseries asm} (\char`\"{}\+\_\+binary\+\_\+jquery\+\_\+3\+\_\+3\+\_\+1\+\_\+min\+\_\+js\+\_\+start\char`\"{})
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_ada294a581eb53b75ebd4b3332b9de2da}\label{esp__mad__task__http__server_8c_ada294a581eb53b75ebd4b3332b9de2da}} 
+const uint8\+\_\+t jquery\+\_\+3\+\_\+3\+\_\+1\+\_\+min\+\_\+js\+\_\+end\mbox{[}$\,$\mbox{]} {\bfseries asm} (\char`\"{}\+\_\+binary\+\_\+jquery\+\_\+3\+\_\+3\+\_\+1\+\_\+min\+\_\+js\+\_\+end\char`\"{})
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__mad__task__http__server_8c_a3b53468c02118b45ea2de3814e68ef4e}{main\+\_\+page\+\_\+get\+\_\+handler}} (httpd\+\_\+req\+\_\+t $\ast$req)
+\begin{DoxyCompactList}\small\item\em An H\+T\+TP G\+ET handler for the main esp.\+html page. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__mad__task__http__server_8c_a5e57862c1f597a1a1ec61581a959875a}{bootstrap\+\_\+min\+\_\+css\+\_\+handler}} (httpd\+\_\+req\+\_\+t $\ast$req)
+\begin{DoxyCompactList}\small\item\em An H\+T\+TP G\+ET handler for bootstrap.\+min.\+css uri. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__mad__task__http__server_8c_a6f7831b412ac57a3fc6762ed4db1688a}{bootstrap\+\_\+min\+\_\+js\+\_\+handler}} (httpd\+\_\+req\+\_\+t $\ast$req)
+\begin{DoxyCompactList}\small\item\em An H\+T\+TP G\+ET handler for bootstrap.\+min.\+js uri. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__mad__task__http__server_8c_ad0912f449468991eb9aa1f3b9ab5573b}{jquery\+\_\+3\+\_\+3\+\_\+1\+\_\+min\+\_\+js\+\_\+handler}} (httpd\+\_\+req\+\_\+t $\ast$req)
+\begin{DoxyCompactList}\small\item\em An H\+T\+TP G\+ET handler for jquery.\+3.\+3.\+1.\+min.\+js uri. \end{DoxyCompactList}\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__mad__task__http__server_8c_ad15491378c9c175fc2648b772c6bb788}{sensors\+\_\+get\+\_\+handler}} (httpd\+\_\+req\+\_\+t $\ast$req)
+\begin{DoxyCompactList}\small\item\em An H\+T\+TP G\+ET handler to serve, travel, angle and delta of both sensors. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a6f215a2cec9961c453fc8b216a7624ca}\label{esp__mad__task__http__server_8c_a6f215a2cec9961c453fc8b216a7624ca}} 
+esp\+\_\+err\+\_\+t {\bfseries sensor2\+\_\+post\+\_\+handler} (httpd\+\_\+req\+\_\+t $\ast$req)
+\item 
+esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__mad__task__http__server_8c_a4da23f4bcb1b1a78e141a7a7a4c8db23}{chord\+\_\+post\+\_\+handler}} (httpd\+\_\+req\+\_\+t $\ast$req)
+\begin{DoxyCompactList}\small\item\em An H\+T\+TP P\+O\+ST handler. \end{DoxyCompactList}\item 
+httpd\+\_\+handle\+\_\+t \mbox{\hyperlink{esp__mad__task__http__server_8c_aa405dbf500a1f511f559e1e87efff9da}{start\+\_\+webserver}} (void)
+\begin{DoxyCompactList}\small\item\em Start the http server and stet the uris handles. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{esp__mad__task__http__server_8c_ae6f378959433adbb1cb20e4f68916f0c}{stop\+\_\+webserver}} (httpd\+\_\+handle\+\_\+t server)
+\begin{DoxyCompactList}\small\item\em stop the httpd web server. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_ab2f13112e59e974788384de154abdf41}\label{esp__mad__task__http__server_8c_ab2f13112e59e974788384de154abdf41}} 
+void {\bfseries task\+\_\+http\+\_\+server} (void $\ast$ignore)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a2e6e33aba660c63e0ed0edb45b43f628}\label{esp__mad__task__http__server_8c_a2e6e33aba660c63e0ed0edb45b43f628}} 
+float {\bfseries travel2} = 0.\+0
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a944e6043842b8ea8abbfd88a69c0c7e9}\label{esp__mad__task__http__server_8c_a944e6043842b8ea8abbfd88a69c0c7e9}} 
+float {\bfseries angle2} = 0.\+0
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a8324110108b6ff39a82aae5e0e176e33}\label{esp__mad__task__http__server_8c_a8324110108b6ff39a82aae5e0e176e33}} 
+float {\bfseries maxi\+Travel\+Sensor1} = 0.\+0
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_ad964c7ee8291c32698a16387fae05eec}\label{esp__mad__task__http__server_8c_ad964c7ee8291c32698a16387fae05eec}} 
+float {\bfseries mini\+Travel\+Sensor1} = 0.\+0
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_aa7cccc40c081d05927fe7e0dca5ac89c}\label{esp__mad__task__http__server_8c_aa7cccc40c081d05927fe7e0dca5ac89c}} 
+float {\bfseries maxi\+Travel\+Sensor2} = 0.\+0
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_aec27509204ff3f1b691b48c747855bca}\label{esp__mad__task__http__server_8c_aec27509204ff3f1b691b48c747855bca}} 
+float {\bfseries mini\+Travel\+Sensor2} = 0.\+0
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a3dcb0e6bd4cbf80d0f163555cdb41c0c}\label{esp__mad__task__http__server_8c_a3dcb0e6bd4cbf80d0f163555cdb41c0c}} 
+float {\bfseries travel}
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_ab8ef1bf8a70cc07c6d55823c390a7e76}\label{esp__mad__task__http__server_8c_ab8ef1bf8a70cc07c6d55823c390a7e76}} 
+float {\bfseries angle}
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_aadf5d6cdc83e6198c1279fbb0edf2677}\label{esp__mad__task__http__server_8c_aadf5d6cdc83e6198c1279fbb0edf2677}} 
+int {\bfseries chord\+Control\+Surface}
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_af31d7819a88d7bd902f39bff3a7eafd3}\label{esp__mad__task__http__server_8c_af31d7819a88d7bd902f39bff3a7eafd3}} 
+const int {\bfseries C\+L\+I\+E\+N\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+E\+D\+\_\+\+B\+IT} = B\+I\+T0
+\item 
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a7410c369a88b18b2f0a2b890a25ccea8}\label{esp__mad__task__http__server_8c_a7410c369a88b18b2f0a2b890a25ccea8}} 
+const int {\bfseries C\+L\+I\+E\+N\+T\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+E\+D\+\_\+\+B\+IT} = B\+I\+T1
+\item 
+httpd\+\_\+uri\+\_\+t {\bfseries main\+\_\+page}
+\item 
+httpd\+\_\+uri\+\_\+t {\bfseries bootstrap\+\_\+min\+\_\+css\+\_\+uri}
+\item 
+httpd\+\_\+uri\+\_\+t {\bfseries bootstrap\+\_\+min\+\_\+js\+\_\+uri}
+\item 
+httpd\+\_\+uri\+\_\+t {\bfseries jquery\+\_\+3\+\_\+3\+\_\+1\+\_\+min\+\_\+js\+\_\+uri}
+\item 
+httpd\+\_\+uri\+\_\+t {\bfseries sensors}
+\item 
+httpd\+\_\+uri\+\_\+t {\bfseries sensor2}
+\item 
+httpd\+\_\+uri\+\_\+t {\bfseries chord}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file include all the code to deal with a simple http server. 
+
+\begin{DoxyAuthor}{Author}
+Alain Désandré -\/ \href{mailto:alain.desandre@wanadoo.fr}{\texttt{ alain.\+desandre@wanadoo.\+fr}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+November 18th 2018
+\end{DoxyDate}
+H\+T\+TP server deal with the various http request from the clients. At the fist reception of an http get from one client, the server respond with the requested uri (see Website\+Files/ for the various uri). esp\+\_\+mad\+\_\+task\+\_\+http\+\_\+server deals with \+:
+\begin{DoxyItemize}
+\item nvs intialisation
+\item dhcp server intialisation
+\item wifi driver initialisation in soft AP mode
+\item when AP station is started, the http server is launched and the uri handles are setup Uris are embedded in the .rodata D\+R\+AM segment (see C\+Make\+List.\+txt) Main H\+T\+ML page is Website\+Files/esp.\+html and used bootstrap framework and jquery. Ressources for bootstrap and jquery are minified version in Website\+Files/
+\end{DoxyItemize}
+
+Version history 01/07/2019 \+: maxi, mini, travel for both sensors added 24/03/2020 \+: http\+\_\+uri\+\_\+t variables declaration post-\/fixed by \char`\"{}\+\_\+uri\char`\"{} to insure compatibility with E\+S\+P-\/\+I\+DF 4.\+0 and C\+Make build System buffer buf\mbox{[}\mbox{]} in chord\+\_\+post\+\_\+handler pass to 50 bytes. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a5e57862c1f597a1a1ec61581a959875a}\label{esp__mad__task__http__server_8c_a5e57862c1f597a1a1ec61581a959875a}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!bootstrap\_min\_css\_handler@{bootstrap\_min\_css\_handler}}
+\index{bootstrap\_min\_css\_handler@{bootstrap\_min\_css\_handler}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{bootstrap\_min\_css\_handler()}{bootstrap\_min\_css\_handler()}}
+{\footnotesize\ttfamily esp\+\_\+err\+\_\+t bootstrap\+\_\+min\+\_\+css\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t $\ast$}]{req }\end{DoxyParamCaption})}
+
+
+
+An H\+T\+TP G\+ET handler for bootstrap.\+min.\+css uri. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em $\ast$req} & \+: un http\+\_\+req\+\_\+t pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+S\+P\+\_\+\+OK 
+\end{DoxyReturn}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a6f7831b412ac57a3fc6762ed4db1688a}\label{esp__mad__task__http__server_8c_a6f7831b412ac57a3fc6762ed4db1688a}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!bootstrap\_min\_js\_handler@{bootstrap\_min\_js\_handler}}
+\index{bootstrap\_min\_js\_handler@{bootstrap\_min\_js\_handler}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{bootstrap\_min\_js\_handler()}{bootstrap\_min\_js\_handler()}}
+{\footnotesize\ttfamily esp\+\_\+err\+\_\+t bootstrap\+\_\+min\+\_\+js\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t $\ast$}]{req }\end{DoxyParamCaption})}
+
+
+
+An H\+T\+TP G\+ET handler for bootstrap.\+min.\+js uri. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em $\ast$req} & \+: un http\+\_\+req\+\_\+t pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+S\+P\+\_\+\+OK. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a4da23f4bcb1b1a78e141a7a7a4c8db23}\label{esp__mad__task__http__server_8c_a4da23f4bcb1b1a78e141a7a7a4c8db23}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!chord\_post\_handler@{chord\_post\_handler}}
+\index{chord\_post\_handler@{chord\_post\_handler}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{chord\_post\_handler()}{chord\_post\_handler()}}
+{\footnotesize\ttfamily esp\+\_\+err\+\_\+t chord\+\_\+post\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t $\ast$}]{req }\end{DoxyParamCaption})}
+
+
+
+An H\+T\+TP P\+O\+ST handler. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em $\ast$req} & \+: un http\+\_\+req\+\_\+t pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+
+\begin{DoxyItemize}
+\item E\+S\+P\+\_\+\+OK
+\item E\+S\+P\+\_\+\+F\+A\+IL 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_ad0912f449468991eb9aa1f3b9ab5573b}\label{esp__mad__task__http__server_8c_ad0912f449468991eb9aa1f3b9ab5573b}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!jquery\_3\_3\_1\_min\_js\_handler@{jquery\_3\_3\_1\_min\_js\_handler}}
+\index{jquery\_3\_3\_1\_min\_js\_handler@{jquery\_3\_3\_1\_min\_js\_handler}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{jquery\_3\_3\_1\_min\_js\_handler()}{jquery\_3\_3\_1\_min\_js\_handler()}}
+{\footnotesize\ttfamily esp\+\_\+err\+\_\+t jquery\+\_\+3\+\_\+3\+\_\+1\+\_\+min\+\_\+js\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t $\ast$}]{req }\end{DoxyParamCaption})}
+
+
+
+An H\+T\+TP G\+ET handler for jquery.\+3.\+3.\+1.\+min.\+js uri. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em $\ast$req} & \+: un http\+\_\+req\+\_\+t pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+S\+P\+\_\+\+OK. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a3b53468c02118b45ea2de3814e68ef4e}\label{esp__mad__task__http__server_8c_a3b53468c02118b45ea2de3814e68ef4e}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!main\_page\_get\_handler@{main\_page\_get\_handler}}
+\index{main\_page\_get\_handler@{main\_page\_get\_handler}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{main\_page\_get\_handler()}{main\_page\_get\_handler()}}
+{\footnotesize\ttfamily esp\+\_\+err\+\_\+t main\+\_\+page\+\_\+get\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t $\ast$}]{req }\end{DoxyParamCaption})}
+
+
+
+An H\+T\+TP G\+ET handler for the main esp.\+html page. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em $\ast$req} & \+: un http\+\_\+req\+\_\+t pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+S\+P\+\_\+\+OK 
+\end{DoxyReturn}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_ad15491378c9c175fc2648b772c6bb788}\label{esp__mad__task__http__server_8c_ad15491378c9c175fc2648b772c6bb788}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!sensors\_get\_handler@{sensors\_get\_handler}}
+\index{sensors\_get\_handler@{sensors\_get\_handler}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{sensors\_get\_handler()}{sensors\_get\_handler()}}
+{\footnotesize\ttfamily esp\+\_\+err\+\_\+t sensors\+\_\+get\+\_\+handler (\begin{DoxyParamCaption}\item[{httpd\+\_\+req\+\_\+t $\ast$}]{req }\end{DoxyParamCaption})}
+
+
+
+An H\+T\+TP G\+ET handler to serve, travel, angle and delta of both sensors. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em $\ast$req} & \+: an http\+\_\+req\+\_\+t pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+S\+P\+\_\+\+OK 
+\end{DoxyReturn}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_aa405dbf500a1f511f559e1e87efff9da}\label{esp__mad__task__http__server_8c_aa405dbf500a1f511f559e1e87efff9da}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!start\_webserver@{start\_webserver}}
+\index{start\_webserver@{start\_webserver}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{start\_webserver()}{start\_webserver()}}
+{\footnotesize\ttfamily httpd\+\_\+handle\+\_\+t start\+\_\+webserver (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Start the http server and stet the uris handles. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+N\+U\+LL or a pointer on http\+\_\+handle\+\_\+t server. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_ae6f378959433adbb1cb20e4f68916f0c}\label{esp__mad__task__http__server_8c_ae6f378959433adbb1cb20e4f68916f0c}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!stop\_webserver@{stop\_webserver}}
+\index{stop\_webserver@{stop\_webserver}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{stop\_webserver()}{stop\_webserver()}}
+{\footnotesize\ttfamily vod stop\+\_\+webserver (\begin{DoxyParamCaption}\item[{httpd\+\_\+handle\+\_\+t}]{server }\end{DoxyParamCaption})}
+
+
+
+stop the httpd web server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em http\+\_\+handle\+\_\+t} & server. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a06dbacc56da839aa23e9fb3bdedbf251}\label{esp__mad__task__http__server_8c_a06dbacc56da839aa23e9fb3bdedbf251}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!bootstrap\_min\_css\_uri@{bootstrap\_min\_css\_uri}}
+\index{bootstrap\_min\_css\_uri@{bootstrap\_min\_css\_uri}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{bootstrap\_min\_css\_uri}{bootstrap\_min\_css\_uri}}
+{\footnotesize\ttfamily httpd\+\_\+uri\+\_\+t bootstrap\+\_\+min\+\_\+css\+\_\+uri}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .uri       = \textcolor{stringliteral}{"/bootstrap.min.css"},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .method    = HTTP\_GET,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .handler   = \mbox{\hyperlink{esp__mad__task__http__server_8c_a5e57862c1f597a1a1ec61581a959875a}{bootstrap\_min\_css\_handler}},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .user\_ctx  = NULL}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_aa452fccf42fb8b8fd56f68e59277cd2e}\label{esp__mad__task__http__server_8c_aa452fccf42fb8b8fd56f68e59277cd2e}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!bootstrap\_min\_js\_uri@{bootstrap\_min\_js\_uri}}
+\index{bootstrap\_min\_js\_uri@{bootstrap\_min\_js\_uri}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{bootstrap\_min\_js\_uri}{bootstrap\_min\_js\_uri}}
+{\footnotesize\ttfamily httpd\+\_\+uri\+\_\+t bootstrap\+\_\+min\+\_\+js\+\_\+uri}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .uri       = \textcolor{stringliteral}{"/bootstrap.min.js"},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .method    = HTTP\_GET,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .handler   = \mbox{\hyperlink{esp__mad__task__http__server_8c_a6f7831b412ac57a3fc6762ed4db1688a}{bootstrap\_min\_js\_handler}},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .user\_ctx  = NULL}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a8cca3fff3a3e6aada29d3b107b636429}\label{esp__mad__task__http__server_8c_a8cca3fff3a3e6aada29d3b107b636429}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!chord@{chord}}
+\index{chord@{chord}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{chord}{chord}}
+{\footnotesize\ttfamily httpd\+\_\+uri\+\_\+t chord}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .uri       = \textcolor{stringliteral}{"/chord"},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .method    = HTTP\_POST,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .handler   = \mbox{\hyperlink{esp__mad__task__http__server_8c_a4da23f4bcb1b1a78e141a7a7a4c8db23}{chord\_post\_handler}},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .user\_ctx  = NULL}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a6b7f4a70572f6436f5ca3c9c9ab3788c}\label{esp__mad__task__http__server_8c_a6b7f4a70572f6436f5ca3c9c9ab3788c}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!jquery\_3\_3\_1\_min\_js\_uri@{jquery\_3\_3\_1\_min\_js\_uri}}
+\index{jquery\_3\_3\_1\_min\_js\_uri@{jquery\_3\_3\_1\_min\_js\_uri}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{jquery\_3\_3\_1\_min\_js\_uri}{jquery\_3\_3\_1\_min\_js\_uri}}
+{\footnotesize\ttfamily httpd\+\_\+uri\+\_\+t jquery\+\_\+3\+\_\+3\+\_\+1\+\_\+min\+\_\+js\+\_\+uri}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .uri       = \textcolor{stringliteral}{"/jquery-\/3.3.1.min.js"},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .method    = HTTP\_GET,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .handler   = \mbox{\hyperlink{esp__mad__task__http__server_8c_ad0912f449468991eb9aa1f3b9ab5573b}{jquery\_3\_3\_1\_min\_js\_handler}},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .user\_ctx  = NULL}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a132152ca7a666a282137c06ac50753f9}\label{esp__mad__task__http__server_8c_a132152ca7a666a282137c06ac50753f9}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!main\_page@{main\_page}}
+\index{main\_page@{main\_page}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{main\_page}{main\_page}}
+{\footnotesize\ttfamily httpd\+\_\+uri\+\_\+t main\+\_\+page}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .uri       = \textcolor{stringliteral}{"/"},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .method    = HTTP\_GET,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .handler   = \mbox{\hyperlink{esp__mad__task__http__server_8c_a3b53468c02118b45ea2de3814e68ef4e}{main\_page\_get\_handler}},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .user\_ctx  = NULL}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_aa9be3bbef010fab9019b0554c22d7071}\label{esp__mad__task__http__server_8c_aa9be3bbef010fab9019b0554c22d7071}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!sensor2@{sensor2}}
+\index{sensor2@{sensor2}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{sensor2}{sensor2}}
+{\footnotesize\ttfamily httpd\+\_\+uri\+\_\+t sensor2}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .uri       = \textcolor{stringliteral}{"/sensor2"},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .method    = HTTP\_POST,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .handler   = sensor2\_post\_handler,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .user\_ctx  = NULL}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{esp__mad__task__http__server_8c_a03e7c007dc23f3b7a312d4717be9ed56}\label{esp__mad__task__http__server_8c_a03e7c007dc23f3b7a312d4717be9ed56}} 
+\index{esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}!sensors@{sensors}}
+\index{sensors@{sensors}!esp\_mad\_task\_http\_server.c@{esp\_mad\_task\_http\_server.c}}
+\doxysubsubsection{\texorpdfstring{sensors}{sensors}}
+{\footnotesize\ttfamily httpd\+\_\+uri\+\_\+t sensors}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .uri       = \textcolor{stringliteral}{"/sensors"},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .method    = HTTP\_GET,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .handler   = \mbox{\hyperlink{esp__mad__task__http__server_8c_ad15491378c9c175fc2648b772c6bb788}{sensors\_get\_handler}},}
+\DoxyCodeLine{}
+\DoxyCodeLine{    .user\_ctx  = NULL}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

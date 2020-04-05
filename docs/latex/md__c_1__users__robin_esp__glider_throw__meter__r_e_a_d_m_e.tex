@@ -1,0 +1,21 @@
+This project proposes a simple digital Angle/\+Throw meter and ... Differentials, using two esp32 and two M\+PU 6050 6 D\+O\+F\+FS components.
+
+Glider\+Throw meter is composed by two device, each using one esp32 and one M\+PU 6050.
+
+Each device can measure the deflections in degrees / millimeters with a resolution of 0.\+1 degrees and can measure the differential when working together with a second unit since Glider\+Throw is a system that comprises two sensors, one for each wing or surface of your airplane.
+
+Using a dual system very much simplifies the throw setting of your model by having a direct view of both control surfaces at the same time.
+
+Glider\+Throw is primary design for setting the control surface of a model glider but you will find that it can be used on most every airplane and for a variety of applications as Measuring a dihedral angle of a wing, Measuring Model Airplane Incidence angle , etc.
+
+As the first device embedded a small http server, the data can be viewed through any web browser on a smartphone, Android or i\+OS, PC or M\+AC.
+
+UI is built using bootstrap and jquery, and all the files needed are embedded in the .rodata segment of the first device.
+
+The project is composed of two parts, the server (Esp\+\_\+mad\+\_\+\+Server directory) and the client (Esp\+\_\+mad\+\_\+\+Client directory).
+
+Two extras libraries are used in the project \+: i2clibdev and \mbox{\hyperlink{class_m_p_u6050}{M\+P\+U6050}} from jrowberg (\href{https://github.com/jrowberg/i2cdevlib}{\texttt{ https\+://github.\+com/jrowberg/i2cdevlib}}).
+
+These libraries are in the extra\+\_\+components directrory of the project. Take care to update the Makefile given in Esp\+\_\+mad\+\_\+\+Client \& Server regarding your own configuration.
+
+Enjoy ! 

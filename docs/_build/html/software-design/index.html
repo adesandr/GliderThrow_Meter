@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Software Design &#8212; Documentation GliderThrow_Meter V1.0.2</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Hardware Design" href="../hardware-design/index.html" />
+    <link rel="prev" title="Get Started" href="../get-started/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="software-design">
+<h1>Software Design<a class="headerlink" href="#software-design" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="logical-design">
+<h2>Logical design<a class="headerlink" href="#logical-design" title="Lien permanent vers ce titre">¶</a></h2>
+<p>The following figure shows the overall logical architecture of the system composed of a server and a client.</p>
+<img alt="../_images/software-design-architecture.png" src="../_images/software-design-architecture.png" />
+</div>
+<div class="section" id="server-software-architecture">
+<h2>Server software architecture<a class="headerlink" href="#server-software-architecture" title="Lien permanent vers ce titre">¶</a></h2>
+<dl>
+<dt>The « Server » software code is made up of three files:</dt><dd><ul class="simple">
+<li><p>esp_mad.cpp: this is the launch file which will create two FreeRtos tasks</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>the « measure » task</p></li>
+<li><p>the « http-server » task</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>esp_mad_task_http_server.c: it is the file which contains the code of the task « http-server »</p></li>
+<li><p>esp_mad_task_measure.cpp: it is the file which contains the code of the task « measure ».</p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="the-http-server-task">
+<h3>The http-server task<a class="headerlink" href="#the-http-server-task" title="Lien permanent vers ce titre">¶</a></h3>
+<p>to be complete</p>
+</div>
+<div class="section" id="the-measure-task">
+<h3>The measure task<a class="headerlink" href="#the-measure-task" title="Lien permanent vers ce titre">¶</a></h3>
+<p>to be complete</p>
+</div>
+</div>
+<div class="section" id="client-software-architecture">
+<h2>Client software architecture<a class="headerlink" href="#client-software-architecture" title="Lien permanent vers ce titre">¶</a></h2>
+<p>to be complete</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">GliderThrow_Meter</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sotfware Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#logical-design">Logical design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-software-architecture">Server software architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-http-server-task">The http-server task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-measure-task">The measure task</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#client-software-architecture">Client software architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware-design/index.html">Hardware Design</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../get-started/index.html" title="Chapitre précédent">Get Started</a></li>
+      <li>Next: <a href="../hardware-design/index.html" title="Chapitre suivant">Hardware Design</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Alain Désandré.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/software-design/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
