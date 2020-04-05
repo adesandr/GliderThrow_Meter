@@ -65,7 +65,7 @@ Breadboard         Lolin32 demoboard  MPU6050 demoboard  Prototyping Wires
 
 .. |Lolin32| image:: /_static/lolin32.png
 
-.. |MPU6050| image:: /_static/mpu6050-board.png
+.. |MPU6050| image:: /_static/MPU6050-board.png
  
 .. |Wires| image:: /_static/prototype-wires.png
  
