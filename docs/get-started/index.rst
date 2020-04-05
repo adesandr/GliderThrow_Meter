@@ -61,7 +61,7 @@ These components can be easily found on the internet (Bandgood, Alliexpress, etc
 Breadboard         Lolin32 demoboard  MPU6050 demoboard  Prototyping Wires
 =================  =================  =================  =================
 
-.. |Breadboard| image:: /_static/breadboard.jpg
+.. |Breadboard| image:: /_static/breadboard.png
 
 .. |Lolin32| image:: /_static/lolin32.jpg
 
