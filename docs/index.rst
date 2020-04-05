@@ -15,9 +15,9 @@ GliderThrow meter is made up of two device, each using one `ESP32 <https://www.e
 and one `MPU 6050 <https://invensense.tdk.com/products/motion-tracking/6-axis/mpu-6050/>`_ 6 doffs component.
 
 Each device can measure the deflections in degrees / millimeters with a resolution of 0.1 degrees and can measure the differential when 
-working together with a second unit since GliderThrow is a system that comprises two sensors, one for each wing or surface of your airplane.
+working together with a second unit since GliderThrow is a system that comprises two sensors, one for each wing or surface control pair of your airplane.
 
-Using a dual system very much simplifies the throw setting of your model by having a direct view of both control surfaces at the same time.
+Using a dual system very much simplifies the throw setting of your model by having a direct view of "equivalent" control surfaces at the same time (left and right Aileron, or flap).
 
 As the first device embedded a small http server, the data can be viewed through any web browser on a smartphone (Android, iOS, etc.), PC or MAC.
 
@@ -35,6 +35,8 @@ for more information to setup an ESP-IDF environnement.
 
 I highly recommande you to use the `Vscode <https://code.visualstudio.com/download>`_ IDE and the 
 `expressif ESP-IDF Vscode Extension <https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension>`_ to build the project.
+
+This project is published under the `MIT license <https://github.com/adesandr/GliderThrow_Meter/blob/master/LICENCE>`_.
 
 Enjoy !
 

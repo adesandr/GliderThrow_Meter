@@ -16,12 +16,12 @@
 
 #define PI  3.14159265359
 
-#define LOLIN_32                 /* Update to LOLIN_32_LITE or LOLIN_32 depending your ESP32 dev. board */
+#define LOLIN_32                    /* Update to LOLIN_32_LITE or LOLIN_32 depending your ESP32 dev. board */
 
 #ifdef X_ESP32
     #define PIN_SDA 15
     #define PIN_CLK 14
-    #define BLINK_GPIO  GPIO_NUM_13
+    #define BLINK_GPIO  GPIO_NUM_13 /* If you prototype with this board, connect a LED on this pin because this board doesn't embark a led in its circuit */
 #endif
 
 #ifdef LOLIN_32_LITE
