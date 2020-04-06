@@ -47,6 +47,14 @@ Each element is then referenced in the code using the following two directives :
 
 .. note:: It is also possible to perform the same operations using a SPI Flash File System (SPIFFS), but I have not tested this solution. For a Web server using more than one HTML page, this method is probably more interesting than the method consisting in embedding the pages in the .rodata segment.
 
+The informations calculated by the "Measure" task (angle and travel) are retrieved by the http_server task in memory, these two variables being defined as global variables. These two values are updated by the "Measure" task every 10 ms.
+
+The deflection angle information measured by the "Client" board is received at a frequency of 900 ms by an HTTP POST request. On receipt of the request, the deflection value in mm is calculated according to the control surface chord.
+
+.. note:: the deflection value in mm is calculated as a function of the angle by the following formula: deflection-in-mm = chord * sin((deflection-in-degree*(2.0*PI)/360.0)/2.0) * 2.0
+
+When the chord is changed from a web browser, an HTTP POST request is received and the chordControlSurface global variable is changed.
+
 The measure task
 ----------------
 to be complete
