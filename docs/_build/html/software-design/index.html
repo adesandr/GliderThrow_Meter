@@ -60,7 +60,31 @@
 </dl>
 <div class="section" id="the-http-server-task">
 <h3>The http-server task<a class="headerlink" href="#the-http-server-task" title="Lien permanent vers ce titre">¶</a></h3>
-<p>to be complete</p>
+<p>The http-server task starts by launching a DHCP server, then initializes the board in AP mode by associating the SSID defined in the esp_map.h file.</p>
+<p>The address 198.168.1.1 is assigned to the Wifi AP as defined when the DHCP server is launched.</p>
+<p>During the initialization of the Wifi in AP mode, an event_group is created to receive the various events that can be received by the Wifi stack.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>When the <em>SYSTEM_EVENT_AP_START</em> event is received, the web server is launched using the httpd function library. When the server is launched, the various URLs on which the server is likely to react are recorded and for each URL a callback function is associated.</p></li>
+<li><p>When the event <em>SYSTEM_EVENT_AP_STACONNECTED</em> is received, the corresponding bit is recorded in the event_group.</p></li>
+<li><p>On receipt of the <em>SYSTEM_EVENT_AP_STADISCONNECTED</em> event, the corresponding bit is recorded in the event group.</p></li>
+<li><p>On receipt of the <em>SYSTEM_EVENT_AP_STOP</em> event, the web server is stopped and the associated resources are released.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The URL « / », which corresponds to the reception of an HTTP GET at the address 192.168.1.1, i.e. the main page of the site (esp.html), triggers the loading of the elements embedded in the page, which are bootstrap.min.css, bootstrap.min.js and jquery-3.1.1.min.js, by as many HTTP GET requests as required by the client browser.</p>
+</div>
+<p>All these elements, as well as the esp.html page, are embedded in the .rodata segment of the ESP32 memory (using the EMBED_FILES directive in the project’s CMakeList.txt file).</p>
+<p>Each element is then referenced in the code using the following two directives :</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">esp_html_start</span><span class="p">[]</span> <span class="k">asm</span><span class="p">(</span><span class="s">&quot;_binary_esp_html_start&quot;</span><span class="p">);</span>
+<span class="k">extern</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">esp_html_end</span><span class="p">[]</span> <span class="k">asm</span><span class="p">(</span><span class="s">&quot;_binary_esp_html_end&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is also possible to perform the same operations using a SPI Flash File System (SPIFFS), but I have not tested this solution. For a Web server using more than one HTML page, this method is probably more interesting than the method consisting in embedding the pages in the .rodata segment.</p>
+</div>
 </div>
 <div class="section" id="the-measure-task">
 <h3>The measure task<a class="headerlink" href="#the-measure-task" title="Lien permanent vers ce titre">¶</a></h3>
