@@ -20,6 +20,6 @@ Two extras libraries are used in the project : i2clibdev and MPU6050 from jrowbe
 
 These libraries are in the extra_components directrory of the project. Take care to update the Makefile given in Esp_mad_Client & Server regarding your own configuration.
 
-For more information, please read the documentation at https://gliderthrow-meter.readthedocs.io/en/latest/
+For more information, please read the docs at https://gliderthrow-meter.readthedocs.io/en/latest/
 
 Enjoy !
