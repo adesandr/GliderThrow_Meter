@@ -23,7 +23,7 @@ The "Server" board integrates a web server, which allows any web browser to conn
 
 The HTML pages are developed using the Bootstrap framework for the layout and JQuery for the Javascript calls embedded in the pages.
 
-To date, the software development only takes into account one client board.
+.. note:: To date, the software development only takes into account one client board.
 
 Functional requirement
 ======================
