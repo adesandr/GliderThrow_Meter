@@ -74,6 +74,33 @@ Basically complementary filter avoid used of kallman filter, quiet difficult to 
 .. image:: /_static/formula-angle-travel.png
              :align: center
 
-Client software architecture
-============================
-to be complete
+UX Design
+=========
+The man-machine interface of the project consists of a single HTML page (esp.html).
+
+This page is built using the CSS framework `bootstrap <https://getbootstrap.com/>`_.
+
+The page embeds an ajax script which periodically makes a HTTP GET request to the "Server" board which sends back the different information to be displayed in the page. A second script makes it possible to carry out the change of the chord of the control surfaces by a HTTP POST request.
+
+To connect to the page, it is first necessary to connect to the Wifi ad'hoc network of SSID ESP_MAD.
+
+.. image:: /_static/ssid-selection.png
+   :align: center
+
+Then, just type the address 192.168.1.1 in the URL bar of your browser to connect to the main page of the project.
+
+.. image:: /_static/menu-travel.png
+   :align: center
+
+The "Angle" tab selection causes the page showing the deflection angles for both board to be displayed.
+
+.. image:: /_static/menu-angle.png
+
+Finally, the "Setting" tab will display the page that allows you to change the value of the control surface chord. Note that in the current version, the project allows to control only one "Client" both and both boards deal with the same chord value.
+
+.. image:: /_static/menu-chord.png
+   :align: center
+
+To change the value of the chord, modify the value in the input field and validate with "Save change chord" button.
+
+.. image:: /_static/change-chord.png
