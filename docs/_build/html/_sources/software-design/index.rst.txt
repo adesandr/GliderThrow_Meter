@@ -72,7 +72,7 @@ Basically complementary filter avoid used of kallman filter, quiet difficult to 
 .. note:: The deflection value in mm is calculated as a function of the angle by the following formula : X = 2* sin(alpha/2) * L.
 
 .. image:: /_static/formula-angle-travel.png
-             :align: center
+   :align: center
 
 UX Design
 =========
@@ -84,8 +84,8 @@ The page embeds an ajax script which periodically makes a HTTP GET request to th
 
 To connect to the page, it is first necessary to connect to the Wifi ad'hoc network of SSID ESP_MAD.
 
-.. image:: /_static/ssid-selection.png
-   :align: center
+.. figure:: /_static/ssid-selection.png
+    :align: center
 
 Then, just type the address 192.168.1.1 in the URL bar of your browser to connect to the main page of the project.
 
