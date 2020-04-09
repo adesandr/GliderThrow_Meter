@@ -95,6 +95,7 @@ Then, just type the address 192.168.1.1 in the URL bar of your browser to connec
 The "Angle" tab selection causes the page showing the deflection angles for both board to be displayed.
 
 .. image:: /_static/menu-angle.png
+   :align: center
 
 Finally, the "Setting" tab will display the page that allows you to change the value of the control surface chord. Note that in the current version, the project allows to control only one "Client" both and both boards deal with the same chord value.
 
@@ -104,3 +105,4 @@ Finally, the "Setting" tab will display the page that allows you to change the v
 To change the value of the chord, modify the value in the input field and validate with "Save change chord" button.
 
 .. image:: /_static/change-chord.png
+   :align: center
