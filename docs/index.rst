@@ -8,7 +8,7 @@ Welcome to GliderThrow_Meter's documentation!
 
 This is the documentation for the GliderThrow_Meter's project (`GliderThrow_Meter <https://github.com/adesandr/GliderThrow_Meter>`_).
 
-GliderThrow is primary design for setting the control surface of a model glider but you will find that it can be used on most 
+GliderThrow is primary design for setting the control surface of a RC glider but you will find that it can be used on most 
 every airplane and for a variety of applications as Measuring a dihedral angle of a wing, Measuring Model Airplane Incidence angle , etc.
 
 GliderThrow meter is made up of two device, each using one `ESP32 <https://www.espressif.com/en/products/hardware/esp32/overview>`_ SOC 

@@ -8,7 +8,7 @@ Each device can measure the deflections in degrees / millimeters with a resoluti
 
 Using a dual system very much simplifies the throw setting of your model by having a direct view of both control surfaces at the same time.
 
-GliderThrow is primary design for setting the control surface of a model glider but you will find that it can be used on most every airplane and for a variety of applications as Measuring a dihedral angle of a wing, Measuring Model Airplane Incidence angle , etc.
+GliderThrow is primary design for setting the control surface of a RC glider but you will find that it can be used on most every RC airplane and for a variety of applications as Measuring a dihedral angle of a wing, Measuring Model Airplane Incidence angle , etc.
 
 As the first device embedded a small http server, the data can be viewed through any web browser on a smartphone, Android or iOS, PC or MAC.
 
