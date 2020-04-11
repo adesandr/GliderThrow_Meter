@@ -74,6 +74,30 @@ Basically complementary filter avoid used of kallman filter, quiet difficult to 
 .. image:: /_static/formula-angle-travel.png
    :align: center
 
+Client software architecture
+============================
+
+The "Client" software code is made up of three files:
+ * esp_mad_client.cpp: this is the launch file which will create two FreeRtos tasks
+
+  * the "measure" task
+  * the "http-client" task
+
+ * esp_mad_task_http_client.c: it is the file which contains the code of the task "http-server"
+ * esp_mad_task_measure.cpp: it is the file which contains the code of the task "measure".
+
+The measure task
+----------------
+The measure task is totally the same code than the measure task of the "Server". No more words to add to this section :-)
+
+The esp_map_task_http_client
+----------------------------
+The "hhtp-client" task start to initialize the board on wifi station.
+
+Then, the task checks periodically if the board is connected to the "Server" Board, and if the MPU6050 calibration is fisnish testing the global Binit variable.
+
+If these conditions are true, an HTTP POST with the angle measure by the board is send to the "Server" board.
+
 UX Design
 =========
 The man-machine interface of the project consists of a single HTML page (esp.html).
@@ -84,7 +108,7 @@ The page embeds an ajax script which periodically makes a HTTP GET request to th
 
 To connect to the page, it is first necessary to connect to the Wifi ad'hoc network of SSID ESP_MAD.
 
-.. figure:: /_static/ssid-selection.png
+.. image:: /_static/ssid-selection.png
     :align: center
 
 Then, just type the address 192.168.1.1 in the URL bar of your browser to connect to the main page of the project.

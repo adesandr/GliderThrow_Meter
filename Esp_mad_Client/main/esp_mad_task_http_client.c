@@ -219,6 +219,14 @@ void task_http_client(void *ignore)
 
     EventBits_t uxBits;
 
+    esp_http_client_config_t config = {
+
+        .url = "http://192.168.1.1/sensor2",
+
+        .event_handler = _http_event_handler,
+
+    };
+
     esp_err_t ret = nvs_flash_init();
     
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -240,14 +248,6 @@ void task_http_client(void *ignore)
     /*--- if station connected and MPU calibration done ---*/
     if(((uxBits & CONNECTED_BIT) != 0) && BInit)
         {
-
-        esp_http_client_config_t config = {
-
-            .url = "http://192.168.1.1/sensor2",
-
-            .event_handler = _http_event_handler,
-
-            };
 
         esp_http_client_handle_t client = esp_http_client_init(&config);
 
