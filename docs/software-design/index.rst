@@ -88,10 +88,12 @@ The "Client" software code is made up of three files:
 
 The measure task
 ----------------
+
 The measure task is totally the same code than the measure task of the "Server". No more words to add to this section :-)
 
 The esp_map_task_http_client
 ----------------------------
+
 The "hhtp-client" task start to initialize the board on wifi station.
 
 Then, the task checks periodically if the board is connected to the "Server" Board, and if the MPU6050 calibration is fisnish testing the global Binit variable.
@@ -100,6 +102,7 @@ If these conditions are true, an HTTP POST with the angle measure by the board i
 
 UX Design
 =========
+
 The man-machine interface of the project consists of a single HTML page (esp.html).
 
 This page is built using the CSS framework `bootstrap <https://getbootstrap.com/>`_.
@@ -109,7 +112,7 @@ The page embeds an ajax script which periodically makes a HTTP GET request to th
 To connect to the page, it is first necessary to connect to the Wifi ad'hoc network of SSID ESP_MAD.
 
 .. image:: /_static/ssid-selection.png
-    :align: center
+   :align: center
 
 Then, just type the address 192.168.1.1 in the URL bar of your browser to connect to the main page of the project.
 
