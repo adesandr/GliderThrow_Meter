@@ -28,7 +28,6 @@ The http-server task starts by launching a DHCP server, then initializes the boa
 The address 198.168.1.1 is assigned to the Wifi AP as defined when the DHCP server is launched.
 
 During the initialization of the Wifi in AP mode, an event_group is created to receive the various events that can be received by the Wifi stack.
-
  * When the *SYSTEM_EVENT_AP_START* event is received, the web server is launched using the httpd function library. When the server is launched, the various URLs on which the server is likely to react are recorded and for each URL a callback function is associated.
  * When the event *SYSTEM_EVENT_AP_STACONNECTED* is received, the corresponding bit is recorded in the event_group.
  * On receipt of the *SYSTEM_EVENT_AP_STADISCONNECTED* event, the corresponding bit is recorded in the event group.
@@ -55,6 +54,7 @@ When the chord is changed from a web browser, an HTTP POST request is received a
 
 The "measure" task
 ------------------
+
 The task "measure" performs the following functions :
  * initialization of the I2C bus,
  * calibration of the MPU6050 component,
@@ -65,7 +65,7 @@ The task "measure" performs the following functions :
 
 .. note:: the task "measure" is identical for the "Server" board and the "Client" board. The only difference is that in the case of the "Server" board, the deflection value in mm is calculated periodically by the "measure" task, whereas for the "Client" board, the value of the angle is transmitted to the "Server" board using an HTTP POST request and it is the "Server" board that performs the calculation of the deflection in mm.
 
-Complementary filter is used to combine accelero and gyro datas. see `complementary filter <http://www.pieter-jan.com/node/11>`_ for more information regarding the complementary filter.
+Complementary filter is used to combine accelero and gyro datas. see `complementary filter <http://www.pieter-jan.com/node/11>`_ for more information.
 
 Basically complementary filter avoid used of kallman filter, quiet difficult to implement in small platform. Gyro are used for fast motion as accelero are used for slow motion.
 
@@ -73,6 +73,30 @@ Basically complementary filter avoid used of kallman filter, quiet difficult to 
 
 .. image:: /_static/formula-angle-travel.png
    :align: center
+
+Client software architecture
+============================
+
+The "Client" software code is made up of three files:
+ * esp_mad_client.cpp: this is the launch file which will create two FreeRtos tasks
+
+  * the "measure" task
+  * the "http-client" task
+
+ * esp_mad_task_http_client.c: it is the file which contains the code of the task "http-server"
+ * esp_mad_task_measure.cpp: it is the file which contains the code of the task "measure".
+
+The measure task
+----------------
+The measure task is totally the same code than the measure task of the "Server". No more words to add to this section :-)
+
+The esp_map_task_http_client
+----------------------------
+The "hhtp-client" task start to initialize the board on wifi station.
+
+Then, the task checks periodically if the board is connected to the "Server" Board, and if the MPU6050 calibration is fisnish testing the global Binit variable.
+
+If these conditions are true, an HTTP POST with the angle measure by the board is send to the "Server" board.
 
 UX Design
 =========

@@ -1,37 +1,167 @@
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Software Design &#8212; Documentation GliderThrow_Meter V1.0.2</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../_static/translations.js"></script>
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Software Design &mdash; Documentation GliderThrow_Meter V1.0.2</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
     <link rel="next" title="Hardware Design" href="../hardware-design/index.html" />
-    <link rel="prev" title="Get Started" href="../get-started/index.html" />
+    <link rel="prev" title="Get Started" href="../get-started/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
    
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
           
 
-          <div class="body" role="main">
+          
+            <a href="../index.html" class="icon icon-home"> GliderThrow_Meter
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sotfware Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#logical-design">Logical design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-software-architecture">Server software architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-http-server-task">The http-server task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-measure-task">The « measure » task</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#client-software-architecture">Client software architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">The measure task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-esp-map-task-http-client">The esp_map_task_http_client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ux-design">UX Design</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware-design/index.html">Hardware Design</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GliderThrow_Meter</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Software Design</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/software-design/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="software-design">
 <h1>Software Design<a class="headerlink" href="#software-design" title="Lien permanent vers ce titre">¶</a></h1>
@@ -62,15 +192,15 @@
 <h3>The http-server task<a class="headerlink" href="#the-http-server-task" title="Lien permanent vers ce titre">¶</a></h3>
 <p>The http-server task starts by launching a DHCP server, then initializes the board in AP mode by associating the SSID defined in the esp_map.h file.</p>
 <p>The address 198.168.1.1 is assigned to the Wifi AP as defined when the DHCP server is launched.</p>
-<p>During the initialization of the Wifi in AP mode, an event_group is created to receive the various events that can be received by the Wifi stack.</p>
-<blockquote>
-<div><ul class="simple">
+<dl class="simple">
+<dt>During the initialization of the Wifi in AP mode, an event_group is created to receive the various events that can be received by the Wifi stack.</dt><dd><ul class="simple">
 <li><p>When the <em>SYSTEM_EVENT_AP_START</em> event is received, the web server is launched using the httpd function library. When the server is launched, the various URLs on which the server is likely to react are recorded and for each URL a callback function is associated.</p></li>
 <li><p>When the event <em>SYSTEM_EVENT_AP_STACONNECTED</em> is received, the corresponding bit is recorded in the event_group.</p></li>
 <li><p>On receipt of the <em>SYSTEM_EVENT_AP_STADISCONNECTED</em> event, the corresponding bit is recorded in the event group.</p></li>
 <li><p>On receipt of the <em>SYSTEM_EVENT_AP_STOP</em> event, the web server is stopped and the associated resources are released.</p></li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The URL « / », which corresponds to the reception of an HTTP GET at the address 192.168.1.1, i.e. the main page of the site (esp.html), triggers the loading of the elements embedded in the page, which are bootstrap.min.css, bootstrap.min.js and jquery-3.1.1.min.js, by as many HTTP GET requests as required by the client browser.</p>
@@ -109,13 +239,42 @@
 <p class="admonition-title">Note</p>
 <p>the task « measure » is identical for the « Server » board and the « Client » board. The only difference is that in the case of the « Server » board, the deflection value in mm is calculated periodically by the « measure » task, whereas for the « Client » board, the value of the angle is transmitted to the « Server » board using an HTTP POST request and it is the « Server » board that performs the calculation of the deflection in mm.</p>
 </div>
-<p>Complementary filter is used to combine accelero and gyro datas. see <a class="reference external" href="http://www.pieter-jan.com/node/11">complementary filter</a> for more information regarding the complementary filter.</p>
+<p>Complementary filter is used to combine accelero and gyro datas. see <a class="reference external" href="http://www.pieter-jan.com/node/11">complementary filter</a> for more information.</p>
 <p>Basically complementary filter avoid used of kallman filter, quiet difficult to implement in small platform. Gyro are used for fast motion as accelero are used for slow motion.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The deflection value in mm is calculated as a function of the angle by the following formula : X = 2* sin(alpha/2) * L.</p>
 </div>
 <img alt="../_images/formula-angle-travel.png" class="align-center" src="../_images/formula-angle-travel.png" />
+</div>
+</div>
+<div class="section" id="client-software-architecture">
+<h2>Client software architecture<a class="headerlink" href="#client-software-architecture" title="Lien permanent vers ce titre">¶</a></h2>
+<dl>
+<dt>The « Client » software code is made up of three files:</dt><dd><ul class="simple">
+<li><p>esp_mad_client.cpp: this is the launch file which will create two FreeRtos tasks</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>the « measure » task</p></li>
+<li><p>the « http-client » task</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>esp_mad_task_http_client.c: it is the file which contains the code of the task « http-server »</p></li>
+<li><p>esp_mad_task_measure.cpp: it is the file which contains the code of the task « measure ».</p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="id1">
+<h3>The measure task<a class="headerlink" href="#id1" title="Lien permanent vers ce titre">¶</a></h3>
+<p>The measure task is totally the same code than the measure task of the « Server ». No more words to add to this section :-)</p>
+</div>
+<div class="section" id="the-esp-map-task-http-client">
+<h3>The esp_map_task_http_client<a class="headerlink" href="#the-esp-map-task-http-client" title="Lien permanent vers ce titre">¶</a></h3>
+<p>The « hhtp-client » task start to initialize the board on wifi station.</p>
+<p>Then, the task checks periodically if the board is connected to the « Server » Board, and if the MPU6050 calibration is fisnish testing the global Binit variable.</p>
+<p>If these conditions are true, an HTTP POST with the angle measure by the board is send to the « Server » board.</p>
 </div>
 </div>
 <div class="section" id="ux-design">
@@ -137,82 +296,52 @@
 </div>
 
 
+           </div>
+           
           </div>
-          
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">GliderThrow_Meter</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Sotfware Design</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#logical-design">Logical design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#server-software-architecture">Server software architecture</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#the-http-server-task">The http-server task</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-measure-task">The « measure » task</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#ux-design">UX Design</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../hardware-design/index.html">Hardware Design</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../get-started/index.html" title="Chapitre précédent">Get Started</a></li>
-      <li>Next: <a href="../hardware-design/index.html" title="Chapitre suivant">Hardware Design</a></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Recherche rapide</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../hardware-design/index.html" class="btn btn-neutral float-right" title="Hardware Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../get-started/index.html" class="btn btn-neutral float-left" title="Get Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  
 
+  <hr/>
 
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Alain Désandré
 
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-
-
-
+</footer>
 
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2020, Alain Désandré.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="../_sources/software-design/index.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
 
-    
+    </section>
 
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
     
-  </body>
+   
+
+</body>
 </html>

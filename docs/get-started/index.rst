@@ -27,8 +27,8 @@ The HTML pages are developed using the Bootstrap framework for the layout and JQ
 
 Functional requirement
 ======================
-The main features requirement from the system are the following:
 
+The main features requirement from the system are the following:
  * Measurement of control surface deflection in either Angle or mm,
  * At least two LEDs :
 
@@ -118,7 +118,6 @@ pin GND->  pin GND
 After completing this assembly, you must download the file esp-mad-server.bin obtained after compilation into your ESP32 demo card.
 
 The procedure for using the UI is as follows:
-
  #. Leave the breadboard flat,
  #. Connect the "Server" card via its USB port,
  #. If your board is equipped with an embedded led, this led will blink very quickly to indicate that the system is in calibration phase of the MPU6050 (leave the breadboard flat during this phase). After a few seconds, the LED will switch to a slower flashing mode to indicate that the MPU6050 has completed its calibration,
