@@ -63,7 +63,7 @@ Breadboard         Lolin32 demoboard  MPU6050 demoboard  Prototyping Wires
 
 .. |Breadboard| image:: /_static/breadboard.png
 
-.. |Lolin32| image:: /_static/lolin32.png
+.. |Lolin32| image:: /_static/lolin32-lite.png
 
 .. |MPU6050| image:: /_static/MPU6050-board.png
  
@@ -81,7 +81,7 @@ Wemos Lolin 32       Wemos Lolin 32 lite  Wemos clone
 
 .. |Lolin 32| image:: /_static/lolin32.png
 
-.. |Lolin 32 Lite| image:: /_static/lolin32.png
+.. |Lolin 32 Lite| image:: /_static/lolin32-lite.png
 
 .. |Wemos X| image:: /_static/clone-wemos.png
 
