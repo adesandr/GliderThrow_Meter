@@ -81,7 +81,7 @@ Wemos Lolin 32       Wemos Lolin 32 lite  Wemos clone
 
 .. |Lolin 32| image:: /_static/lolin32.png
 
-.. |Lolin 32 Lite| image:: /_static/lolin32-lite.png
+.. |Lolin 32 Lite| image:: /_static/lolin32.png
 
 .. |Wemos X| image:: /_static/clone-wemos.png
 
