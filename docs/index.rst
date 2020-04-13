@@ -59,7 +59,7 @@ Enjoy !
    :hidden:
 
    Get Started <get-started/index>
-   Sotfware Design <software-design/index>
+   Software Design <software-design/index>
    Hardware Design <hardware-design/index>
 
 

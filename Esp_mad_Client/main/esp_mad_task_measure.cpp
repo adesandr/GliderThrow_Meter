@@ -222,7 +222,10 @@ void task_measure(void*){
     	/*--- see  http://www.pieter-jan.com/node/11 for more information regarding the complementary filter  ---*/
     	/*--- or https://delta-iot.com/la-theorie-du-filtre-complementaire/ (in french)                       ---*/
     	/*--- Basically complementary filter avoid used of kallman filter, quiet difficult to implement in    ---*/
-    	/*--- small platform. Gyro are used for fast motion as accelero are used for slow motion.             ---*/                                 
+    	/*--- small platform. Gyro are used for fast motion as accelero are used for slow motion.             ---*/
+	    /*--- The formula to compute angle is angle = 0.98 * (angle + gyrData * dt) + (0.02 * accData)        ---*/
+		/*--- dt is 10 ms (so 0.01).                                                                          ---*/
+		/*--- Raw GyrData need to be divide by the sensitivity scale factor (131). see MPU6050 datasheet p12. ---*/                                
     	mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
     	angle=0.98*(angle+float(gy)*0.01/131) + 0.02*atan2((double)ax,(double)az)*180/PI;
 
