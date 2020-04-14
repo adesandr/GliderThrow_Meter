@@ -159,11 +159,12 @@
             
   <div class="section" id="hardware-design">
 <h1>Hardware Design<a class="headerlink" href="#hardware-design" title="Lien permanent vers ce titre">¶</a></h1>
+<p>The hardware design is based on the <a class="reference external" href="https://github.com/adafruit/Adafruit-HUZZAH32-ESP32-Feather-PCB">Adafruit HUZZAH32 ES32 feather open source board</a></p>
 <dl class="simple">
 <dt>The GliderThrow_Meter design is broken down into seven major sections :</dt><dd><ul class="simple">
 <li><p>Power supply and filtering,</p></li>
 <li><p>Lipo charging,</p></li>
-<li><p>USB to serial converter with ESD protection</p></li>
+<li><p>USB to serial converter</p></li>
 <li><p>MPU6050,</p></li>
 <li><p>ESP-WROOM-32D &amp; Autoreset</p></li>
 <li><p>Reset circuit</p></li>
@@ -190,7 +191,7 @@
 </div>
 <div class="section" id="usb-to-serial-converter-with-esd-protection">
 <h2>USB to serial converter with ESD protection<a class="headerlink" href="#usb-to-serial-converter-with-esd-protection" title="Lien permanent vers ce titre">¶</a></h2>
-<p>The USB serial converter is based on a CP2102N from Silicon Labs. An USBLC6-2SC6 from STm is used for ESD protection.</p>
+<p>The USB serial converter is based on a CP2102N from Silicon Labs.</p>
 <img alt="../_images/usb-to-serial-design.png" class="align-center" src="../_images/usb-to-serial-design.png" />
 </div>
 <div class="section" id="mpu6050">

@@ -2,10 +2,12 @@
 Hardware Design
 ***************
 
+The hardware design is based on the `Adafruit HUZZAH32 ES32 feather open source board <https://github.com/adafruit/Adafruit-HUZZAH32-ESP32-Feather-PCB>`_
+
 The GliderThrow_Meter design is broken down into seven major sections :
  * Power supply and filtering,
  * Lipo charging,
- * USB to serial converter with ESD protection
+ * USB to serial converter
  * MPU6050,
  * ESP-WROOM-32D & Autoreset
  * Reset circuit
@@ -38,7 +40,7 @@ The lipo charging circuit is based on the MCP73831/2 microship chip. This chip i
 USB to serial converter with ESD protection
 ===========================================
 
-The USB serial converter is based on a CP2102N from Silicon Labs. An USBLC6-2SC6 from STm is used for ESD protection.
+The USB serial converter is based on a CP2102N from Silicon Labs.
 
 .. image:: /_static/usb-to-serial-design.png
    :align: center
