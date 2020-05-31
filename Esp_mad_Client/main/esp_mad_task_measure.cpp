@@ -14,7 +14,7 @@
 #include <esp_err.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
-#include "mpu6050.h"
+#include "MPU6050.h"
 #include "I2Cdev.h"
 #include "driver/i2c.h"
 #include "MPU6050_6Axis_MotionApps20.h"

@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.5)
 #Project version
 set(PROJECT_VER "1.0.2")
 
-#Include path for extra libs
-set(EXTRA_COMPONENT_DIRS "../extra_components")
+#Additional Directorie for comonents
+set(EXTRA_COMPONENT_DIRS "${CMAKE_SOURCE_DIR}/../extra_components")
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 
