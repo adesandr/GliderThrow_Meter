@@ -107,3 +107,8 @@ The routed PCB (without ground plan) is shown below. The routing was done under 
 
 .. image:: /_static/board-outline-v10.png
    :align: center
+
+Bill Of Material
+================
+
+BOM can be downloaded at this link `bom.xlsx file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_bom/bom_revE.csv>`_
