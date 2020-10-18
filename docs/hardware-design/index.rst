@@ -111,4 +111,4 @@ The routed PCB (without ground plan) is shown below. The routing was done under 
 Bill Of Material
 ================
 
-BOM can be downloaded at this link `bom.xlsx file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_bom/bom_revE.csv>`_
+BOM can be downloaded at this link `bom.xlsx file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_bom/bom_revE.xlsx>`_
