@@ -86,11 +86,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Hardware Design</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#power-supply-and-filtering">Power supply and filtering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lipo-charging">Lipo charging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usb-to-serial-converter-with-esd-protection">USB to serial converter with ESD protection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usb-to-serial-converter">USB to serial converter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mpu6050">MPU6050</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#esp-wroom-32d-autoreset">ESP-WROOM-32D &amp; Autoreset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reset-circuit">Reset circuit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adressable-led">Adressable LED</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pcb-routing">PCB routing</a></li>
 </ul>
 </li>
 </ul>
@@ -168,7 +169,7 @@
 <li><p>MPU6050,</p></li>
 <li><p>ESP-WROOM-32D &amp; Autoreset</p></li>
 <li><p>Reset circuit</p></li>
-<li><p>Adressebale LED</p></li>
+<li><p>Adressable LED</p></li>
 </ul>
 </dd>
 </dl>
@@ -189,14 +190,14 @@
 </div>
 <img alt="../_images/lipo-charging-design.png" class="align-center" src="../_images/lipo-charging-design.png" />
 </div>
-<div class="section" id="usb-to-serial-converter-with-esd-protection">
-<h2>USB to serial converter with ESD protection<a class="headerlink" href="#usb-to-serial-converter-with-esd-protection" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="usb-to-serial-converter">
+<h2>USB to serial converter<a class="headerlink" href="#usb-to-serial-converter" title="Lien permanent vers ce titre">¶</a></h2>
 <p>The USB serial converter is based on a CP2102N from Silicon Labs.</p>
 <img alt="../_images/usb-to-serial-design.png" class="align-center" src="../_images/usb-to-serial-design.png" />
 </div>
 <div class="section" id="mpu6050">
 <h2>MPU6050<a class="headerlink" href="#mpu6050" title="Lien permanent vers ce titre">¶</a></h2>
-<p>The circuit for the MPU6050 is a typical application scheme. SDA and SCL pins are connected to the pins 22 &amp; 23 of the ESP-WROOM-32D.</p>
+<p>The circuit for the MPU6050 is a typical application scheme (see datasheet). SDA and SCL pins are connected to the pins 22 &amp; 23 of the ESP-WROOM-32D.</p>
 <img alt="../_images/mpu6050-design.png" class="align-center" src="../_images/mpu6050-design.png" />
 </div>
 <div class="section" id="esp-wroom-32d-autoreset">
@@ -225,6 +226,13 @@
 <h2>Adressable LED<a class="headerlink" href="#adressable-led" title="Lien permanent vers ce titre">¶</a></h2>
 <p>The adressable led is connected to the pin IO13 of the ESP-WROOM-32D. This led is used to display the status of the MPU6050 calibration.</p>
 <img alt="../_images/adressable-led-design.png" class="align-center" src="../_images/adressable-led-design.png" />
+</div>
+<div class="section" id="pcb-routing">
+<h2>PCB routing<a class="headerlink" href="#pcb-routing" title="Lien permanent vers ce titre">¶</a></h2>
+<p>The routed PCB (without ground plan) is shown below. The routing was done under EAGLE.</p>
+<img alt="../_images/pcb_RevE.png" class="align-center" src="../_images/pcb_RevE.png" />
+<p>3D made with fusion 360 is shown below.</p>
+<img alt="../_images/board-outline-v10.png" class="align-center" src="../_images/board-outline-v10.png" />
 </div>
 </div>
 

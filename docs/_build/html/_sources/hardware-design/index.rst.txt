@@ -11,7 +11,7 @@ The GliderThrow_Meter design is broken down into seven major sections :
  * MPU6050,
  * ESP-WROOM-32D & Autoreset
  * Reset circuit
- * Adressebale LED
+ * Adressable LED
 
 Power supply and filtering
 ==========================
@@ -37,8 +37,8 @@ The lipo charging circuit is based on the MCP73831/2 microship chip. This chip i
 .. image:: /_static/lipo-charging-design.png
    :align: center
 
-USB to serial converter with ESD protection
-===========================================
+USB to serial converter
+=======================
 
 The USB serial converter is based on a CP2102N from Silicon Labs.
 
@@ -48,7 +48,7 @@ The USB serial converter is based on a CP2102N from Silicon Labs.
 MPU6050
 =======
 
-The circuit for the MPU6050 is a typical application scheme. SDA and SCL pins are connected to the pins 22 & 23 of the ESP-WROOM-32D.
+The circuit for the MPU6050 is a typical application scheme (see datasheet). SDA and SCL pins are connected to the pins 22 & 23 of the ESP-WROOM-32D.
 
 .. image:: /_static/mpu6050-design.png
    :align: center
@@ -93,4 +93,17 @@ Adressable LED
 The adressable led is connected to the pin IO13 of the ESP-WROOM-32D. This led is used to display the status of the MPU6050 calibration.
 
 .. image:: /_static/adressable-led-design.png
+   :align: center
+
+PCB routing
+===========
+
+The routed PCB (without ground plan) is shown below. The routing was done under EAGLE.
+
+.. image:: /_static/pcb_RevE.png
+   :align: center
+
+3D made with fusion 360 is shown below.
+
+.. image:: /_static/board-outline-v10.png
    :align: center
