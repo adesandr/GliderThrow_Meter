@@ -45,7 +45,7 @@ The USB serial converter is based on a CP2102N from Silicon Labs.
 
 ESD protection is done using a SP0503BAHTG from littlefuse as recommended on the datasheet.
 
-VEREGINN, VDD & VIO pins are tied to +3.3V, and also RSTB pin as recommended on the datasheet.
+VEREGIN, VDD & VIO pins are tied to +3.3V, and also RSTB pin as recommended on the datasheet.
 
 Two decoupling capacitors are also used.
 
