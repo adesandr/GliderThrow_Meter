@@ -7,11 +7,12 @@ The hardware design is based on the `Adafruit HUZZAH32 ES32 feather open source 
 The GliderThrow_Meter design is broken down into seven major sections :
  * Power supply and filtering,
  * Lipo charging,
- * USB to serial converter
+ * USB to serial converter + ESD protection,
  * MPU6050,
- * ESP-WROOM-32D & Autoreset
- * Reset circuit
- * Adressable LED
+ * ESP-WROOM-32D & Autoreset,
+ * Reset circuit,
+ * Boot circuit,
+ * Adressable LED,
 
 Power supply and filtering
 ==========================
@@ -21,7 +22,7 @@ Power supply and filtering
 
 The board can be powered from a 5V USB port (VBUS), or from a 3,7 V LIPO (or Li-Ion) 1S battery.
 
-The battery is connected to a switch that allows the battery power to be turned ON/OFF.
+The battery is connected to a switch that allows the battery supply to be turned ON/OFF.
 
 A DMG3415U (MOSFET transistor) is used to switch between VBUS and VBAT. When VBUS is not present, the gate is pulled low, and the MOSFET shorts out the body diode, connecting VBAT directly to the LDO. When VBUS is greater than VBAT (that is our case), the MOSFET is cut off and the body diode is blocking, disconnecting VBAT from the circuit. EN pin of the DMG3415U is pulled low to permanently to enable the chip.
 
@@ -37,10 +38,18 @@ The lipo charging circuit is based on the MCP73831/2 microship chip. This chip i
 .. image:: /_static/lipo-charging-design.png
    :align: center
 
-USB to serial converter
-=======================
+USB to serial converter + ESD protection
+========================================
 
 The USB serial converter is based on a CP2102N from Silicon Labs.
+
+ESD protection is done using a SP0503BAHTG from littlefuse as recommended on the datasheet.
+
+VEREGINN, VDD & VIO pins are tied to +3.3V, and also RSTB pin as recommended on the datasheet.
+
+Two decoupling capacitors are also used.
+
+To detect when the device is connected to a bus, which is defined as VIO – 0.6 V, a resistor divider on VBUS is required to meet these specifications and ensure reliable device operation. In this case, the current limitation of the resistor divider prevents high VBUS pin leakage current, even though the VIO + 2.5 V specification is not strictly met while the device is not powered.
 
 .. image:: /_static/usb-to-serial-design.png
    :align: center
@@ -48,7 +57,7 @@ The USB serial converter is based on a CP2102N from Silicon Labs.
 MPU6050
 =======
 
-The circuit for the MPU6050 is a typical application scheme (see datasheet). SDA and SCL pins are connected to the pins 22 & 23 of the ESP-WROOM-32D.
+The circuit for the MPU6050 is a typical application scheme (see datasheet). SDA and SCL pins are connected to the pins 22 & 23 of the ESP-WROOM-32D with two pullup resistors.
 
 .. image:: /_static/mpu6050-design.png
    :align: center
@@ -82,9 +91,17 @@ Reset circuit
 
 Enable (EN) is the 3.3V regulator’s enable pin. It’s pulled up, so connect to ground to disable the 3.3V regulator. So we connect this pin a pushbutton to restart your ESP32.
 
-As recommended by espressif a 1uF value capacitor is added between EN pin and GND to make automatic reset more reliable.
+As recommended by espressif a RC circuit with a resistor of 10k and a capacitor of 0,1uF is added between EN pin and +3,3V to make automatic reset more reliable.
 
 .. image:: /_static/reset-circuit-design.png
+   :align: center
+
+Boot circuit
+============
+
+Boot swith is connected to GPIO.
+
+.. image:: /_static/boot-circuit-design.png
    :align: center
 
 Adressable LED
@@ -100,17 +117,19 @@ PCB routing
 
 The routed PCB (without ground plan) is shown below. The routing was done under EAGLE.
 
-.. image:: /_static/pcb_RevE.png
+.. image:: /_static/pcb.png
    :align: center
 
 3D made with fusion 360 is shown below.
 
-.. image:: /_static/board-outline-v10.png
+.. image:: /_static/board-outline.png
    :align: center
 
-Bill Of Material & Gerber
-=========================
+Bill Of Material, Eagle Files & Gerber
+======================================
 
 BOM can be downloaded at this link `xlsx file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_bom/bom.xlsx>`_
 
 Gerber files can be downloaded at this link `zip file <https://github.com/adesandr/GliderThrow_Meter/blob/master/Gerber/ESP_MAD_Gerber.zip>`_
+
+Eagle files can be downloaded at this link `zip file <https://github.com/adesandr/GliderThrow_Meter/blob/master/Eagle/eagle-files.zip>`_
