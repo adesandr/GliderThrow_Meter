@@ -4,7 +4,12 @@ Hardware Design
 
 The hardware design is based on the `Adafruit HUZZAH32 ES32 feather open source board <https://github.com/adafruit/Adafruit-HUZZAH32-ESP32-Feather-PCB>`_
 
-The GliderThrow_Meter design is broken down into seven major sections :
+The general architecture of the system is shown below.
+
+.. image:: /_static/macro-architecture.png
+   :align: center
+
+The design is broken down into seven major sections :
  * Power supply and filtering,
  * Lipo charging,
  * USB to serial converter + ESD protection,
@@ -12,7 +17,10 @@ The GliderThrow_Meter design is broken down into seven major sections :
  * ESP-WROOM-32D & Autoreset,
  * Reset circuit,
  * Boot circuit,
- * Adressable LED,
+ * Adressable LED.
+
+.. image:: /_static/schematic.PNG
+   :align: center
 
 Power supply and filtering
 ==========================
