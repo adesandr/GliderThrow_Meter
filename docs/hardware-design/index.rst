@@ -109,7 +109,7 @@ Boot circuit
 
 Boot swith is connected to GPIO.
 
-.. image:: /_static/boot-circuit-design.png
+.. image:: /_static/boot-circuit-design.PNG
    :align: center
 
 Adressable LED
