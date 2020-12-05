@@ -140,4 +140,4 @@ BOM can be downloaded at this link `xlsx file <https://github.com/adesandr/Glide
 
 Gerber files can be downloaded at this link `zip file <https://github.com/adesandr/GliderThrow_Meter/blob/master/Gerber/ESP_MAD_Gerber.zip>`_
 
-Eagle files can be downloaded at this link `zip file <https://github.com/adesandr/GliderThrow_Meter/blob/master/Eagle/eagle-files.zip>`_
+Eagle files can be downloaded at this link `zip file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/Eagle/eagle-files.zip>`_
