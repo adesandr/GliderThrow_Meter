@@ -16,7 +16,7 @@
 
 #define PI  3.14159265359
 
-#define LOLIN_32                    /* Update to LOLIN_32_LITE or LOLIN_32 depending your ESP32 dev. board */
+#define WROOVER_KIT             /* Update depending your ESP32 dev. board */
 
 #ifdef X_ESP32
     #define PIN_SDA 15
@@ -34,6 +34,12 @@
     #define PIN_SDA 21
     #define PIN_CLK 22
     #define BLINK_GPIO  GPIO_NUM_5
+#endif
+
+#ifdef WROOVER_KIT
+    #define PIN_SDA 21
+    #define PIN_CLK 22
+    #define BLINK_GPIO  GPIO_NUM_2    
 #endif
 
 #define AP_WIFI_SSID        "ESP_MAD" 

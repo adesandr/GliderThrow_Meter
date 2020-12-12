@@ -38,6 +38,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <Esp_mad.h>
+#include <Esp_mad_Globals_Variables.h>
 
 float travel2   = 0.0;
 float angle2    = 0.0;
@@ -46,10 +47,6 @@ float maxiTravelSensor1 = 0.0;
 float miniTravelSensor1 = 0.0;
 float maxiTravelSensor2 = 0.0;
 float miniTravelSensor2 = 0.0;
-
-extern float travel;
-extern float angle;
-extern int chordControlSurface;
 
 extern const uint8_t esp_html_start[] asm("_binary_esp_html_start");
 extern const uint8_t esp_html_end[]   asm("_binary_esp_html_end");
@@ -66,8 +63,6 @@ extern const uint8_t jquery_3_3_1_min_js_end[]   asm("_binary_jquery_3_3_1_min_j
 static EventGroupHandle_t wifi_event_group;
 const int CLIENT_CONNECTED_BIT = BIT0;
 const int CLIENT_DISCONNECTED_BIT = BIT1;
-
-#define AP_WIFI_SSID "ESP_MAD"
 
 static const char *TAG="APP";
 

@@ -1,7 +1,7 @@
 /**
  * @file    esp_mad_client.cpp
  * @author  Alain Désandré
- * @version 1.0
+ * @version 1.0.3
  * @date    28 octobre 2018
  * @brief   esp_mad project main files.
  *
@@ -22,13 +22,13 @@
 #include <esp_err.h>
 #include "driver/gpio.h"
 #include <Esp_mad.h>
+#define DEFINE_VARIABLES
+#include <Esp_mad_Globals_Variables.h>
 
 extern "C" {
 	void app_main(void);
     void task_http_client(void*);
 }
-
-extern bool BInit;
 
 extern void task_measure(void*);
 extern void task_http_client(void*);

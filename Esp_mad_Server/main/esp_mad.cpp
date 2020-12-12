@@ -26,6 +26,8 @@
 #include <esp_err.h>
 #include "driver/gpio.h"
 #include <Esp_mad.h>
+#define DEFINE_VARIABLES
+#include <Esp_mad_Globals_Variables.h>
 
 extern "C" {
 	void app_main(void);
@@ -34,8 +36,6 @@ extern "C" {
 
 extern void task_measure(void*);
 extern void task_http_server(void*);
-
-extern bool BInit;
 
 /**
  *	@fn 	    app_main(void)

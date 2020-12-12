@@ -1,7 +1,7 @@
 /**
  * @file    esp_mad_task_http_client.c
  * @author  Alain Désandré
- * @version 1.0
+ * @version 1.0.3
  * @date    November 18th 2018
  * @brief   This file include all the code to deal with a simple http server.
  *
@@ -23,9 +23,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <Esp_mad.h>
-
-extern float angle;
-extern bool BInit;
+#include <Esp_mad_Globals_Variables.h>
 
 /* FreeRTOS event group to signal when we are connected & ready to make a request */
 
@@ -43,7 +41,7 @@ static const char *TAG="Esp_Client";
 
 /**
  *	@fn 	    esp_err_t event_handler(void *ctx, system_event_t *event).
- *	@brief 		task launch the function to initialize wize .
+ *	@brief 		task launch the function to initialize wifi .
  *	@param[in]	*ctx : httpd_handler_t pointer.
  *	@param[in]	*event : system_event_t event pointer.
  *	@return		ESP_OK
