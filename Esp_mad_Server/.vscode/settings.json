@@ -14,5 +14,10 @@
     "interface/ftdi/esp32_devkitj_v1.cfg",
     "board/esp32-wrover.cfg"
   ],
-  "cmake.configureOnOpen": false
+  "cmake.configureOnOpen": false,
+  "cSpell.words": [
+    "SRCS",
+    "clibdev",
+    "jquery"
+  ]
 }
