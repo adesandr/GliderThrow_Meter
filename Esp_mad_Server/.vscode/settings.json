@@ -16,10 +16,17 @@
   ],
   "cmake.configureOnOpen": false,
   "cSpell.words": [
+    "Alain",
+    "LOGI",
     "SRCS",
+    "STAIPASSIGNED",
     "clibdev",
     "cmake",
+    "dhcps",
     "directorie",
-    "jquery"
+    "jquery",
+    "rodata",
+    "ssid",
+    "wifi"
   ]
 }

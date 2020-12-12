@@ -440,7 +440,7 @@ esp_err_t chord_post_handler(httpd_req_t *req)
 
     return ESP_OK;
 
-} /* end chor_post_handler() */
+} /* end chord_post_handler() */
 
 httpd_uri_t chord = {
 
@@ -717,7 +717,7 @@ void task_http_server(void *ignore)
     	vTaskDelay(300/portTICK_PERIOD_MS);
 	} /* end while() */
 
-    /*--- this part will not be executed but we stick the free rtos recommandation ---*/
+    /*--- this part will not be executed but we stick the free rtos recomendation ---*/
 	vTaskDelete(NULL);
 
 }
