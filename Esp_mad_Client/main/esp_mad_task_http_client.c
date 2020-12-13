@@ -41,7 +41,7 @@ static const char *TAG="Esp_Client";
 
 /**
  *	@fn 	    esp_err_t event_handler(void *ctx, system_event_t *event).
- *	@brief 		task launch the function to initialize wifi .
+ *	@brief 		Wifi Event handler.
  *	@param[in]	*ctx : httpd_handler_t pointer.
  *	@param[in]	*event : system_event_t event pointer.
  *	@return		ESP_OK
@@ -205,8 +205,8 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 } /* end _http_event_handler() */
 
 /**
- *	@fn 	    task_http_server.
- *	@brief 		task launch the function to initialize wize .
+ *	@fn 	    task_http_client
+ *	@brief 		Main task for the http client.
  *	@param[in]	void*
  *	@return		void.
  */

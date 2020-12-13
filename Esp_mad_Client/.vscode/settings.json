@@ -15,13 +15,16 @@
     "board/esp32-wrover.cfg"
   ],
   "cSpell.words": [
+    "Alain",
     "Blinky",
     "CMAKE",
     "IOMUX",
     "LOGD",
+    "LOGI",
     "SSID",
     "gpio",
     "muxed",
+    "octobre",
     "wifi"
   ]
 }
