@@ -518,7 +518,7 @@ void stop_webserver(httpd_handle_t server)
 
 /**
  *	@fn 	    esp_err_t event_handler(void *ctx, system_event_t *event).
- *	@brief 		task launch the function to initialize wize .
+ *	@brief 		task launch the function to initialize handler event .
  *	@param[in]	*ctx : httpd_handler_t pointer.
  *	@param[in]	*event : system_event_t event pointer.
  *	@return		ESP_OK
