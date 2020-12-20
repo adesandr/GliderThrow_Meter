@@ -13,6 +13,9 @@
  * 
  */
 
+/*-----------------------------------------
+ *-            INCLUDES        
+ *-----------------------------------------*/
 #include <esp_log.h>
 #include <esp_err.h>
 #include <freertos/FreeRTOS.h>
@@ -26,20 +29,23 @@
 #include <Esp_mad.h>
 #include <Esp_mad_Globals_Variables.h>
 
-int16_t ax, ay, az;                       // raw measure
-int16_t gx, gy, gz;
-uint8_t Accel_range;
-uint8_t Gyro_range;
+/*-----------------------------------------
+ *-            LOCALS VARIABLES        
+ *-----------------------------------------*/
+static int16_t ax, ay, az;                       // raw measure
+static int16_t gx, gy, gz;
+static uint8_t Accel_range;
+static uint8_t Gyro_range;
 
 //Change this 3 variables if you want to fine tune to your needs.
-int buffersize=1000;     //Amount of readings used to average, make it higher to get more precision but sketch will be slower  (default:1000)
-int acel_deadzone=8;     //Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
-int giro_deadzone=1;     //Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
+static int buffersize=1000;     //Amount of readings used to average, make it higher to get more precision but sketch will be slower  (default:1000)
+static int acel_deadzone=8;     //Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
+static int giro_deadzone=1;     //Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
 
-int mean_ax,mean_ay,mean_az,mean_gx,mean_gy,mean_gz,state=0;
-int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
+static int mean_ax,mean_ay,mean_az,mean_gx,mean_gy,mean_gz,state=0;
+static int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
 
-MPU6050 mpu = MPU6050();
+static MPU6050 mpu = MPU6050();
 
 /**
  * 	@fn			void meansensors(void)
@@ -206,7 +212,7 @@ void task_measure(void*){
 	ESP_LOGI(tagd,"MPU6050 initialization ...");
 	mpu.initialize();
 
-	/*--- I2C Connexion Test ---*/
+	/*--- I2C Connection Test ---*/
 	if(mpu.testConnection())
 		ESP_LOGI(tagd, "I2C connection OK\n");
 	
@@ -219,7 +225,7 @@ void task_measure(void*){
 	/*--- Infinite loop ---*/
 	while(1){
 
-		/*--- Compute Y angle in degre. Complementary filter is used to combine accelero and gyro datas       ---*/
+		/*--- Compute Y angle in degree. Complementary filter is used to combine accelero and gyro datas      ---*/
     	/*--- see  http://www.pieter-jan.com/node/11 for more information regarding the complementary filter  ---*/
     	/*--- or https://delta-iot.com/la-theorie-du-filtre-complementaire/ (in french)                       ---*/
     	/*--- Basically complementary filter avoid used of kallman filter, quiet difficult to implement in    ---*/
@@ -234,8 +240,8 @@ void task_measure(void*){
     	/*--- to be converted in radian (angleDegre = angleRadian *(2*PI)/360)                               ---*/ 
     	travel = chordControlSurface * sin((angle*(2.0*PI)/360.0)/2.0) * 2.0;
 
-		//ESP_LOGI(tagd, "angle %f - travel %f\n",angle,travel);
-		//ESP_LOGI(tagd, "(abs)angle %d - (abs)travel %d\n",(int)abs(angle), (int)abs(travel));
+		ESP_LOGD(tagd, "angle %f - travel %f\n",angle,travel);
+		ESP_LOGD(tagd, "(abs)angle %d - (abs)travel %d\n",(int)abs(angle), (int)abs(travel));
 
 		vTaskDelay(10/portTICK_PERIOD_MS);
 		

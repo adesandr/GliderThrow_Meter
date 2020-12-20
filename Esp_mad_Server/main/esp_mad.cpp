@@ -8,17 +8,21 @@
  * @details The MAD application is intended to provide a ESP32-based tool
  *          for visualizing the deflection (in mm and degree) of control surface
  *          on a remote-controlled model.
- *          ESP_MAD is composed of four files :
+ *          ESP_MAD is composed of six files :
  *              . esp_mad.ccp : main function.
  *              . esp_mad_task_measure.cpp : MPU6050 management
  *              . esp_mad_task_http_server.c : http server
- *              . esp_mad.h : Globals define
+ *              . Esp_mad.h : Globals define
+ *              . Esp_mad_Globals_Variables.h : Globals variables
  *              . esp_html.h : HTML page and Jquery/Javascript function.
  * 
  *          Version history
  *              23/05/2019 : new version of gpio management, post V3.3 esp-idf
  */
 
+/*-----------------------------------------
+ *-            INCLUDES        
+ *-----------------------------------------*/
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "sdkconfig.h"
@@ -26,9 +30,16 @@
 #include <esp_err.h>
 #include "driver/gpio.h"
 #include <Esp_mad.h>
+
+/*-----------------------------------------
+ * GLOBALS VARIABLES DECLARATION & INIT.        
+ *-----------------------------------------*/
 #define DEFINE_VARIABLES
 #include <Esp_mad_Globals_Variables.h>
 
+/*-----------------------------------------
+ *-            EXTERNALS        
+ *-----------------------------------------*/
 extern "C" {
 	void app_main(void);
     void task_http_server(void*);
@@ -45,7 +56,8 @@ extern void task_http_server(void*);
  */
 void app_main(void)
 {
-    int iDelay = 100;
+    /*--- Locals declaration ---*/
+    int iDelay = 100;           /* Used to setup the blinky period when MPU6050 is not calibrate */
 
     /*--- two tasks are launched. One task handle the MPU6050 measurement and   ---*/
     /*--- the other one is a pretty simple http server to deal with the browser ---*/

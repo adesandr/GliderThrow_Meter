@@ -24,7 +24,9 @@
  *          
  */
 
-/*--- All the include needed ---*/
+/*-----------------------------------------
+ *-            INCLUDES        
+ *-----------------------------------------*/
 #include <esp_wifi.h>
 #include <esp_event_loop.h>
 #include <esp_log.h>
@@ -40,6 +42,9 @@
 #include <Esp_mad.h>
 #include <Esp_mad_Globals_Variables.h>
 
+/*-----------------------------------------
+ *-            LOCALS VARIABLES        
+ *-----------------------------------------*/
 float travel2   = 0.0;
 float angle2    = 0.0;
 
