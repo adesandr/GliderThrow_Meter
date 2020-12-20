@@ -32,20 +32,20 @@
 /*-----------------------------------------
  *-            LOCALS VARIABLES        
  *-----------------------------------------*/
-static int16_t ax, ay, az;                       // raw measure
-static int16_t gx, gy, gz;
-static uint8_t Accel_range;
-static uint8_t Gyro_range;
+int16_t ax, ay, az;                       // raw measure
+int16_t gx, gy, gz;
+uint8_t Accel_range;
+uint8_t Gyro_range;
 
 //Change this 3 variables if you want to fine tune to your needs.
-static int buffersize=1000;     //Amount of readings used to average, make it higher to get more precision but sketch will be slower  (default:1000)
-static int acel_deadzone=8;     //Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
-static int giro_deadzone=1;     //Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
+int buffersize=1000;     //Amount of readings used to average, make it higher to get more precision but sketch will be slower  (default:1000)
+int acel_deadzone=8;     //Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
+int giro_deadzone=1;     //Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
 
-static int mean_ax,mean_ay,mean_az,mean_gx,mean_gy,mean_gz,state=0;
-static int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
+int mean_ax,mean_ay,mean_az,mean_gx,mean_gy,mean_gz,state=0;
+int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
 
-static MPU6050 mpu = MPU6050();
+MPU6050 mpu = MPU6050();
 
 /**
  * 	@fn			void meansensors(void)

@@ -8,13 +8,17 @@
  * @details The MAD application is intended to provide a ESP32-based tool
  *          for visualizing the deflection (in mm and degree) of control surface
  *          on a remote-controlled model.
- *          ESP_MAD is composed of four files :
+ *          ESP_MAD is composed of five files :
  *              - esp_mad_client.ccp : main function.
  *              - esp_mad_task_measure.cpp : MPU6050 management
  *              - esp_mad_task_http_client.c : http client
- *              - esp_mad.h : Globals define
+ *              - Esp_mad_Globals_Variables.h : Globals variables declaration & Init.
+ *              - Esp_mad.h : Globals define
  */
 
+/*-----------------------------------------
+ *-            INCLUDES        
+ *-----------------------------------------*/
 #include "freertos/FreeRTOS.h"
 #include "sdkconfig.h"
 #include "freertos/task.h"
@@ -22,9 +26,16 @@
 #include <esp_err.h>
 #include "driver/gpio.h"
 #include <Esp_mad.h>
+
+/*-----------------------------------------
+ *- GLOBALS VARIABLES DECLARATION & INIT        
+ *-----------------------------------------*/
 #define DEFINE_VARIABLES
 #include <Esp_mad_Globals_Variables.h>
 
+/*-----------------------------------------
+ *-            EXTERNALS        
+ *-----------------------------------------*/
 extern "C" {
 	void app_main(void);
     void task_http_client(void*);
