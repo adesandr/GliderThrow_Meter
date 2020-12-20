@@ -217,7 +217,7 @@ void task_measure(void*){
 		ESP_LOGI(tagd, "I2C connection OK\n");
 	
 	else
-	 	ESP_LOGI(tagd, "I2C connection Error\n");
+	 	ESP_LOGE(tagd, "I2C connection Error\n");
 
 	/*--- MPU6050 Calibration ---*/
 	InitMPU6050();
