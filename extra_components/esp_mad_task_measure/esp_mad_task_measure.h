@@ -1,11 +1,10 @@
 /**
- * \file      esp_mad_task_measure.h
- * \author    Alain Désandré - alain.desandre@wanadoo.fr
- * \version   1.0
- * \date      December 24th 2020
- * \brief     interface for the esp_mad_task_measure component.
+ * @file      esp_mad_task_measure.h
+ * @author    Alain Désandré - alain.desandre@wanadoo.fr
+ * @date      December 24th 2020
+ * @brief     interface for the esp_mad_task_measure component.
  *
- * \details   Protypes and define for the component.
+ * @details   Protypes and define for the component.
  * 
  */
 
