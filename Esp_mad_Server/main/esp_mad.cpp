@@ -1,7 +1,6 @@
 /**
  * @file    esp_mad.cpp
  * @author  Alain Désandré
- * @version 1.0.3
  * @date    28 octobre 2018
  * @brief   esp_mad project main files.
  *
@@ -16,8 +15,6 @@
  *              . Esp_mad_Globals_Variables.h : Globals variables
  *              . esp_html.h : HTML page and Jquery/Javascript function.
  * 
- *          Version history
- *              23/05/2019 : new version of gpio management, post V3.3 esp-idf
  */
 
 /*-----------------------------------------

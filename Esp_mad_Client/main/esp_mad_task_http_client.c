@@ -1,13 +1,10 @@
 /**
  * @file    esp_mad_task_http_client.c
- * @author  Alain Désandré
- * @version 1.0.3
+ * @author  Alain Désandré - alain.desandre@wanadoo.fr
  * @date    November 18th 2018
- * @brief   This file include all the code to deal with a simple http server.
+ * @brief   This file include all the code of the esp_mad client.
  *
- * @details HTTP server deal with the various http request from the client.
- *			At the fist reception of an http get from one client, the server
- *			respond with the esp_mad HTML page (see esp_html.h).
+ * @details The task initialize Wifi in STA mode and connect to ESP_MAD AP station.
  *          
  */
 
@@ -39,7 +36,7 @@ static EventGroupHandle_t wifi_event_group;
 
 const int CONNECTED_BIT = BIT0;
 
-static const char *TAG="Esp_Client";
+static const char *TAG="Esp_Client->";
 
 /**
  *	@fn 	    esp_err_t event_handler(void *ctx, system_event_t *event).

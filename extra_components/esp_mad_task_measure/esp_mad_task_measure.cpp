@@ -1,11 +1,10 @@
 /**
- * \file      esp_mad_task_measure.cpp
- * \author    Alain Désandré - alain.desandre@wanadoo.fr
- * \version   1.0
- * \date      28 octobre 2018
- * \brief     This task process the measure and calibration of the MPU6050
+ * @file      esp_mad_task_measure.cpp
+ * @author    Alain Désandré - alain.desandre@wanadoo.fr
+ * @date      october 28th 2018
+ * @brief     This task process the measure and calibration of the MPU6050
  *
- * \details   This task handles the periodicall MPU6050 measurement and computes the 
+ * @details   This task handles the periodicall MPU6050 measurement and computes the 
  *            angle and travel of the wing surface. This file is part of the esp_mad
  *            project. travel, chordSurface and angle are globals and used by the 
  *			  task_server (see esp_mad_task_http_server.c) to respond to the periodical 
@@ -23,6 +22,7 @@
 #include "MPU6050.h"
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
+#include "esp_mad_task_measure.h"
 #include "sdkconfig.h"
 #include <driver/i2c.h>
 #include "math.h"

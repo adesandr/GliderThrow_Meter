@@ -1,7 +1,6 @@
 /**
  * @file    esp_mad_task_http_server.c
  * @author  Alain Désandré - alain.desandre@wanadoo.fr
- * @version 1.0
  * @date    November 18th 2018
  * @brief   This file include all the code to deal with a simple http server.
  *
@@ -16,11 +15,6 @@
  *          Uris are embedded in the .rodata DRAM segment (see CMakeList.txt)
  *          Main HTML page is WebsiteFiles/esp.html and used bootstrap framework and jquery.
  *          Ressources for bootstrap and jquery are minified version in WebsiteFiles/ 
- *
- *          Version history
- *              01/07/2019 : maxi, mini, travel for both sensors added
- *              24/03/2020 : http_uri_t variables declaration post-fixed by "_uri" to insure compatibility with ESP-IDF 4.0 and CMake build System
- *                           buffer buf[] in chord_post_handler pass to 50 bytes.
  *          
  */
 
@@ -31,14 +25,14 @@
 #include <esp_event_loop.h>
 #include <esp_log.h>
 #include <esp_system.h>
+#include <esp_http_server.h>
+#include <math.h>
 #include <nvs_flash.h>
 #include <sys/param.h>
-#include <esp_http_server.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <freertos/event_groups.h>
 #include <stdlib.h>
-#include <math.h>
 #include <Esp_mad.h>
 #include <Esp_mad_Globals_Variables.h>
 
@@ -69,7 +63,7 @@ static EventGroupHandle_t wifi_event_group;
 const int CLIENT_CONNECTED_BIT = BIT0;
 const int CLIENT_DISCONNECTED_BIT = BIT1;
 
-static const char *TAG="APP";
+static const char *TAG="Esp_Server->";
 
 /**
  *	@fn 	    esp_err_t main_page_get_handler (httpd_req_t *req)

@@ -1,8 +1,7 @@
 /**
  * @file    esp_mad_client.cpp
- * @author  Alain Désandré
- * @version 1.0.3
- * @date    28 octobre 2018
+ * @author  Alain Désandré - alain.desandre@wanadoo.fr
+ * @date    october 28 2018
  * @brief   esp_mad project main files.
  *
  * @details The MAD application is intended to provide a ESP32-based tool
