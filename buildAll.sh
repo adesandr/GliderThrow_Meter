@@ -22,12 +22,17 @@ executeCmd() {
     delFileIfExist
     dateStart=$(date +%s)
     cd ./Esp_mad_Server
-    idf.py $1 >> ../resultBuild.txt
+    idf.py $1 $2 >> ../resultBuild.txt
     cd ../Esp_mad_Client
-    idf.py $1 >> ../resultBuild.txt
+    idf.py $1 $2 >> ../resultBuild.txt
+    cd ..
+    echo >> ./resultBuild.txt
+    echo "<---------------- Elapse Time for the $1 ---------------->" >> ./resultBuild.txt
+    echo >> ./resultBuild.txt
     dateEnd=$(date +%s)
     elapseTime=$(( $dateEnd - $dateStart ))
-    echo "$1 duration is equal to $elapseTime s" >> ../resultBuild.txt
+    echo "$1 duration is equal to $elapseTime s" >> ./resultBuild.txt
+    tail -n 4 ./resultBuild.txt
 }
 
 # Check the number of parameters
@@ -38,7 +43,8 @@ fi
 
 # Execute regarding the parameter
 if [ $1 = "-b" ] || [ $1 = "--build" ]; then
-    executeCmd "build"
+    executeCmd "build" "size"
+    grep "Total image size" ./resultBuild.txt
 elif [ $1 = "-c" ] || [ "$1" = "--clean" ]; then
     executeCmd "clean"
 else
