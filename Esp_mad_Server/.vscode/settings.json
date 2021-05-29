@@ -40,5 +40,6 @@
     "stabilisation",
     "tagd",
     "wifi"
-  ]
+  ],
+  "idf.portWin": "COM8"
 }
