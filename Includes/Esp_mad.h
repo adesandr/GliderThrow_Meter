@@ -16,8 +16,9 @@
 
 #define PI  3.14159265359
 
-#define WROOVER_KIT             /* Update depending your ESP32 dev. board */
+#define ESP_MAD_BOARD               /* Update depending your ESP32 dev. board. set to ESP_MAD_BOARD developped for the project */
 
+/*--- Boards used for first prototyping ---*/
 #ifdef X_ESP32
     #define PIN_SDA 15
     #define PIN_CLK 14
@@ -40,6 +41,13 @@
     #define PIN_SDA 21
     #define PIN_CLK 22
     #define BLINK_GPIO  GPIO_NUM_2    
+#endif
+
+/*--- Custom ESP_MAD Board developped for the purpose of the project ---*/
+#ifdef ESP_MAD_BOARD
+    #define PIN_SDA 23
+    #define PIN_CLK 22
+    #define BLINK_GPIO  GPIO_NUM_13
 #endif
 
 #define AP_WIFI_SSID        "ESP_MAD" 
