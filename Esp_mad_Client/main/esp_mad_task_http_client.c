@@ -212,7 +212,9 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 void task_http_client(void *ignore)
 
 {
-    char post_data[20];
+    char post_data[30];
+
+    float voltage2;
 
     EventBits_t uxBits;
 
@@ -243,13 +245,15 @@ void task_http_client(void *ignore)
 
     uxBits = xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT, false, true, portMAX_DELAY);    
 
+    voltage2 = voltage/1000.0;
+
     /*--- if station connected and MPU calibration done ---*/
     if(((uxBits & CONNECTED_BIT) != 0) && BInit)
         {
 
         esp_http_client_handle_t client = esp_http_client_init(&config);
 
-        sprintf(post_data,"%.1f", angle);
+        sprintf(post_data,"{\"angle\":%0.1f,\"voltage\":%0.2f}", angle, voltage2);
 
         esp_http_client_set_url(client, "http://192.168.1.1/sensor2");
 

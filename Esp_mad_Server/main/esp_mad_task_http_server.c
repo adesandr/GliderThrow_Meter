@@ -29,6 +29,7 @@
 #include <math.h>
 #include <nvs_flash.h>
 #include <sys/param.h>
+#include <cJSON.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <freertos/event_groups.h>
@@ -46,6 +47,8 @@ float maxiTravelSensor1 = 0.0;
 float miniTravelSensor1 = 0.0;
 float maxiTravelSensor2 = 0.0;
 float miniTravelSensor2 = 0.0;
+
+float voltage2 = 0.0;
 
 extern const uint8_t esp_html_start[] asm("_binary_esp_html_start");
 extern const uint8_t esp_html_end[]   asm("_binary_esp_html_end");
@@ -208,6 +211,9 @@ esp_err_t sensors_get_handler(httpd_req_t *req)
     float DeltaTravel;
     float DeltaAngle;
 
+    float voltage1 = 0.0;
+    float voltage2 = 0.0;
+
     /* Get header value string length and allocate memory for length + 1,
 
      * extra byte for null termination */
@@ -232,7 +238,7 @@ esp_err_t sensors_get_handler(httpd_req_t *req)
 
     }
 
-    buf = malloc(200);
+    buf = malloc(250);
 
     memset(buf,0,sizeof(buf)-1);
 
@@ -250,7 +256,13 @@ esp_err_t sensors_get_handler(httpd_req_t *req)
     if (travel2 < miniTravelSensor2)
         miniTravelSensor2 = travel2; 
 
-    sprintf(buf,"{\"travel1\":%0.1f,\"travel2\":%0.1f,\"DeltaTravel\":%0.1f,\"angle1\":%0.1f,\"angle2\":%0.1f,\"DeltaAngle\":%0.1f, \"maxiTravelSensor1\":%0.1f, \"miniTravelSensor1\":%0.1f,\"maxiTravelSensor2\":%0.1f,\"miniTravelSensor2\":%0.1f}",travel, travel2, DeltaTravel, angle, angle2, DeltaAngle, maxiTravelSensor1, miniTravelSensor1, maxiTravelSensor2, miniTravelSensor2);
+    /*--- compute voltage in volt ---*/
+    voltage1 = voltage/1000.0;
+
+    ESP_LOGI(TAG, "voltage1 %f - voltage2 %f", voltage1, voltage2);
+
+    /*--- Preparing the buffer request in json format ---*/
+    sprintf(buf,"{\"travel1\":%0.1f,\"travel2\":%0.1f,\"DeltaTravel\":%0.1f,\"angle1\":%0.1f,\"angle2\":%0.1f,\"DeltaAngle\":%0.1f, \"maxiTravelSensor1\":%0.1f, \"miniTravelSensor1\":%0.1f,\"maxiTravelSensor2\":%0.1f,\"miniTravelSensor2\":%0.1f,\"voltage1\":%0.2f, \"voltage2\":%0.2f}",travel, travel2, DeltaTravel, angle, angle2, DeltaAngle, maxiTravelSensor1, miniTravelSensor1, maxiTravelSensor2, miniTravelSensor2, voltage1, voltage2);
 
  	ESP_LOGI(TAG, "[len = %d]  \n", strlen(buf));
 
@@ -258,6 +270,7 @@ esp_err_t sensors_get_handler(httpd_req_t *req)
 
     httpd_resp_set_type(req,"text/plain");
 
+    /*--- Send the request ---*/
     httpd_resp_send(req, buf, strlen(buf));
 
     free(buf);
@@ -294,6 +307,9 @@ esp_err_t sensor2_post_handler(httpd_req_t *req)
     char buf[40];
 
     int ret, remaining = req->content_len;
+    cJSON *sensor2_json = NULL;
+    const cJSON *json_angle = NULL;
+    const cJSON *json_voltage = NULL;
 
     ESP_LOGI(TAG, "Entering ----> sensor2_post_handler()\n");
     ESP_LOGI(TAG, "method: %d\n", req->method);
@@ -329,9 +345,18 @@ esp_err_t sensor2_post_handler(httpd_req_t *req)
 
         ESP_LOGI(TAG, "====================================");
 
-        angle2 = strtof(buf,NULL);
+        /*--- Parse Json buffer receved form client ---*/
+        sensor2_json = cJSON_Parse(buf);
+        json_angle = cJSON_GetObjectItemCaseSensitive(sensor2_json, "angle");
+        angle2 = json_angle->valuedouble;
+        json_voltage = cJSON_GetObjectItemCaseSensitive(sensor2_json, "voltage");
+        voltage2 = json_voltage->valuedouble;
+        cJSON_Delete(sensor2_json);
+
+        /*--- Compute travel2 ---*/
         travel2 = chordControlSurface * sin((angle2*(2.0*PI)/360.0)/2.0) * 2.0;
-        ESP_LOGI(TAG,"angle2 : %.1f - travel2 : %.1f\n",angle2, travel2);
+
+        ESP_LOGI(TAG,"angle2 : %.1f - travel2 : %.1f - voltage2 : %.2f\n",angle2, travel2, voltage2);
 
         /* Send response to the client, by default 200 OK status in the mime type */
         httpd_resp_send(req, NULL, 0);

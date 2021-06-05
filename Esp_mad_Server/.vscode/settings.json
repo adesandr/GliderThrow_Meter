@@ -41,5 +41,8 @@
     "tagd",
     "wifi"
   ],
-  "idf.portWin": "COM8"
+  "idf.portWin": "COM8",
+  "files.associations": {
+    "esp_adc_cal.h": "c"
+  }
 }

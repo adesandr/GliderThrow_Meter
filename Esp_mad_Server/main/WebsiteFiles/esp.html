@@ -33,6 +33,7 @@
                     <li><a class="nav-item nav-link active" href="#p1" data-toggle="tab">Travel</a></li>
                     <li><a class="nav-item nav-link" href="#p2" data-toggle="tab">Angle</a></li>
                     <li><a class="nav-item nav-link" href="#p3" data-toggle="tab">Setting</a></li>
+                    <li><a class="nav-item nav-link" href="#p4" data-toggle="tab">Info</a></li>
                 </ul>
             </nav>      
         </div>
@@ -142,6 +143,25 @@
                 <button class="col-lg-12" style="border-radius:10px;font-size:50px;background-color:#33ff00" id="chordSubmit" name="chordSubmit">Save chord value</button>
             </div>
             
+            <!-- info tab-content -->
+            <div class="tab-pane" id="p4">      
+
+                <div class="col-lg-12">
+                    <div style="background:linear-gradient(to right, #ff5db1 0%,#ef017c 100%);border-radius:10px">
+                        <p class="text-center" style="color:white;font-size:50px">Sensor 1 Voltage : &nbsp;<span id="voltage1" name="voltage1"></span>
+                        V</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div style="background:linear-gradient(to right, #a9e4f7 0%,#0fb4e7 100%);border-radius:10px">
+                        <p class="text-center" style="color:white;font-size:50px">Sensor 2 Voltage : &nbsp;<span id="voltage2" name="voltage2"></span>
+                        V</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
         <!-- This script sent a periodical request to the esp32 http server -->
@@ -165,7 +185,9 @@
                             $("#maxiTravelSensor1").text(obj.maxiTravelSensor1)
                             $("#miniTravelSensor1").text(obj.miniTravelSensor1)
                             $("#maxiTravelSensor2").text(obj.maxiTravelSensor2)
-                            $("#miniTravelSensor2").text(obj.miniTravelSensor2)         
+                            $("#miniTravelSensor2").text(obj.miniTravelSensor2)   
+                            $("#voltage1").text(obj.voltage1) 
+                            $("#voltage2").text(obj.voltage2)          
                         } else {
                             $("#travel1").text("?");
                             $("#travel2").text("?");
@@ -176,7 +198,9 @@
                             $("#maxiTravelSensor1").text("?"); 
                             $("#miniTravelSensor1").text("?");
                             $("#maxiTravelSensor2").text("?");
-                            $("#miniTravelSensor2").text("?");          
+                            $("#miniTravelSensor2").text("?"); 
+                            $("#voltage1").text("?");       
+                            $("#voltage2").text("?");     
                         }
                     }).fail(function() {
                         console.log("The was a problem retrieving the data.");

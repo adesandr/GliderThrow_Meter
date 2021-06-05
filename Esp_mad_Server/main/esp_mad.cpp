@@ -40,6 +40,7 @@
 extern "C" {
 	void app_main(void);
     void task_http_server(void*);
+    void task_vBattery(void*);
 }
 
 extern void task_measure(void*);
@@ -65,6 +66,11 @@ void app_main(void)
     vTaskDelay(500/portTICK_PERIOD_MS);
 
     xTaskCreate(&task_http_server, "http_server_task", 8192, NULL, 5, NULL);
+
+    /*--- Wait for stabilisation, not mandatory ---*/
+    vTaskDelay(500/portTICK_PERIOD_MS);
+
+    xTaskCreate(&task_vBattery, "vBattery_task", 8192, NULL, 5, NULL);
 
     /*---  Configure the IOMUX register for pad BLINK_GPIO (some pads are ---*/
     /*---  muxed to GPIO on reset already, but some default to other      ---*/

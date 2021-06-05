@@ -27,6 +27,7 @@ EXTERN bool BInit INITIALIZER(0);                /* Boolean used to indicated if
 EXTERN float travel INITIALIZER(0.0);            /* Store the travel measure by the MPU6050                          */
 EXTERN float angle INITIALIZER(0.0);             /* Store the angle measure by the MPU6050                           */                           
 EXTERN int chordControlSurface INITIALIZER(50);  /* Store the chord of the Control surface in mm. 50 mm by default   */
+EXTERN uint voltage INITIALIZER(0);              /* Store the voltage of the battery                                 */
 
 #endif /* _ESP_MAD_GLOBALS_VARIABLES_H_ */
  

@@ -16,6 +16,8 @@
 
 #define PI  3.14159265359
 
+#define AP_WIFI_SSID    "ESP_MAD" 
+
 #define ESP_MAD_BOARD               /* Update depending your ESP32 dev. board. set to ESP_MAD_BOARD developped for the project */
 
 /*--- Boards used for first prototyping ---*/
@@ -49,8 +51,6 @@
     #define PIN_CLK 22
     #define BLINK_GPIO  GPIO_NUM_13
 #endif
-
-#define AP_WIFI_SSID        "ESP_MAD" 
 
 #endif /* _ESP_MAD_H_ */
  
