@@ -13,13 +13,15 @@ Server software architecture
 ============================
 
 The "Server" software code is made up of three files:
- * esp_mad.cpp: this is the launch file which will create two FreeRtos tasks
+ * esp_mad.cpp: this is the launch file which will create three FreeRtos tasks
 
   * the "measure" task
   * the "http-server" task
+  * the "tack_vBattery"
 
  * esp_mad_task_http_server.c: it is the file which contains the code of the task "http-server"
  * esp_mad_task_measure.cpp: it is the file which contains the code of the task "measure".
+ * esp_mad_task_vBattry.c : it is the file with contains the code of the task "task_vBattery"
 
 The http-server task
 --------------------
@@ -74,17 +76,28 @@ Basically complementary filter avoid used of kallman filter, quiet difficult to 
 .. image:: /_static/formula-angle-travel.png
    :align: center
 
+The "tack_vBattery" task
+------------------------
+
+The task "vBattery" compute periodically the measurement of the voltage of the battery.
+
+The battery voltage is connected to the IO35 pin of the ESP-WROOM-32. This pin is the chanel 7 of the ADC1.
+
+A bridge resistor divider with two resistors of 100 KOhm is used to decreased the voltage from 4.2 V to 2.1 V. So the attenuation of the ADC is set to 11 dB.  
+
 Client software architecture
 ============================
 
 The "Client" software code is made up of three files:
- * esp_mad_client.cpp: this is the launch file which will create two FreeRtos tasks
+ * esp_mad_client.cpp: this is the launch file which will create three FreeRtos tasks
 
   * the "measure" task
   * the "http-client" task
+  * the "task_vBattery"
 
  * esp_mad_task_http_client.c: it is the file which contains the code of the task "http-server"
  * esp_mad_task_measure.cpp: it is the file which contains the code of the task "measure".
+ * esp_mad_task_vBattery.c : it is the file which contains the code of the task "task_vBattery".
 
 The measure task
 ----------------
@@ -99,6 +112,11 @@ The "hhtp-client" task start to initialize the board on wifi station.
 Then, the task checks periodically if the board is connected to the "Server" Board, and if the MPU6050 calibration is fisnish testing the global Binit variable.
 
 If these conditions are true, an HTTP POST with the angle measure by the board is send to the "Server" board.
+
+The task_vBattery
+-----------------
+
+The task_vBattery is totally the same code than the task_vBattery of the "server". No more words to add to this section also :-)
 
 UX Design
 =========
@@ -124,7 +142,7 @@ The "Angle" tab selection causes the page showing the deflection angles for both
 .. image:: /_static/menu-angle.png
    :align: center
 
-Finally, the "Setting" tab will display the page that allows you to change the value of the control surface chord. Note that in the current version, the project allows to control only one "Client" both and both boards deal with the same chord value.
+The "Setting" tab will display the page that allows you to change the value of the control surface chord. Note that in the current version, the project allows to control only one "Client" both and both boards deal with the same chord value.
 
 .. image:: /_static/menu-chord.png
    :align: center
@@ -132,4 +150,9 @@ Finally, the "Setting" tab will display the page that allows you to change the v
 To change the value of the chord, modify the value in the input field and validate with "Save change chord" button.
 
 .. image:: /_static/change-chord.png
+   :align: center
+
+Finally, the "Info" tab display the voltage of the battery for both sensor/
+
+.. image:: /_static/menu-info.png
    :align: center
