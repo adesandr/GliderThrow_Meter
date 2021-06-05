@@ -36,7 +36,7 @@ for more information to setup an ESP-IDF environnement.
 I highly recommande you to use the `Vscode <https://code.visualstudio.com/download>`_ IDE and the 
 `expressif ESP-IDF Vscode Extension <https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension>`_ to build the project.
 
-All my thanks to the members of the `Electrolab <https://www.electrolab.fr/>`_ of Nanterre who assisted me during the realization of this project and for the access to the manufacturing and tests tools of this miraculous fablab.
+All my thanks to the members of the `Electrolab <https://www.electrolab.fr/>`_ of Nanterre who assisted me during the realization of this project and for the access to the manufacturing and tests tools of this miraculous Hackerspace.
 
 This project is published under the `MIT license <https://github.com/adesandr/GliderThrow_Meter/blob/master/LICENCE>`_.
 
