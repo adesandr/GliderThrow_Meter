@@ -48,7 +48,7 @@ Each element is then referenced in the code using the following two directives :
 
 .. note:: It is also possible to perform the same operations using a SPI Flash File System (SPIFFS), but I have not tested this solution. For a Web server using more than one HTML page, this method is probably more interesting than the method consisting in embedding the pages in the .rodata segment.
 
-The informations calculated by the "Measure" task (angle and travel) are retrieved by the http_server task from memory, these two variables being defined as global variables. These two values are updated by the "Measure" task every 10 ms.
+Data calculated by the "Measure" task (angle and travel) are retrieved by the http_server task from memory, these two variables being defined as global variables. These two values are updated by the "Measure" task every 10 ms.
 
 The deflection angle information measured by the "Client" board is received at a frequency of 900 ms by an HTTP POST request. On receipt of the request, the deflection value in mm is calculated according to the control surface chord.
 
@@ -79,7 +79,7 @@ Basically complementary filter avoid used of kallman filter, quiet difficult to 
 The "tack_vBattery" task
 ------------------------
 
-The task "vBattery" compute periodically the measurement of the voltage of the battery.
+The task "vBattery" compute periodically (each 30s per default) the measurement of the voltage of the battery.
 
 The battery voltage is connected to the IO35 pin of the ESP-WROOM-32. This pin is the chanel 7 of the ADC1.
 
