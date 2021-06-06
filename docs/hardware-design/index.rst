@@ -135,8 +135,8 @@ The routed PCB (without ground plan) is shown below. The routing was done under 
 
 The finish board is shown below (quiet similar to the 3D model isn't it :-)
 
-.. image::  /_static/pcb-finish.png
-   :align:center
+.. image:: /_static/pcb-finish.png
+   :align: center
 
 Bill Of Material, Eagle Files & Gerber
 ======================================
