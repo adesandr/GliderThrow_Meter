@@ -42,11 +42,11 @@ This project is published under the `MIT license <https://github.com/adesandr/Gl
 
 Enjoy !
 
-==================  ==================  ==================
-|Get Started|_      |Software Design|_  |Hardware Design|_
-------------------  ------------------  ------------------
-`Get Started`_      `Software Design`_  `Hardware Design`_
-==================  ==================  ==================
+==================  ==================  ==================  ==================
+|Get Started|_      |Software Design|_  |Hardware Design|_  |System Build|_
+------------------  ------------------  ------------------  ------------------
+`Get Started`_      `Software Design`_  `Hardware Design`_  `System Build`_
+==================  ==================  ==================  ==================
 
 .. |Get Started| image:: /_static/get-started.png
 .. _Get Started: get-started/index.html
@@ -57,12 +57,16 @@ Enjoy !
 .. |Hardware Design| image:: /_static/hardware-design.png
 .. _Hardware Design: hardware-design/index.html
 
+.. |System Build| image:: /_static/system-build.png
+.. _System Build: system-build/index.html
+
 .. toctree::
    :hidden:
 
    Get Started <get-started/index>
    Software Design <software-design/index>
    Hardware Design <hardware-design/index>
+   System Build <system-build/index>
 
 
 Indices and tables

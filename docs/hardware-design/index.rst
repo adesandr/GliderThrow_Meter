@@ -143,7 +143,7 @@ Bill Of Material, Eagle Files & Gerber
 
 BOM can be downloaded at this link `xlsx file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_bom/bom.xlsx>`_
 
-Pick & Places file can be downloaded at this link 
+Pick & Places file can be downloaded at this link `txt file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_pick%26place/PnP_ESP_MAD_RevF_front_forSmtAssistant.txt>`_ The format of this file is compatible with the Smt Assistant utility from Alciom. SmtAssistant is a software developped by ALCIOM and helping to locate a part on a printed circuit board, based on a bitmap of the PCB and Pick&Place file.  SmtAssistant is usefull for manual prototype assembly, inspection or board repair works. `see here <https://www.alciom.com/en/smtassistant/>`_ for more information and download.
 
 Gerber files can be downloaded at this link `zip file <https://github.com/adesandr/GliderThrow_Meter/blob/master/Gerber/ESP_MAD_Gerber.zip>`_
 
