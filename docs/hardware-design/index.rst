@@ -143,6 +143,8 @@ Bill Of Material, Eagle Files & Gerber
 
 BOM can be downloaded at this link `xlsx file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_bom/bom.xlsx>`_
 
+Pick & Places file can be downloaded at this link 
+
 Gerber files can be downloaded at this link `zip file <https://github.com/adesandr/GliderThrow_Meter/blob/master/Gerber/ESP_MAD_Gerber.zip>`_
 
 Eagle files can be downloaded at this link `zip file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/Eagle/eagle-files.zip>`_
