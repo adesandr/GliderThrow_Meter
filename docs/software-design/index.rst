@@ -17,11 +17,11 @@ The "Server" software code is made up of three files:
 
   * the "measure" task
   * the "http-server" task
-  * the "tack_vBattery"
+  * the "task_vBattery"
 
  * esp_mad_task_http_server.c: it is the file which contains the code of the task "http-server"
  * esp_mad_task_measure.cpp: it is the file which contains the code of the task "measure".
- * esp_mad_task_vBattry.c : it is the file with contains the code of the task "task_vBattery"
+ * esp_mad_task_vBattery.c : it is the file with contains the code of the task "task_vBattery"
 
 The http-server task
 --------------------
@@ -76,7 +76,7 @@ Basically complementary filter avoid used of kallman filter, quiet difficult to 
 .. image:: /_static/formula-angle-travel.png
    :align: center
 
-The "tack_vBattery" task
+The "task_vBattery" task
 ------------------------
 
 The task "vBattery" compute periodically (each 30s per default) the measurement of the voltage of the battery.

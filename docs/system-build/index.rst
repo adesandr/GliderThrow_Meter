@@ -26,14 +26,14 @@ Another solution if you don't want to waste time manually assembling the board i
 20 mm magnet
 ------------
 
-20 mm neodym magnet can be ordered at 'supermagnet.fr <https://www.supermagnete.fr/aimants-disques-neodyme/disque-magnetique-20mm-2mm_S-20-02-N>'_
+20 mm neodym magnet can be ordered at `supermagnet.fr <https://www.supermagnete.fr/aimants-disques-neodyme/disque-magnetique-20mm-2mm_S-20-02-N>`_
 
 Lipo 1S battery
 ---------------
 
-A '350 mAh Lipo <https://www.flashrc.com/tattu/22927-batterie_tattu_lipo_1s_37v_350mah_30c_prise_molex.html>'_ battery is recommended. '500 mAh Turnigy lipo >https://hobbyking.com/fr_fr/turnigy-nano-tech-500mah-1s-25-50c-lipo-pack-losi-mini-compatible-1.html?queryID=d166af1407953f939983d0e383a2d794&objectID=79555&indexName=hbk_live_products_analyticsbattery>'_ from hobbyking is also a good choice.
+A `350 mAh Lipo <https://www.flashrc.com/tattu/22927-batterie_tattu_lipo_1s_37v_350mah_30c_prise_molex.html>`_ battery is recommended. `500 mAh Turnigy lipo >https://hobbyking.com/fr_fr/turnigy-nano-tech-500mah-1s-25-50c-lipo-pack-losi-mini-compatible-1.html?queryID=d166af1407953f939983d0e383a2d794&objectID=79555&indexName=hbk_live_products_analyticsbattery>`_ from hobbyking is also a good choice.
 
-With the turnigy 500 mAh battery, the autonomy of one device is around 3h.
+With the turnigy 500 mAh battery, the autonomy of one device is around 3h of use.
 
 How to build assemble one board
 ===============================
