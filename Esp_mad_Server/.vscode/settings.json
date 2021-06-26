@@ -44,5 +44,6 @@
   "idf.portWin": "COM8",
   "files.associations": {
     "esp_adc_cal.h": "c"
-  }
+  },
+  "idf.flashType": "UART"
 }

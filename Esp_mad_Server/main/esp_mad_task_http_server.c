@@ -262,7 +262,7 @@ esp_err_t sensors_get_handler(httpd_req_t *req)
     ESP_LOGI(TAG, "voltage1 %f - voltage2 %f", voltage1, voltage2);
 
     /*--- Preparing the buffer request in json format ---*/
-    sprintf(buf,"{\"travel1\":%0.1f,\"travel2\":%0.1f,\"DeltaTravel\":%0.1f,\"angle1\":%0.1f,\"angle2\":%0.1f,\"DeltaAngle\":%0.1f, \"maxiTravelSensor1\":%0.1f, \"miniTravelSensor1\":%0.1f,\"maxiTravelSensor2\":%0.1f,\"miniTravelSensor2\":%0.1f,\"voltage1\":%0.2f, \"voltage2\":%0.2f}",travel, travel2, DeltaTravel, angle, angle2, DeltaAngle, maxiTravelSensor1, miniTravelSensor1, maxiTravelSensor2, miniTravelSensor2, voltage1, voltage2);
+    sprintf(buf,"{\"travel1\":%0.1f,\"travel2\":%0.1f,\"DeltaTravel\":%0.1f,\"angle1\":%0.1f,\"angle2\":%0.1f,\"DeltaAngle\":%0.1f,\"maxiTravelSensor1\":%0.1f,\"miniTravelSensor1\":%0.1f, \"maxiTravelSensor2\":%0.1f, \"miniTravelSensor2\":%0.1f,\"voltage1\":%0.2f, \"voltage2\":%0.2f}",(travel < 0 ? (-1*travel) : travel), (travel2 < 0 ? (-1*travel2) : travel2), (DeltaTravel < 0 ? (-1*DeltaTravel) : DeltaTravel), (angle < 0 ? (-1*angle) : angle), (angle2 < 0 ? (-1*angle2) : angle2), (DeltaAngle < 0 ? (-1*DeltaAngle) : DeltaAngle), (-1*miniTravelSensor1),maxiTravelSensor1,   (-1*miniTravelSensor2), maxiTravelSensor2, voltage1, voltage2);
 
  	ESP_LOGI(TAG, "[len = %d]  \n", strlen(buf));
 
