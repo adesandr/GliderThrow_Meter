@@ -112,7 +112,7 @@ Boot swith is connected to GPIO.
 .. image:: /_static/boot-circuit-design.PNG
    :align: center
 
-.. note:: Some ESP32 based schematics mention a 0,1uF capacitor in parallel to the BOOT button. Do not add this capacitor in this design or you will not be able to start the board without pressing the EN button.
+.. note:: Some ESP32 based schematics mention a 0,1uF capacitor in parallel to the BOOT button to debounce. Do not add this capacitor in this design or you will not be able to start the board without pressing the EN button.
 
 Adressable LED
 ==============
