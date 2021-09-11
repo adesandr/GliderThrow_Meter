@@ -25,6 +25,20 @@ The "Server" software code is made up of three files:
 
 The http-server task
 --------------------
+A web server is a software component that listens for incoming HTTP requests from web browsers. Upon receiving a request, the web server sends a response. This may be the return of an HTML document to be displayed in a browser or data that forms a response to a service call. An HTTP request can also include data to be sent to the ESP32 for processing. There are many implementations of Web servers that can run in an ESP32 environment.
+
+The Espressif (ESP-IDF) framework provides an API for implementing a lightweight Web server on ESP32.
+
+The HTTP Server component of Espressif (ESP-IDF) allows you to run a lightweight web server on ESP32. The two basic API calls are:
+
+ * httpd_start(): creates an HTTP server instance, allocates resources to it based on the specified configuration, and generates a handle to the server instance. The server will have a listening socket (TCP) for HTTP traffic. The task priority and stack size are configurable when creating the server instance by passing the httpd_config_t structure to httpd_start(). TCP traffic is parsed as HTTP requests and, depending on the requested URI, registered handlers will be called to return HTTP response packets.
+
+ * httpd_stop(): stops the server with the provided handle and releases the associated resources. This is a blocking function that first signals a stop to the server task, and then waits for the task to finish. Upon termination, the task closes all open connections, deletes registered URI handlers, and resets all session context data to empty.
+
+To process HTTP requests sent to the server, you will need to register URI handlers with :
+
+ * httpd_register_uri_handler(): registers a URI handler by passing an httpd_uri_t structure object that has members including the IR name, method type (e.g. HTTPD_GET / HTTPD_POST / HTTPD_PUT etc ...), a function pointer of type esp_err_t * handler (httpd_req_t * req) and user_ctx pointer to the context data.
+
 The http-server task starts by launching a DHCP server, then initializes the board in AP mode by associating the SSID defined in the esp_map.h file.
 
 The address 198.168.1.1 is assigned to the Wifi AP as defined when the DHCP server is launched.

@@ -112,6 +112,8 @@ Boot swith is connected to GPIO.
 .. image:: /_static/boot-circuit-design.PNG
    :align: center
 
+.. note:: Some ESP32 based schematics mention a 0,1uF capacitor in parallel to the BOOT button. Do not add this capacitor in this design or you will not be able to start the board without pressing the EN button.
+
 Adressable LED
 ==============
 
@@ -143,7 +145,7 @@ Bill Of Material, Eagle Files & Gerber
 
 BOM can be downloaded at this link `xlsx file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_bom/bom.xlsx>`_
 
-Pick & Places file can be downloaded at this link `txt file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_pick%26place/PnP_ESP_MAD_RevF_front_forSmtAssistant.txt>`_ The format of this file is compatible with the Smt Assistant utility from Alciom. SmtAssistant is a software designed by ALCIOM and helping to locate a part on a printed circuit board, based on a bitmap of the PCB and Pick&Place file.  SmtAssistant is usefull for manual prototype assembly, inspection or board repair works. `see here <https://www.alciom.com/en/smtassistant/>`_ for more information and download.
+Pick & Places file can be downloaded at this link `txt file <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_pick%26place/PnP_ESP_MAD_front_forSmtAssistant.txt>`_ The format of this file is compatible with the Smt Assistant utility from Alciom. SmtAssistant is a software designed by ALCIOM and helping to locate a part on a printed circuit board, based on a bitmap of the PCB and Pick&Place file.  SmtAssistant is usefull for manual prototype assembly, inspection or board repair works. `see here <https://www.alciom.com/en/smtassistant/>`_ for more information and download.
 
 Gerber files can be downloaded at this link `zip file <https://github.com/adesandr/GliderThrow_Meter/blob/master/Gerber/ESP_MAD_Gerber.zip>`_
 
