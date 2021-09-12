@@ -32,7 +32,7 @@ The board can be powered from a 5V USB port (VBUS), or from a 3,7 V LIPO (or Li-
 
 The battery is connected to a switch that allows the battery supply to be turned ON/OFF.
 
-A DMG3415U (MOSFET transistor) is used to switch between VBUS and VBAT. When VBUS is not present, the gate is pulled low, and the MOSFET shorts out the body diode, connecting VBAT directly to the LDO. When VBUS is greater than VBAT (that is our case), the MOSFET is cut off and the body diode is blocking, disconnecting VBAT from the circuit. EN pin of the DMG3415U is pulled low to permanently to enable the chip.
+A DMG3415U (MOSFET transistor) is used to switch between VBUS and VBAT. When VBUS is not present, the gate is pulled low, and the MOSFET shorts out the body diode, connecting VBAT directly to the LDO. When VBUS is greater than VBAT (that is our case), the MOSFET is cut off and the body diode is blocking, disconnecting VBAT from the circuit. EN pin of the DMG3415U is pulled low to permanently enable the chip.
 
 So with this switch, VBAT enters to the AP2112-3.3v LDO, if VBUS isn't present, otherwise VBUS enters to the AP2112-3.3.
 
