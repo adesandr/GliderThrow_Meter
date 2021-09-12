@@ -45,5 +45,6 @@
   "files.associations": {
     "esp_adc_cal.h": "c"
   },
-  "idf.flashType": "UART"
+  "idf.flashType": "UART",
+  "restructuredtext.confPath": "c:\\Users\\Robin\\esp\\GliderThrow_Meter\\docs"
 }
