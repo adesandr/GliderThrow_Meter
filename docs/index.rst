@@ -48,7 +48,7 @@ Enjoy !
 `Get Started`_      `Software Design`_  `Hardware Design`_  `System Build`_
 ==================  ==================  ==================  ==================
 
-.. |Get_Started| image:: /_static/get-started.png
+.. |Get Started| image:: /_static/get-started.png
 .. _Get Started: get-started/index.html
 
 .. |Software Design| image:: /_static/software-design.png
