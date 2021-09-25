@@ -43,13 +43,13 @@ This project is published under the `MIT license <https://github.com/adesandr/Gl
 Enjoy !
 
 ==================  ==================  ==================  ==================
-|The Genesis|_      |Software Design|_  |Hardware Design|_  |System Build|_
+|Get_Started|_      |Software Design|_  |Hardware Design|_  |System Build|_
 ------------------  ------------------  ------------------  ------------------
-`The Genesis`_      `Software Design`_  `Hardware Design`_  `System Build`_
+`Get Started`_      `Software Design`_  `Hardware Design`_  `System Build`_
 ==================  ==================  ==================  ==================
 
-.. |The Genesis| image:: /_static/get-started.png
-.. _The Genesis: get-started/index.html
+.. |Get_Started| image:: /_static/get-started.png
+.. _Get Started: get-started/index.html
 
 .. |Software Design| image:: /_static/software-design.png
 .. _Software Design: software-design/index.html
