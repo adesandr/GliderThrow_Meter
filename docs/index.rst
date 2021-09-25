@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to GliderThrow_Meter's documentation!
+Welcome to the GliderThrow_Meter's documentation!
 =============================================
 
 This is the documentation for the GliderThrow_Meter's project (`GliderThrow_Meter <https://github.com/adesandr/GliderThrow_Meter>`_).
@@ -17,7 +17,7 @@ and one `MPU 6050 <https://invensense.tdk.com/products/motion-tracking/6-axis/mp
 Each device can measure the deflections in degrees / millimeters with a resolution of 0.1 degrees and can measure the differential when 
 working together with a second unit since GliderThrow is a system that comprises two sensors, one for each wing or surface control pair of your airplane.
 
-Using a dual system very much simplifies the throw setting of your model by having a direct view of "equivalent" control surfaces at the same time (left and right Aileron, or flap).
+Using a dual system simplifies a lot the throw setting of your model by having a direct view of "equivalent" control surfaces at the same time (left and right aileron, or flap).
 
 As the first device embedded a small http server, the data can be viewed through any web browser on a smartphone (Android, iOS, etc.), PC or MAC.
 
@@ -43,13 +43,13 @@ This project is published under the `MIT license <https://github.com/adesandr/Gl
 Enjoy !
 
 ==================  ==================  ==================  ==================
-|Get Started|_      |Software Design|_  |Hardware Design|_  |System Build|_
+|The Genesis|_      |Software Design|_  |Hardware Design|_  |System Build|_
 ------------------  ------------------  ------------------  ------------------
-`Get Started`_      `Software Design`_  `Hardware Design`_  `System Build`_
+`The Genesis`_      `Software Design`_  `Hardware Design`_  `System Build`_
 ==================  ==================  ==================  ==================
 
-.. |Get Started| image:: /_static/get-started.png
-.. _Get Started: get-started/index.html
+.. |The Genesis| image:: /_static/get-started.png
+.. _The Genesis: get-started/index.html
 
 .. |Software Design| image:: /_static/software-design.png
 .. _Software Design: software-design/index.html
