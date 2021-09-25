@@ -15,11 +15,11 @@ Introduction
 ============
 The principle of the project is based on the use of two (or more) completely identical boards that communicate using Wifi, on an ad'hoc network (define as ESP_MAD network).
 
-One of the board (named "Server") is initialized in Acces Point (AP) mode. The other boards initialize in Station mode (STA) (named "Client(s)").
+One of the board (named "Server") is initialized in Access Point (AP) mode. The other boards initialize in Station mode (STA) (named "Client(s)").
 
 The "Server" board and the "Client" board(s) use similar software, but slightly different because of this specificity of Wifi configuration.
 
-The "Server" board integrates a web server, which allows any web browser to connect to the "Server" board and to navigate on the developed HTML pages (so, connection are possible with all the devices equiped with a a web browser like a PC, a Tablet or a Smartphone under Android or IOS).
+The "Server" board integrates a web server, which allows any web browser to connect to the "Server" board and to navigate on the developed HTML pages (so, connection are possible with all the devices equipped with a a web browser like a PC, a Tablet or a Smartphone under Android or IOS).
 
 The HTML pages are developed using the Bootstrap framework for the layout and JQuery for the Javascript calls embedded in the pages.
 
