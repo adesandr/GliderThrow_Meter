@@ -43,7 +43,7 @@ This project is published under the `MIT license <https://github.com/adesandr/Gl
 Enjoy !
 
 ==================  ==================  ==================  ==================
-|Get_Started|_      |Software Design|_  |Hardware Design|_  |System Build|_
+|Get Started|_      |Software Design|_  |Hardware Design|_  |System Build|_
 ------------------  ------------------  ------------------  ------------------
 `Get Started`_      `Software Design`_  `Hardware Design`_  `System Build`_
 ==================  ==================  ==================  ==================
