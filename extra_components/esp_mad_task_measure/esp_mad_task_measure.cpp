@@ -38,9 +38,9 @@ uint8_t Accel_range;
 uint8_t Gyro_range;
 
 //Change this 3 variables if you want to fine tune to your needs.
-int buffersize=1000;     //Amount of readings used to average, make it higher to get more precision but sketch will be slower  (default:1000)
-int acel_deadzone=8;     //Acelerometer error allowed, make it lower to get more precision, but sketch may not converge  (default:8)
-int giro_deadzone=1;     //Giro error allowed, make it lower to get more precision, but sketch may not converge  (default:1)
+int buffersize=1000;     //Amount of readings used to average, make it higher to get more precision but algorithm will be slower  (default:1000)
+int acel_deadzone=8;     //Acelerometer error allowed, make it lower to get more precision, but algorithm may not converge  (default:8)
+int giro_deadzone=1;     //Giro error allowed, make it lower to get more precision, but algorithm may not converge  (default:1)
 
 int mean_ax,mean_ay,mean_az,mean_gx,mean_gy,mean_gz,state=0;
 int ax_offset,ay_offset,az_offset,gx_offset,gy_offset,gz_offset;
@@ -98,8 +98,6 @@ void calibration(void){
   gx_offset=-mean_gx/4;
   gy_offset=-mean_gy/4;
   gz_offset=-mean_gz/4;
-
-  static const char tag_calibration[] = "Calibration ->"; 
   
   while (1){
     int ready=0;
@@ -112,8 +110,6 @@ void calibration(void){
     mpu.setZGyroOffset(gz_offset);
 
     meansensors();
-
-	ESP_LOGI(tag_calibration, "Ready value = %d\n", ready);
 
     if (abs(mean_ax)<=acel_deadzone) ready++;
     else ax_offset=ax_offset-mean_ax/acel_deadzone;
