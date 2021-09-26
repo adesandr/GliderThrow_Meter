@@ -98,6 +98,8 @@ void calibration(void){
   gx_offset=-mean_gx/4;
   gy_offset=-mean_gy/4;
   gz_offset=-mean_gz/4;
+
+  static const char tag_calibration[] = "Calibration ->"; 
   
   while (1){
     int ready=0;
@@ -110,6 +112,8 @@ void calibration(void){
     mpu.setZGyroOffset(gz_offset);
 
     meansensors();
+
+	ESP_LOGI(tag_calibration, "Ready value = %d\n", ready);
 
     if (abs(mean_ax)<=acel_deadzone) ready++;
     else ax_offset=ax_offset-mean_ax/acel_deadzone;

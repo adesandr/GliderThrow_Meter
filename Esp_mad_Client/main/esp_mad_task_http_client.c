@@ -214,6 +214,8 @@ void task_http_client(void *ignore)
 {
     char post_data[30];
 
+    static const char tag[] = "http_client->";
+
     float voltage2;
 
     EventBits_t uxBits;
@@ -246,6 +248,8 @@ void task_http_client(void *ignore)
     uxBits = xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT, false, true, portMAX_DELAY);    
 
     voltage2 = voltage/1000.0;
+
+    ESP_LOGI(tag, "voltage2 %f - voltage %d\n", voltage2, voltage);
 
     /*--- if station connected and MPU calibration done ---*/
     if(((uxBits & CONNECTED_BIT) != 0) && BInit)

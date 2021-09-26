@@ -212,7 +212,6 @@ esp_err_t sensors_get_handler(httpd_req_t *req)
     float DeltaAngle;
 
     float voltage1 = 0.0;
-    float voltage2 = 0.0;
 
     /* Get header value string length and allocate memory for length + 1,
 
