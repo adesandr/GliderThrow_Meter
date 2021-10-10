@@ -33,6 +33,9 @@ This project is build using the ESP-IDF 4.0 CMake Build System. Please refer to 
 `espressif documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ 
 for more information to setup an ESP-IDF environnement.
 
+.. note:: At this stage, the code is not compatible to the ESP-IDF 4.1 release (tcp_adapter & event_loop functions have changed), so take care
+to build the project with an ESP-IDF framework < v4.1.
+
 I highly recommande you to use the `Vscode <https://code.visualstudio.com/download>`_ IDE and the 
 `expressif ESP-IDF Vscode Extension <https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension>`_ to build the project.
 
