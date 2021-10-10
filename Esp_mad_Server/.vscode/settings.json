@@ -8,7 +8,7 @@
     "editor.quickSuggestions": true
   },
   "C_Cpp.intelliSenseEngineFallback": "Enabled",
-  "idf.port": "/dev/ttyUSB1",
+  "idf.port": "/dev/ttyUSB0",
   "idf.adapterTargetName": "esp32",
   "idf.openOcdConfigs": [
     "interface/ftdi/esp32_devkitj_v1.cfg",
@@ -18,33 +18,35 @@
   "cSpell.words": [
     "Alain",
     "Blinky",
-    "IOMUX",
-    "LOGI",
-    "LOLIN",
-    "SRCS",
-    "STAIPASSIGNED",
-    "WROOVER",
     "cembre",
     "clibdev",
     "cmake",
     "d",
+    "décembre",
+    "Désandré",
     "dhcps",
     "directorie",
-    "décembre",
     "gpio",
+    "IOMUX",
     "jquery",
+    "LOGI",
+    "LOLIN",
     "muxed",
     "octobre",
     "rodata",
+    "SRCS",
     "ssid",
     "stabilisation",
+    "STAIPASSIGNED",
     "tagd",
-    "wifi"
+    "wifi",
+    "WROOVER"
   ],
   "idf.portWin": "COM8",
   "files.associations": {
     "esp_adc_cal.h": "c"
   },
   "idf.flashType": "UART",
-  "restructuredtext.confPath": "c:\\Users\\Robin\\esp\\GliderThrow_Meter\\docs"
+  "restructuredtext.confPath": "c:\\Users\\Robin\\esp\\GliderThrow_Meter\\docs",
+  "C_Cpp.errorSquiggles": "Disabled"
 }

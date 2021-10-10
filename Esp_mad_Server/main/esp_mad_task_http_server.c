@@ -344,7 +344,7 @@ esp_err_t sensor2_post_handler(httpd_req_t *req)
 
         ESP_LOGI(TAG, "====================================");
 
-        /*--- Parse Json buffer receved form client ---*/
+        /*--- Parse Json buffer received form client ---*/
         sensor2_json = cJSON_Parse(buf);
         json_angle = cJSON_GetObjectItemCaseSensitive(sensor2_json, "angle");
         angle2 = json_angle->valuedouble;
