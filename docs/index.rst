@@ -35,8 +35,8 @@ for more information to setup an ESP-IDF environnement.
 
 .. note:: Take care to build the project with an ESP-IDF framework < v4.1 (tcp_adaptor & event_loop APIs have changed).
 
-I highly recommande you to use the `Vscode <https://code.visualstudio.com/download>`_ IDE and the 
-`expressif ESP-IDF Vscode Extension <https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension>`_ to build the project.
+I highly recommend you to use the `Vscode <https://code.visualstudio.com/download>`_ IDE and the 
+`espressif ESP-IDF Vscode Extension <https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension>`_ to build the project.
 
 All my thanks to the members of the `Electrolab <https://www.electrolab.fr/>`_ of Nanterre who assisted me during the realization of this project and for the access to the manufacturing and tests tools of this miraculous Hackerspace.
 
