@@ -40,16 +40,19 @@
 /*-----------------------------------------
  *-            LOCALS VARIABLES        
  *-----------------------------------------*/
-float travel2   = 0.0;
-float angle2    = 0.0;
 
-float maxiTravelSensor1 = 0.0;
-float miniTravelSensor1 = 0.0;
-float maxiTravelSensor2 = 0.0;
-float miniTravelSensor2 = 0.0;
+/*--- Used to store value received from client or compute ---*/
+static float travel2   = 0.0;
+static float angle2    = 0.0;
 
-float voltage2 = 0.0;
+static float maxiTravelSensor1 = 0.0;
+static float miniTravelSensor1 = 0.0;
+static float maxiTravelSensor2 = 0.0;
+static float miniTravelSensor2 = 0.0;
 
+static float voltage2 = 0.0;
+
+/*--- Pointer on html page and bootstrap stuff ---*/
 extern const uint8_t esp_html_start[] asm("_binary_esp_html_start");
 extern const uint8_t esp_html_end[]   asm("_binary_esp_html_end");
 
@@ -62,9 +65,10 @@ extern const uint8_t bootstrap_min_js_end[]   asm("_binary_bootstrap_min_js_end"
 extern const uint8_t jquery_3_3_1_min_js_start[] asm("_binary_jquery_3_3_1_min_js_start");
 extern const uint8_t jquery_3_3_1_min_js_end[]   asm("_binary_jquery_3_3_1_min_js_end");
 
+/*--- For event_group management ---*/
 static EventGroupHandle_t wifi_event_group;
-const int CLIENT_CONNECTED_BIT = BIT0;
-const int CLIENT_DISCONNECTED_BIT = BIT1;
+static const int CLIENT_CONNECTED_BIT = BIT0;
+static const int CLIENT_DISCONNECTED_BIT = BIT1;
 
 static const char *TAG="Esp_Server->";
 
@@ -478,6 +482,48 @@ httpd_uri_t chord = {
 };
 
 /**
+ *	@fn 	    esp_err_t reset_post_handler (httpd_req_t *req)
+ *	@brief 		An HTTP POST handler.
+ *	@param[in]	*req : un http_req_t pointer.
+ *	@return		
+ *      - ESP_OK
+ *      - ESP_FAIL
+ */
+esp_err_t reset_post_handler(httpd_req_t *req)
+{
+    ESP_LOGI(TAG, "Entering ----> reset_post_handler()\n");
+    ESP_LOGI(TAG, "method: %d\n", req->method);
+    ESP_LOGI(TAG, "uri: %s\n", req->uri);
+    ESP_LOGI(TAG, "len %d\n", req->content_len);
+    
+    /*--- Min & Max reset to 0 ---*/
+    maxiTravelSensor1 = 0.0;
+    miniTravelSensor1 = 0.0;
+    maxiTravelSensor2 = 0.0;
+    miniTravelSensor2 = 0.0;
+
+    /* Send response to the client */
+    httpd_resp_send(req, NULL, 0);
+
+    ESP_LOGI(TAG, "Exit    ----> reset_post_handler()\n");
+
+    return ESP_OK;
+
+} /* end reset_post_handler() */
+
+httpd_uri_t reset = {
+
+    .uri       = "/reset",
+
+    .method    = HTTP_POST,
+
+    .handler   = reset_post_handler,
+
+    .user_ctx  = NULL
+
+};
+
+/**
  *	@fn 	    httpd_handle_t start_webserver (void)
  *	@brief 		Start the http server and stet the uris handles
  *	@param[in]	void
@@ -509,6 +555,8 @@ httpd_handle_t start_webserver(void)
         httpd_register_uri_handler(server, &jquery_3_3_1_min_js_uri);
 
         httpd_register_uri_handler(server, &chord);
+
+        httpd_register_uri_handler(server, &reset);
 
         httpd_register_uri_handler(server, &sensors);
 

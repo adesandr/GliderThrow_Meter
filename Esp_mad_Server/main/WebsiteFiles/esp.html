@@ -108,6 +108,15 @@
                     </div>
                 </div>
 
+                <br/>
+                <br/> 
+                <br/>
+
+                <div class="col text-center">                                             
+                    <button type="button" style="background:linear-gradient(to right, #8f8e8e 0%,#706464 100%);border-radius:10px" 
+                    id="resetSubmit" name="resetSubmit"><p class="text-center" style="color:white;font-size:50px">Reset Maximum(s)</p></button>
+                </div>
+
             </div>
             
             <!-- Angle tab-content -->
@@ -217,6 +226,16 @@
                     $.post('/chord',{chordValue:param}, function(data){
                         alert(data);
                     });
+                });  
+            });
+        </script>
+
+
+        <!-- This script deal the Min & Max Reset -->
+        <script>
+            $(function() {
+                $('#resetSubmit').click(function() {
+                    $.post('/reset');
                 });  
             });
         </script>
