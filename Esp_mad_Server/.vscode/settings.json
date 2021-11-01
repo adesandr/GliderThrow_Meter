@@ -48,5 +48,6 @@
   },
   "idf.flashType": "UART",
   "restructuredtext.confPath": "c:\\Users\\Robin\\esp\\GliderThrow_Meter\\docs",
-  "C_Cpp.errorSquiggles": "Disabled"
+  "C_Cpp.errorSquiggles": "Disabled",
+  "files.autoSave": "afterDelay"
 }

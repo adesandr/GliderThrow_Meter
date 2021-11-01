@@ -231,12 +231,14 @@
         </script>
 
 
-        <!-- This script deal the Min & Max Reset -->
+        <!-- This script deal with the Min & Max Reset -->
         <script>
             $(function() {
                 $('#resetSubmit').click(function() {
-                    $.post('/reset');
-                });  
+                    $.post('/reset', function() {
+                        alert("Min. and Max. reset to 0 for both sensors");
+                    }); 
+                });
             });
         </script>
 
