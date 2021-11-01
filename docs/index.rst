@@ -19,7 +19,7 @@ working together with a second unit since GliderThrow is a system that comprises
 
 Using a dual system simplifies a lot the throw setting of your model by having a direct view of "equivalent" control surfaces at the same time (left and right aileron, or flap).
 
-As the first device embedded a small http server, the data can be viewed through any web browser on a smartphone (Android, iOS, etc.), PC or MAC.
+As the first device embedded a small http server, the data can be viewed through any web browser on a smartphone, PC or MAC, using Windows, Linux, Android or iOS.
 
 UI is built using bootstrap and jquery, and all the files needed are embedded in the .rodata segment of the first device.
 
@@ -27,9 +27,9 @@ The project is made up of two parts, the server (Esp_mad_Server directory) and t
 
 Two extras libraries are used in the project : i2clibdev and MPU6050 from `jrowberg <https://github.com/jrowberg/i2cdevlib>`_.
 
-These libraries are in the extra_components directrory of the project.
+These libraries are in the extra_components directory of the project.
 
-This project is build using the ESP-IDF 4.0 CMake Build System. Please refer to the 
+This project is build using the ESP-IDF 4.0.3 CMake Build System. Please refer to the 
 `espressif documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ 
 for more information to setup an ESP-IDF environnement.
 
