@@ -1,3 +1,7 @@
 /Esp_mad_Client/build
+!/Esp_mad_Client/build/bootloader/bootloader.bin
+!/Esp_mad_Client/build/esp-mad-client.bin
 /Esp_mad_Server/build
+!/Esp_mad_Server/build/bootloader/bootloader.bin
+!/Esp_mad_Server/build/esp-mad-server.bin
 resultBuild.txt
