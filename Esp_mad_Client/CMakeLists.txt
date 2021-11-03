@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 #Project version
-set(PROJECT_VER "1.1.0")
+set(PROJECT_VER "1.2.0")
 
 #Additional Directories for components
 set(EXTRA_COMPONENT_DIRS "${CMAKE_SOURCE_DIR}/../extra_components")
