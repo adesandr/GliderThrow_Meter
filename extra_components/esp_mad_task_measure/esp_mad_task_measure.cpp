@@ -225,7 +225,7 @@ void task_measure(void*){
 	/*--- Infinite loop ---*/
 	while(1){
 
-		/*--- Compute Y angle in degree. Complementary filter is used to combine accelero and gyro datas      ---*/
+		/*--- Compute Y angle in degree. Complementary filter is used to combine accelero and gyro data      ---*/
     	/*--- see  http://www.pieter-jan.com/node/11 for more information regarding the complementary filter  ---*/
     	/*--- or https://delta-iot.com/la-theorie-du-filtre-complementaire/ (in french)                       ---*/
     	/*--- Basically complementary filter avoid used of kallman filter, quiet difficult to implement in    ---*/
@@ -237,7 +237,7 @@ void task_measure(void*){
     	angle=0.98*(angle+float(gy)*0.01/131) + 0.02*atan2((double)ax,(double)az)*180/PI;
 
     	/*--- Compute Control surface travel using : 2* sin(angle/2)* chord. Angle for sinus function needs  ---*/
-    	/*--- to be converted in radian (angleDegre = angleRadian *(2*PI)/360)                               ---*/ 
+    	/*--- to be converted in radian (angleDegree = angleRadian *(2*PI)/360)                              ---*/ 
     	travel = chordControlSurface * sin((angle*(2.0*PI)/360.0)/2.0) * 2.0;
 
 		ESP_LOGD(tagd, "angle %f - travel %f\n",angle,travel);

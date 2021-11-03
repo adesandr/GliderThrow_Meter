@@ -523,6 +523,7 @@ httpd_uri_t reset = {
 
 };
 
+
 /**
  *	@fn 	    httpd_handle_t start_webserver (void)
  *	@brief 		Start the http server and stet the uris handles
@@ -556,7 +557,7 @@ httpd_handle_t start_webserver(void)
 
         httpd_register_uri_handler(server, &chord);
 
-        httpd_register_uri_handler(server, &reset);
+        httpd_register_uri_handler(server, &reset);  
 
         httpd_register_uri_handler(server, &sensors);
 
