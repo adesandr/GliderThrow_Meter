@@ -156,7 +156,7 @@ The man-machine interface (MMI) of the project consists of a single HTML page (e
 
 This page is built using the CSS framework `bootstrap <https://getbootstrap.com/>`_.
 
-The page embeds an ajax script which periodically makes a HTTP GET request to the "Server" board which sends back the different information to be displayed in the page. A second script makes it possible to carry out the change of the chord of the control surfaces by a HTTP POST request.
+The page embeds an ajax script which periodically makes a HTTP GET request to the "Server" board which sends back the different information to be displayed in the page. A second script makes it possible to carry out the change of the chord of the control surfaces by a HTTP POST request. A third script is used to reset the Maximum(s) up and down travel on the travel tab.
 
 All the files for MMI are located in the directoy GliderThrowMeter/Esp_mad_Server/main/WebsiteFiles
 
