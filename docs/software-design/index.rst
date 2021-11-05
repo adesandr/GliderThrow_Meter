@@ -9,6 +9,23 @@ The following figure shows the overall logical architecture of the system compos
 
 .. image:: /_static/software-design-architecture.png
 
+Files organization
+==================
+
+The project files are organized as follows: 
+
+.. image:: /_static/GliderThrowDirectoryTree.png
+
+ * docs : contains all the documentation related with the project. Documentation of the project is generated using Sphinx (a python documentation generator)
+ * Esp-esp_mad_client : contains all the code for the Client part,
+ * Esp_mad_Server : contains all the code for the Server part,
+ * extra_components : contains the libraries used in the project and two components share between the Server and the Client,
+ * Includes : contains Esp_mad.h for the globals define used in the code and Esp_mad_Globals_Variables.h for the declaration of the globals variables used.
+ * buildAll.sh : is a little script used to clean or build all the project. The result is stored in the resultBuild.txt.
+ * README.md is the presentation of the project used by github and LICENCE is a MIT licence.
+
+The docs directory contains also the bom, the datasheet for the main chip used in the project, the stl files to build the casing and the box, the eagle files and the gerber files.
+
 Server software architecture
 ============================
 
@@ -135,11 +152,13 @@ The task_vBattery is totally the same code than the task_vBattery of the "server
 UX Design
 =========
 
-The man-machine interface of the project consists of a single HTML page (esp.html).
+The man-machine interface (MMI) of the project consists of a single HTML page (esp.html).
 
 This page is built using the CSS framework `bootstrap <https://getbootstrap.com/>`_.
 
 The page embeds an ajax script which periodically makes a HTTP GET request to the "Server" board which sends back the different information to be displayed in the page. A second script makes it possible to carry out the change of the chord of the control surfaces by a HTTP POST request.
+
+All the files for MMI are located in the directoy GliderThrowMeter/Esp_mad_Server/main/WebsiteFiles
 
 To connect to the page, it is first necessary to connect to the Wifi ad'hoc network of SSID ESP_MAD.
 
@@ -151,22 +170,28 @@ Then, just type the address 192.168.1.1 in the URL bar of your browser to connec
 .. image:: /_static/menu-travel.png
    :align: center
 
+The main page of the project contains 4 tabs : Travel, Angle, Setting & Info.
+
+The travel tab displayed the current travel of each sensors, and the Maximum up and down for each sensors stored during the operation. The Reset Maximum(s) button is used to set to 0 these Maximum. 
+
 The "Angle" tab selection causes the page showing the deflection angles for both board to be displayed.
 
 .. image:: /_static/menu-angle.png
    :align: center
 
-The "Setting" tab will display the page that allows you to change the value of the control surface chord. Note that in the current version, the project allows to control only one "Client" both and both boards deal with the same chord value.
+The "Setting" tab will display the page that allows you to change the value of the control surface chord.
 
 .. image:: /_static/menu-chord.png
    :align: center
+
+.. note:: In the current version, the project allows to control only one "Client" and both boards deal with the same chord value.
 
 To change the value of the chord, modify the value in the input field and validate with "Save change chord" button.
 
 .. image:: /_static/change-chord.png
    :align: center
 
-Finally, the "Info" tab display the voltage of the battery for both sensor/
+Finally, the "Info" tab display the voltage of the battery for both sensor.
 
 .. image:: /_static/menu-info.png
    :align: center
