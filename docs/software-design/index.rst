@@ -22,7 +22,7 @@ The project files are organized as follows:
  * buildAll.sh : is a little script used to clean or build all the project. The result is stored in the resultBuild.txt,
  * README.md is the presentation of the project used by github and LICENCE is a MIT licence.
 
-.. image:: /_static/GliderThrowDirectoryTree.png
+.. image:: /_static/glider-throw-directory-tree.png
 
 The docs directory contains also the bom, the datasheet for the main chip used in the project, the stl files to build the casing and the box, the eagle files and the gerber files.
 
