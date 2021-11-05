@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to GliderThrow_Meter's documentation!
-=============================================
+Welcome to the GliderThrow_Meter's documentation!
+=================================================
 
 This is the documentation for the GliderThrow_Meter's project (`GliderThrow_Meter <https://github.com/adesandr/GliderThrow_Meter>`_).
 
@@ -17,9 +17,9 @@ and one `MPU 6050 <https://invensense.tdk.com/products/motion-tracking/6-axis/mp
 Each device can measure the deflections in degrees / millimeters with a resolution of 0.1 degrees and can measure the differential when 
 working together with a second unit since GliderThrow is a system that comprises two sensors, one for each wing or surface control pair of your airplane.
 
-Using a dual system very much simplifies the throw setting of your model by having a direct view of "equivalent" control surfaces at the same time (left and right Aileron, or flap).
+Using a dual system simplifies a lot the throw setting of your model by having a direct view of "equivalent" control surfaces at the same time (left and right aileron, or flap).
 
-As the first device embedded a small http server, the data can be viewed through any web browser on a smartphone (Android, iOS, etc.), PC or MAC.
+As the first device embedded a small http server, the data can be viewed through any web browser on a smartphone, PC or MAC, using Windows, Linux, Android or iOS.
 
 UI is built using bootstrap and jquery, and all the files needed are embedded in the .rodata segment of the first device.
 
@@ -27,24 +27,28 @@ The project is made up of two parts, the server (Esp_mad_Server directory) and t
 
 Two extras libraries are used in the project : i2clibdev and MPU6050 from `jrowberg <https://github.com/jrowberg/i2cdevlib>`_.
 
-These libraries are in the extra_components directrory of the project.
+These libraries are in the extra_components directory of the project.
 
-This project is build using the ESP-IDF 4.0 CMake Build System. Please refer to the 
+This project is build using the ESP-IDF 4.0.3 CMake Build System. Please refer to the 
 `espressif documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ 
 for more information to setup an ESP-IDF environnement.
 
-I highly recommande you to use the `Vscode <https://code.visualstudio.com/download>`_ IDE and the 
-`expressif ESP-IDF Vscode Extension <https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension>`_ to build the project.
+.. note:: Take care to build the project with an ESP-IDF framework < v4.1 (tcp_adaptor & event_loop APIs have changed).
+
+I highly recommend you to use the `Vscode <https://code.visualstudio.com/download>`_ IDE and the 
+`espressif ESP-IDF Vscode Extension <https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension>`_ to build the project.
+
+All my thanks to the members of the `Electrolab <https://www.electrolab.fr/>`_ of Nanterre who assisted me during the realization of this project and for the access to the manufacturing and tests tools of this miraculous Hackerspace.
 
 This project is published under the `MIT license <https://github.com/adesandr/GliderThrow_Meter/blob/master/LICENCE>`_.
 
 Enjoy !
 
-==================  ==================  ==================
-|Get Started|_      |Software Design|_  |Hardware Design|_
-------------------  ------------------  ------------------
-`Get Started`_      `Software Design`_  `Hardware Design`_
-==================  ==================  ==================
+==================  ================== ==================  ==================
+|Get Started|_      |Software Design|_ |Hardware Design|_  |System Build|_
+------------------  ------------------ ------------------  ------------------
+`Get Started`_      `Software Design`_ `Hardware Design`_  `System Build`_
+==================  ================== ==================  ==================
 
 .. |Get Started| image:: /_static/get-started.png
 .. _Get Started: get-started/index.html
@@ -55,12 +59,16 @@ Enjoy !
 .. |Hardware Design| image:: /_static/hardware-design.png
 .. _Hardware Design: hardware-design/index.html
 
+.. |System Build| image:: /_static/system-build.png
+.. _System Build: system-build/index.html
+
 .. toctree::
    :hidden:
 
    Get Started <get-started/index>
    Software Design <software-design/index>
    Hardware Design <hardware-design/index>
+   System Build <system-build/index>
 
 
 Indices and tables

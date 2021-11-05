@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to the GliderThrow_Meter's documentation!
-=============================================
+=================================================
 
 This is the documentation for the GliderThrow_Meter's project (`GliderThrow_Meter <https://github.com/adesandr/GliderThrow_Meter>`_).
 

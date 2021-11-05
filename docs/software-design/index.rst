@@ -14,15 +14,15 @@ Files organization
 
 The project files are organized as follows: 
 
-.. image:: /_static/GliderThrowDirectoryTree.png
-
  * docs : contains all the documentation related with the project. Documentation of the project is generated using Sphinx (a python documentation generator)
  * Esp-esp_mad_client : contains all the code for the Client part,
  * Esp_mad_Server : contains all the code for the Server part,
- * extra_components : contains the libraries used in the project and two components share between the Server and the Client,
- * Includes : contains Esp_mad.h for the globals define used in the code and Esp_mad_Globals_Variables.h for the declaration of the globals variables used.
- * buildAll.sh : is a little script used to clean or build all the project. The result is stored in the resultBuild.txt.
+ * extra_components : contains the libraries used in the project and two components share between the Server and the Client (esp_mad_task_measure and esp_mad_task_vBattery),
+ * Includes : contains Esp_mad.h for the globals define used in the code and Esp_mad_Globals_Variables.h for the declaration of the globals variables used,
+ * buildAll.sh : is a little script used to clean or build all the project. The result is stored in the resultBuild.txt,
  * README.md is the presentation of the project used by github and LICENCE is a MIT licence.
+
+.. image:: /_static/GliderThrowDirectoryTree.png
 
 The docs directory contains also the bom, the datasheet for the main chip used in the project, the stl files to build the casing and the box, the eagle files and the gerber files.
 
