@@ -73,7 +73,7 @@ The circuit for the MPU6050 is a typical application scheme (see datasheet). SDA
 ESP-WROOM-32D & Autoreset
 =========================
 
-ESP-WROOM-32D chip, is the last ESP-WROOM-32 update from espressif. As our board is design with built-in USB to Serial converter, we will use esptool.py to automatically reset the board into bootload mode. esptool.py can automatically enter the bootloader by using the RTS and DTR modem status line to toggle GPIO0 and EN automatically. 
+ESP-WROOM-32D chip, is the last ESP-WROOM-32 update from espressif. As our board is design with built-in USB to Serial converter, we will use esptool.py to automatically reset the board into bootloader mode. esptool.py can automatically enter the bootloader by using the RTS and DTR modem status line to toggle GPIO0 and EN automatically. 
 
 EN pin forces the ESP32 chip to reset and the ESP will enter the serial bootloader when GPIO0 is held low on reset. Otherwise it will run the program in flash.
 
