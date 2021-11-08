@@ -138,7 +138,7 @@ The measure task is totally the same code than the measure task of the "Server".
 The esp_map_task_http_client
 ----------------------------
 
-The "hhtp-client" task start to initialize the board on wifi station.
+The "http-client" task start to initialize the board on wifi station.
 
 Then, the task checks periodically if the board is connected to the "Server" Board, and if the MPU6050 calibration is finish testing the global Binit variable.
 
