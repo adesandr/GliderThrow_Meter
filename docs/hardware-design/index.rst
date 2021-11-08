@@ -32,14 +32,14 @@ The board can be powered from a 5V USB port (VBUS), or from a 3,7 V LIPO (or Li-
 
 The battery is connected to a switch that allows the battery supply to be turned ON/OFF.
 
-A DMG3415U (MOSFET transistor) is used to switch between VBUS and VBAT. When VBUS is not present, the gate is pulled low, and the MOSFET shorts out the body diode, connecting VBAT directly to the LDO. When VBUS is greater than VBAT (that is our case), the MOSFET is cut off and the body diode is blocking, disconnecting VBAT from the circuit. EN pin of the DMG3415U is pulled low to permanently enable the chip.
+A DMG3415U (MOSFET transistor) is used to switch between VBUS and VBAT. When VBUS is not present, the gate is pulled low, and the MOSFET shorts out the body diode, connecting VBAT directly to the LDO. When VBUS is greater than VBAT (that is our case if the board is connected by usb), the MOSFET is cut off and the body diode is blocking, disconnecting VBAT from the circuit. EN pin of the DMG3415U is pulled low to permanently enable the chip.
 
 So with this switch, VBAT enters to the AP2112-3.3v LDO, if VBUS isn't present, otherwise VBUS enters to the AP2112-3.3.
 
 Lipo charging
 =============
 
-The lipo charging circuit is based on the MCP73831/2 microship chip. This chip is a miniature single cell, fully integrated Li-Ion, Li-Poly charge management controllers. Typical Application schematic is used.
+The lipo charging circuit is based on the MCP73831/2 microchip chip. This chip is a miniature single cell, fully integrated Li-Ion, Li-Poly charge management controllers. Typical Application schematic is used.
 
 .. note:: R8 resistor is used to set the current regulation. As we will used battery around 350 mA, we fix R8 to a current regulation around 200 mA.
 
@@ -73,7 +73,7 @@ The circuit for the MPU6050 is a typical application scheme (see datasheet). SDA
 ESP-WROOM-32D & Autoreset
 =========================
 
-ESP-WROOM-32D chip, is the last ESP-WROOM-32 update from expressif. As our board is design with built-in USB to Serial converter, we will you esptool.py to automatically reset the board into bootload mode. esptool.py can automatically enter the bootloader by using the RTS and DTR modem status line to toggle GPIO0 and EN automatically. 
+ESP-WROOM-32D chip, is the last ESP-WROOM-32 update from espressif. As our board is design with built-in USB to Serial converter, we will use esptool.py to automatically reset the board into bootload mode. esptool.py can automatically enter the bootloader by using the RTS and DTR modem status line to toggle GPIO0 and EN automatically. 
 
 EN pin forces the ESP32 chip to reset and the ESP will enter the serial bootloader when GPIO0 is held low on reset. Otherwise it will run the program in flash.
 
@@ -107,7 +107,7 @@ As recommended by espressif a RC circuit with a resistor of 10k and a capacitor 
 Boot circuit
 ============
 
-Boot swith is connected to GPIO.
+Boot switch is connected to GPIO.
 
 .. image:: /_static/boot-circuit-design.PNG
    :align: center
@@ -150,3 +150,5 @@ Pick & Places file can be downloaded at this link `Pick&Place file <https://gith
 Gerber files can be downloaded at this link `ESP_MAD_Gerber.zip <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/Gerber/ESP_MAD_Gerber.zip>`_
 
 Eagle files can be downloaded at this link `eagle-files.zip <https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/Eagle/eagle-files.zip>`_
+
+Let's move on to the next chapter for the description of the system assembly and its use.

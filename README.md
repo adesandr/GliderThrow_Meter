@@ -4,9 +4,9 @@ This project proposes a simple digital Angle/Throw meter and ... Differentials, 
 
 GliderThrow meter is composed by two device, each using one esp32 and one MPU 6050.
 
-Each device can measure the deflections in degrees / millimeters with a resolution of 0.1 degrees and can measure the differential when working together with a second unit since GliderThrow is a system that comprises two sensors, one for each wing or surface of your airplane.
+Each device can measure the deflections in degrees / millimeters with a resolution of 0.1 degrees and can measure the differential when working together with a second unit since GliderThrow is a system that comprises two sensors, one for each wing or control surface of your airplane.
 
-Using a dual system very simplifies a lot the throw setting of your model by having a direct view of both control surfaces at the same time.
+Using a dual system simplifies a lot the throw setting of your model by having a direct view of both control surfaces at the same time.
 
 GliderThrow is primary design for setting the control surface of a RC glider but you will find that it can be used on most every RC airplane and for a variety of applications as Measuring a dihedral angle of a wing, Measuring Model Airplane Incidence angle , etc.
 

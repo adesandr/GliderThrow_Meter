@@ -24,7 +24,7 @@ The project files are organized as follows:
 
 .. image:: /_static/glider-throw-directory-tree.png
 
-The docs directory contains also the bom, the datasheet for the main chip used in the project, the stl files to build the casing and the box, the eagle files and the gerber files.
+The docs directory contains also the bom, the datasheets for the main chips used in the project, the stl files to build the casing and the box, the eagle files and the gerber files.
 
 Server software architecture
 ============================
@@ -44,15 +44,13 @@ The http-server task
 --------------------
 A web server is a software component that listens for incoming HTTP requests from web browsers. Upon receiving a request, the web server sends a response. This may be the return of an HTML document to be displayed in a browser or data that forms a response to a service call. An HTTP request can also include data to be sent to the ESP32 for processing. There are many implementations of Web servers that can run in an ESP32 environment.
 
-The Espressif (ESP-IDF) framework provides an API for implementing a lightweight Web server on ESP32.
-
-The HTTP Server component of Espressif (ESP-IDF) allows you to run a lightweight web server on ESP32. The two basic API calls are:
+The Espressif (ESP-IDF) framework provides an API, the HTTP Server component, for implementing a lightweight Web server on ESP32. The two basic API calls are:
 
  * httpd_start(): creates an HTTP server instance, allocates resources to it based on the specified configuration, and generates a handle to the server instance. The server will have a listening socket (TCP) for HTTP traffic. The task priority and stack size are configurable when creating the server instance by passing the httpd_config_t structure to httpd_start(). TCP traffic is parsed as HTTP requests and, depending on the requested URI, registered handlers will be called to return HTTP response packets.
 
  * httpd_stop(): stops the server with the provided handle and releases the associated resources. This is a blocking function that first signals a stop to the server task, and then waits for the task to finish. Upon termination, the task closes all open connections, deletes registered URI handlers, and resets all session context data to empty.
 
-To process HTTP requests sent to the server, you will need to register URI handlers with :
+To process HTTP requests sent to the server, we will need to register URI handlers with :
 
  * httpd_register_uri_handler(): registers a URI handler by passing an httpd_uri_t structure object that has members including the IR name, method type (e.g. HTTPD_GET / HTTPD_POST / HTTPD_PUT etc ...), a function pointer of type esp_err_t * handler (httpd_req_t * req) and user_ctx pointer to the context data.
 
@@ -70,7 +68,7 @@ During the initialization of the Wifi in AP mode, an event_group is created to r
 
 All these elements, as well as the esp.html page, are embedded in the .rodata segment of the ESP32 memory (using the EMBED_FILES directive in the project's CMakeList.txt file).
 
-Each element is then referenced in the code using the following two directives :
+Each element contains in the .rodata segment is then referenced in the code using the following two directives :
 
 .. code-block:: c
 
@@ -85,6 +83,8 @@ The deflection angle information measured by the "Client" board is received at a
 
 When the chord is changed from a web browser, an HTTP POST request is received and the chordControlSurface global variable is changed.
 
+When the user wants to reset the Maximum(s) up and down on the travel tab, an HTTP POST request is received and the values are set to 0.
+
 The "measure" task
 ------------------
 
@@ -98,11 +98,11 @@ The task "measure" performs the following functions :
 
 .. note:: the task "measure" is identical for the "Server" board and the "Client" board. The only difference is that in the case of the "Server" board, the deflection value in mm is calculated periodically by the "measure" task, whereas for the "Client" board, the value of the angle is transmitted to the "Server" board using an HTTP POST request and it is the "Server" board that performs the calculation of the deflection in mm.
 
-Complementary filter is used to combine accelero and gyro datas. see `complementary filter <http://www.pieter-jan.com/node/11>`_ for more information.
+Complementary filter is used to combine accelero and gyro data. see `complementary filter <http://www.pieter-jan.com/node/11>`_ for more information.
 
-Basically complementary filter avoid used of kallman filter, quiet difficult to implement in small platform. Gyro are used for fast motion as accelero are used for slow motion.
+Basically complementary filter avoid used of kallman filter, quiet difficult to implement in small platform as an ESP32. Gyro are used for fast motion as accelero are used for slow motion.
 
-.. note:: The deflection value in mm is calculated as a function of the angle by the following formula : X = 2* sin(alpha/2) * L.
+.. note:: The deflection value in mm is calculated as a function of the angle alpha by the following formula : X = 2* sin(alpha/2) * L.
 
 .. image:: /_static/formula-angle-travel.png
    :align: center
@@ -140,7 +140,7 @@ The esp_map_task_http_client
 
 The "hhtp-client" task start to initialize the board on wifi station.
 
-Then, the task checks periodically if the board is connected to the "Server" Board, and if the MPU6050 calibration is fisnish testing the global Binit variable.
+Then, the task checks periodically if the board is connected to the "Server" Board, and if the MPU6050 calibration is finish testing the global Binit variable.
 
 If these conditions are true, an HTTP POST with the angle measure by the board is send to the "Server" board.
 
@@ -158,7 +158,7 @@ This page is built using the CSS framework `bootstrap <https://getbootstrap.com/
 
 The page embeds an ajax script which periodically makes a HTTP GET request to the "Server" board which sends back the different information to be displayed in the page. A second script makes it possible to carry out the change of the chord of the control surfaces by a HTTP POST request. A third script is used to reset the Maximum(s) up and down travel on the travel tab.
 
-All the files for MMI are located in the directoy GliderThrowMeter/Esp_mad_Server/main/WebsiteFiles
+All the files for MMI are located in the directory GliderThrowMeter/Esp_mad_Server/main/WebsiteFiles
 
 To connect to the page, it is first necessary to connect to the Wifi ad'hoc network of SSID ESP_MAD.
 
@@ -195,3 +195,5 @@ Finally, the "Info" tab display the voltage of the battery for both sensor.
 
 .. image:: /_static/menu-info.png
    :align: center
+
+Let's move on to the next chapter for the description of the board design.

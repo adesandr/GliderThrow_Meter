@@ -8,5 +8,28 @@
         "editor.quickSuggestions": true
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "cSpell.words": [
+        "Adafruit",
+        "adressable",
+        "Autoreset",
+        "BAHTG",
+        "bootloader",
+        "datasheet",
+        "datasheets",
+        "GPIO",
+        "hobbyking",
+        "lipo",
+        "littlefuse",
+        "MOSFET",
+        "neodym",
+        "PDTC",
+        "pullup",
+        "RSTB",
+        "Turnigy",
+        "VBAT",
+        "VBUS",
+        "VEREGIN",
+        "wroom"
+    ]
 } 
