@@ -8,6 +8,7 @@ What do you need
 Building the components for the project is extremely simple and requires only the following parts.
 
 .. image:: /_static/glider-throw-parts.png
+   :align: center
 
 Stl files
 ---------
