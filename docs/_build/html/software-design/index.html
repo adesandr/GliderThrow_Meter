@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software Design &mdash; Documentation GliderThrow_Meter V1.2.0</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Hardware Design" href="../hardware-design/index.html" />
+    <link rel="prev" title="Get Started" href="../get-started/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> GliderThrow_Meter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Software Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#logical-design">Logical design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#files-organization">Files organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-software-architecture">Server software architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-http-server-task">The http-server task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-measure-task">The « measure » task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-task-vbattery-task">The « task_vBattery » task</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#client-software-architecture">Client software architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">The measure task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-esp-map-task-http-client">The esp_map_task_http_client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-task-vbattery">The task_vBattery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ux-design">UX Design</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware-design/index.html">Hardware Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-build/index.html">System Build</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GliderThrow_Meter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Software Design</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/software-design/index.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="software-design">
+<h1>Software Design<a class="headerlink" href="#software-design" title="Lien permanent vers ce titre"></a></h1>
+<section id="logical-design">
+<h2>Logical design<a class="headerlink" href="#logical-design" title="Lien permanent vers ce titre"></a></h2>
+<p>The following figure shows the overall logical architecture of the system composed of a server and a client.</p>
+<img alt="../_images/software-design-architecture.png" src="../_images/software-design-architecture.png" />
+</section>
+<section id="files-organization">
+<h2>Files organization<a class="headerlink" href="#files-organization" title="Lien permanent vers ce titre"></a></h2>
+<p>The project files are organized as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>docs : contains all the documentation related with the project. Documentation of the project is generated using Sphinx (a python documentation generator)</p></li>
+<li><p>Esp-esp_mad_client : contains all the code for the Client part,</p></li>
+<li><p>Esp_mad_Server : contains all the code for the Server part,</p></li>
+<li><p>extra_components : contains the libraries used in the project and two components share between the Server and the Client (esp_mad_task_measure and esp_mad_task_vBattery),</p></li>
+<li><p>Includes : contains Esp_mad.h for the globals define used in the code and Esp_mad_Globals_Variables.h for the declaration of the globals variables used,</p></li>
+<li><p>buildAll.sh : is a little script used to clean or build all the project. The result is stored in the resultBuild.txt,</p></li>
+<li><p>README.md is the presentation of the project used by github and LICENCE is a MIT licence.</p></li>
+</ul>
+</div></blockquote>
+<img alt="../_images/glider-throw-directory-tree.png" src="../_images/glider-throw-directory-tree.png" />
+<p>The docs directory contains also the bom, the datasheets for the main chips used in the project, the stl files to build the casing and the box, the eagle files and the gerber files.</p>
+</section>
+<section id="server-software-architecture">
+<h2>Server software architecture<a class="headerlink" href="#server-software-architecture" title="Lien permanent vers ce titre"></a></h2>
+<dl>
+<dt>The « Server » software code is made up of three files:</dt><dd><ul class="simple">
+<li><p>esp_mad.cpp: this is the launch file which will create three FreeRtos tasks</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>the « measure » task</p></li>
+<li><p>the « http-server » task</p></li>
+<li><p>the « task_vBattery »</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>esp_mad_task_http_server.c: it is the file which contains the code of the task « http-server »</p></li>
+<li><p>esp_mad_task_measure.cpp: it is the file which contains the code of the task « measure ».</p></li>
+<li><p>esp_mad_task_vBattery.c : it is the file with contains the code of the task « task_vBattery »</p></li>
+</ul>
+</dd>
+</dl>
+<section id="the-http-server-task">
+<h3>The http-server task<a class="headerlink" href="#the-http-server-task" title="Lien permanent vers ce titre"></a></h3>
+<p>A web server is a software component that listens for incoming HTTP requests from web browsers. Upon receiving a request, the web server sends a response. This may be the return of an HTML document to be displayed in a browser or data that forms a response to a service call. An HTTP request can also include data to be sent to the ESP32 for processing. There are many implementations of Web servers that can run in an ESP32 environment.</p>
+<p>The Espressif (ESP-IDF) framework provides an API, the HTTP Server component, for implementing a lightweight Web server on ESP32. The two basic API calls are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>httpd_start(): creates an HTTP server instance, allocates resources to it based on the specified configuration, and generates a handle to the server instance. The server will have a listening socket (TCP) for HTTP traffic. The task priority and stack size are configurable when creating the server instance by passing the httpd_config_t structure to httpd_start(). TCP traffic is parsed as HTTP requests and, depending on the requested URI, registered handlers will be called to return HTTP response packets.</p></li>
+<li><p>httpd_stop(): stops the server with the provided handle and releases the associated resources. This is a blocking function that first signals a stop to the server task, and then waits for the task to finish. Upon termination, the task closes all open connections, deletes registered URI handlers, and resets all session context data to empty.</p></li>
+</ul>
+</div></blockquote>
+<p>To process HTTP requests sent to the server, we will need to register URI handlers with :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>httpd_register_uri_handler(): registers a URI handler by passing an httpd_uri_t structure object that has members including the IR name, method type (e.g. HTTPD_GET / HTTPD_POST / HTTPD_PUT etc …), a function pointer of type esp_err_t * handler (httpd_req_t * req) and user_ctx pointer to the context data.</p></li>
+</ul>
+</div></blockquote>
+<p>The http-server task starts by launching a DHCP server, then initializes the board in AP mode by associating the SSID defined in the esp_map.h file.</p>
+<p>The address 198.168.1.1 is assigned to the Wifi AP as defined when the DHCP server is launched.</p>
+<dl class="simple">
+<dt>During the initialization of the Wifi in AP mode, an event_group is created to receive the various events that can be received by the Wifi stack.</dt><dd><ul class="simple">
+<li><p>When the <em>SYSTEM_EVENT_AP_START</em> event is received, the web server is launched using the httpd function library. When the server is launched, the various URLs on which the server is likely to react are recorded and for each URL a callback function is associated.</p></li>
+<li><p>When the event <em>SYSTEM_EVENT_AP_STACONNECTED</em> is received, the corresponding bit is recorded in the event_group.</p></li>
+<li><p>On receipt of the <em>SYSTEM_EVENT_AP_STADISCONNECTED</em> event, the corresponding bit is recorded in the event group.</p></li>
+<li><p>On receipt of the <em>SYSTEM_EVENT_AP_STOP</em> event, the web server is stopped and the associated resources are released.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The URL « / », which corresponds to the reception of an HTTP GET at the address 192.168.1.1, i.e. the main page of the site (esp.html), triggers the loading of the elements embedded in the page, which are bootstrap.min.css, bootstrap.min.js and jquery-3.1.1.min.js, by as many HTTP GET requests as required by the client browser.</p>
+</div>
+<p>All these elements, as well as the esp.html page, are embedded in the .rodata segment of the ESP32 memory (using the EMBED_FILES directive in the project’s CMakeList.txt file).</p>
+<p>Each element contains in the .rodata segment is then referenced in the code using the following two directives :</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">esp_html_start</span><span class="p">[]</span><span class="w"> </span><span class="k">asm</span><span class="p">(</span><span class="s">&quot;_binary_esp_html_start&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">esp_html_end</span><span class="p">[]</span><span class="w"> </span><span class="k">asm</span><span class="p">(</span><span class="s">&quot;_binary_esp_html_end&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is also possible to perform the same operations using a SPI Flash File System (SPIFFS), but I have not tested this solution. For a Web server using more than one HTML page, this method is probably more interesting than the method consisting in embedding the pages in the .rodata segment.</p>
+</div>
+<p>Data calculated by the « Measure » task (angle and travel) are retrieved by the http_server task from memory, these two variables being defined as global variables. These two values are updated by the « Measure » task every 10 ms.</p>
+<p>The deflection angle information measured by the « Client » board is received at a frequency of 900 ms by an HTTP POST request. On receipt of the request, the deflection value in mm is calculated according to the control surface chord.</p>
+<p>When the chord is changed from a web browser, an HTTP POST request is received and the chordControlSurface global variable is changed.</p>
+<p>When the user wants to reset the Maximum(s) up and down on the travel tab, an HTTP POST request is received and the values are set to 0.</p>
+</section>
+<section id="the-measure-task">
+<h3>The « measure » task<a class="headerlink" href="#the-measure-task" title="Lien permanent vers ce titre"></a></h3>
+<dl>
+<dt>The task « measure » performs the following functions :</dt><dd><ul class="simple">
+<li><p>initialization of the I2C bus,</p></li>
+<li><p>calibration of the MPU6050 component,</p></li>
+<li><p>Then periodically:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Reading of the accelerometer and gyroscope values on the axes (x, y, z),</p></li>
+<li><p>Calculation of the angle in degrees based on the previous values.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>the task « measure » is identical for the « Server » board and the « Client » board. The only difference is that in the case of the « Server » board, the deflection value in mm is calculated periodically by the « measure » task, whereas for the « Client » board, the value of the angle is transmitted to the « Server » board using an HTTP POST request and it is the « Server » board that performs the calculation of the deflection in mm.</p>
+</div>
+<p>Complementary filter is used to combine accelero and gyro data. see <a class="reference external" href="http://www.pieter-jan.com/node/11">complementary filter</a> for more information.</p>
+<p>Basically complementary filter avoid used of kallman filter, quiet difficult to implement in small platform as an ESP32. Gyro are used for fast motion as accelero are used for slow motion.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The deflection value in mm is calculated as a function of the angle alpha by the following formula : X = 2* sin(alpha/2) * L.</p>
+</div>
+<img alt="../_images/formula-angle-travel.png" class="align-center" src="../_images/formula-angle-travel.png" />
+</section>
+<section id="the-task-vbattery-task">
+<h3>The « task_vBattery » task<a class="headerlink" href="#the-task-vbattery-task" title="Lien permanent vers ce titre"></a></h3>
+<p>The task « vBattery » compute periodically (each 30s per default) the measurement of the voltage of the battery.</p>
+<p>The battery voltage is connected to the IO35 pin of the ESP-WROOM-32. This pin is the chanel 7 of the ADC1.</p>
+<p>A bridge resistor divider with two resistors of 100 KOhm is used to decreased the voltage from 4.2 V to 2.1 V. So the attenuation of the ADC is set to 11 dB.</p>
+</section>
+</section>
+<section id="client-software-architecture">
+<h2>Client software architecture<a class="headerlink" href="#client-software-architecture" title="Lien permanent vers ce titre"></a></h2>
+<dl>
+<dt>The « Client » software code is made up of three files:</dt><dd><ul class="simple">
+<li><p>esp_mad_client.cpp: this is the launch file which will create three FreeRtos tasks</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>the « measure » task</p></li>
+<li><p>the « http-client » task</p></li>
+<li><p>the « task_vBattery »</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>esp_mad_task_http_client.c: it is the file which contains the code of the task « http-server »</p></li>
+<li><p>esp_mad_task_measure.cpp: it is the file which contains the code of the task « measure ».</p></li>
+<li><p>esp_mad_task_vBattery.c : it is the file which contains the code of the task « task_vBattery ».</p></li>
+</ul>
+</dd>
+</dl>
+<section id="id1">
+<h3>The measure task<a class="headerlink" href="#id1" title="Lien permanent vers ce titre"></a></h3>
+<p>The measure task is totally the same code than the measure task of the « Server ». No more words to add to this section :-)</p>
+</section>
+<section id="the-esp-map-task-http-client">
+<h3>The esp_map_task_http_client<a class="headerlink" href="#the-esp-map-task-http-client" title="Lien permanent vers ce titre"></a></h3>
+<p>The « http-client » task start to initialize the board on wifi station.</p>
+<p>Then, the task checks periodically if the board is connected to the « Server » Board, and if the MPU6050 calibration is finish testing the global Binit variable.</p>
+<p>If these conditions are true, an HTTP POST with the angle measure by the board is send to the « Server » board.</p>
+</section>
+<section id="the-task-vbattery">
+<h3>The task_vBattery<a class="headerlink" href="#the-task-vbattery" title="Lien permanent vers ce titre"></a></h3>
+<p>The task_vBattery is totally the same code than the task_vBattery of the « server ». No more words to add to this section also :-)</p>
+</section>
+</section>
+<section id="ux-design">
+<h2>UX Design<a class="headerlink" href="#ux-design" title="Lien permanent vers ce titre"></a></h2>
+<p>The man-machine interface (MMI) of the project consists of a single HTML page (esp.html).</p>
+<p>This page is built using the CSS framework <a class="reference external" href="https://getbootstrap.com/">bootstrap</a>.</p>
+<p>The page embeds an ajax script which periodically makes a HTTP GET request to the « Server » board which sends back the different information to be displayed in the page. A second script makes it possible to carry out the change of the chord of the control surfaces by a HTTP POST request. A third script is used to reset the Maximum(s) up and down travel on the travel tab.</p>
+<p>All the files for MMI are located in the directory GliderThrowMeter/Esp_mad_Server/main/WebsiteFiles</p>
+<p>To connect to the page, it is first necessary to connect to the Wifi ad’hoc network of SSID ESP_MAD.</p>
+<img alt="../_images/ssid-selection.png" class="align-center" src="../_images/ssid-selection.png" />
+<p>Then, just type the address 192.168.1.1 in the URL bar of your browser to connect to the main page of the project.</p>
+<img alt="../_images/menu-travel.png" class="align-center" src="../_images/menu-travel.png" />
+<p>The main page of the project contains 4 tabs : Travel, Angle, Setting &amp; Info.</p>
+<p>The travel tab displayed the current travel of each sensors, and the Maximum up and down for each sensors stored during the operation. The Reset Maximum(s) button is used to set to 0 these Maximum.</p>
+<p>The « Angle » tab selection causes the page showing the deflection angles for both board to be displayed.</p>
+<img alt="../_images/menu-angle.png" class="align-center" src="../_images/menu-angle.png" />
+<p>The « Setting » tab will display the page that allows you to change the value of the control surface chord.</p>
+<img alt="../_images/menu-chord.png" class="align-center" src="../_images/menu-chord.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the current version, the project allows to control only one « Client » and both boards deal with the same chord value.</p>
+</div>
+<p>To change the value of the chord, modify the value in the input field and validate with « Save change chord » button.</p>
+<img alt="../_images/change-chord.png" class="align-center" src="../_images/change-chord.png" />
+<p>Finally, the « Info » tab display the voltage of the battery for both sensor.</p>
+<img alt="../_images/menu-info.png" class="align-center" src="../_images/menu-info.png" />
+<p>Let’s move on to the next chapter for the description of the board design.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="../get-started/index.html" class="btn btn-neutral float-left" title="Get Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="../hardware-design/index.html" class="btn btn-neutral float-right" title="Hardware Design" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Alain Désandré.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

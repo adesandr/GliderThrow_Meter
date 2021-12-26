@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Started &mdash; Documentation GliderThrow_Meter V1.2.0</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Software Design" href="../software-design/index.html" />
+    <link rel="prev" title="Welcome to the GliderThrow_Meter’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> GliderThrow_Meter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Get Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-requirement">Functional requirement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-do-you-need">What do you need</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#first-stage-of-prototyping-basic-connection-diagram">First stage of prototyping : Basic connection diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#second-stage-of-prototyping">Second stage of prototyping</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software-design/index.html">Software Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware-design/index.html">Hardware Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-build/index.html">System Build</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GliderThrow_Meter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Get Started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/get-started/index.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="get-started">
+<h1>Get Started<a class="headerlink" href="#get-started" title="Lien permanent vers ce titre"></a></h1>
+<p>The objective of this project is to design a board based on an ESP-WROOM-32 module from the company Espressif and an MPU6050 component from the company Invensense.</p>
+<dl class="simple">
+<dt>The design process is based on 3 steps:</dt><dd><ol class="arabic simple">
+<li><p>Prototyping of the concept from demoboards</p></li>
+<li><p>Software development based on the prototype</p></li>
+<li><p>Board design (schematic and routing).</p></li>
+</ol>
+</dd>
+</dl>
+<p>The Get started section presents the first part of the process, i.e. the prototyping phase.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre"></a></h2>
+<p>The principle of the project is based on the use of two (or more) completely identical boards that communicate using Wifi, on an ad’hoc network (define as ESP_MAD network).</p>
+<p>One of the board (named « Server ») is initialized in Access Point (AP) mode. The other boards initialize in Station mode (STA) (named « Client(s) »).</p>
+<p>The « Server » board and the « Client » board(s) use similar software, but slightly different because of this specificity of Wifi configuration.</p>
+<p>The « Server » board integrates a web server, which allows any web browser to connect to the « Server » board and to navigate on the HTML page (so, connection are possible with all the devices equipped with a a web browser like a PC, a Mac, a Tablet or a Smartphone under Windows, Linux, Android or IOS).</p>
+<p>The HTML pages are developed using the Bootstrap framework for the layout and JQuery for the Javascript calls embedded in the pages.</p>
+</section>
+<section id="functional-requirement">
+<h2>Functional requirement<a class="headerlink" href="#functional-requirement" title="Lien permanent vers ce titre"></a></h2>
+<dl>
+<dt>The main features requirement from the system are the following:</dt><dd><ul class="simple">
+<li><p>Measurement of control surface deflection in either Angle or mm,</p></li>
+<li><p>At least two LEDs :</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>One to indicate that the circuit is in operation « during calibration of the MPU6050 » or in measurement mode after calibration,</p></li>
+<li><p>the other to indicate that the battery is charging.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Recording and display of maximum and minimum deflection (in mm),</p></li>
+<li><p>Minimum management of a « Client » board in order to adjust two control surfaces at the same time and ensure « identical » deflection on both control surfaces (aileron, flap, elevator, etc),</p></li>
+<li><p>Possibility to change the control surface chord (due to the use of the MPU6050 which allows to recover angles, this feature is mandatory),</p></li>
+<li><p>Possibility to easily change the UI of the web interface,</p></li>
+<li><p>Battery powered with a battery life time of 3h in normal operation,</p></li>
+<li><p>In order to be able to be installed on a small control surface, a casing with a maximum form factor of 41 mm x 41 mm x 31 mm is targeted,</p></li>
+<li><p>The design of a storage box for both devices</p></li>
+<li><p>The design of the casing must incorporate :</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>A USB interface for reprogramming the ESP-WROOM-32 module and recharging the battery,</p></li>
+<li><p>An on-off button allowing to recharge the battery without powering the rest of the circuit.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<p>In must-have, it will eventually be possible to manage up to 5 « Client » boards at the same time in order to be able to adjust the 6 control surfaces of an F3F glider.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To date, the software only takes into account one client board.</p>
+</div>
+</section>
+<section id="what-do-you-need">
+<h2>What do you need<a class="headerlink" href="#what-do-you-need" title="Lien permanent vers ce titre"></a></h2>
+<p>During the prototyping phase, we will use some breadboards, a development board integrating an ESP-WROOM-32 module, a development board integrating an MPU6050, as well as some prototyping wires.</p>
+<p>These components can be easily found on the internet (Bandgood, Alliexpress, etc.), for a few euros.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><img alt="Breadboard" src="../_images/breadboard.png" /></p></td>
+<td><p><img alt="Lolin32" src="../_images/lolin32-lite.png" /></p></td>
+<td><p><img alt="MPU6050" src="../_images/MPU6050-board.png" /></p></td>
+<td><p><img alt="Wires" src="../_images/prototype-wires.png" /></p></td>
+</tr>
+<tr class="row-even"><td><p>Breadboard</p></td>
+<td><p>Lolin32 demoboard</p></td>
+<td><p>MPU6050 demoboard</p></td>
+<td><p>Prototyping Wires</p></td>
+</tr>
+</tbody>
+</table>
+<p>Several demonstration boards based on ESP-WROOM-32 can be used</p>
+<p>I personally used the following boards without any problem.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 34%" />
+<col style="width: 32%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><img alt="Lolin 32" src="../_images/lolin32.png" /></p></td>
+<td><p><img alt="Lolin 32 Lite" src="../_images/lolin32-lite.png" /></p></td>
+<td><p><img alt="Wemos X" src="../_images/clone-wemos.png" /></p></td>
+</tr>
+<tr class="row-even"><td><p>Wemos Lolin 32</p></td>
+<td><p>Wemos Lolin 32 lite</p></td>
+<td><p>Wemos clone</p></td>
+</tr>
+</tbody>
+</table>
+<p>The last board in this table has a Wemos marking, but does not appear to come from the company of the same name. However, it works very well and is a little smaller than the two Lolin 32 Wemos (But this board, unlike the Lolin cards, has no battery connector and therefore no charging circuit). You can easily find this board by doing a search on the net of the type « compact ESP32 board ».</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>On some ESP32 boards, in particular the Wemos clone, it is essential to switch the card to « boot » mode during the software loading operation. These boards have generally two buttons, an « EN » button which is actually the Reset button, and a « Boot » button which allows you to switch the board to « Boot » mode when you launch an « idf.py flash » command.</p>
+</div>
+</section>
+<section id="first-stage-of-prototyping-basic-connection-diagram">
+<h2>First stage of prototyping : Basic connection diagram<a class="headerlink" href="#first-stage-of-prototyping-basic-connection-diagram" title="Lien permanent vers ce titre"></a></h2>
+<p>I used this basic setup to develop the first version of the code, starting with the code for the « Server » board, then the code for the « Client » board. If you want to test it, you’ll have to use two « big » breadboards (one for the « Serveur », the other for the « Client) or 4 small ones (two for the « Serveur » and two for the « Client »).</p>
+<p>The ESP32 demoboard is easily connected to the MPU6050 board using I2C.</p>
+<img alt="../_images/demoboard-connexion.png" class="align-center" src="../_images/demoboard-connexion.png" />
+<p>So,</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Lolin 32</p></th>
+<th class="head"><p>MPU6050</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pin 21-&gt;</p></td>
+<td><p>pin SDA</p></td>
+</tr>
+<tr class="row-odd"><td><p>pin 22-&gt;</p></td>
+<td><p>pin SCL</p></td>
+</tr>
+<tr class="row-even"><td><p>pin 5V-&gt;</p></td>
+<td><p>pin VCC</p></td>
+</tr>
+<tr class="row-odd"><td><p>pin GND-&gt;</p></td>
+<td><p>pin GND</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ESP32 allows you to change the assignments of the I2C pins. To test this feature, I used different assignments on my three demoboards. These mappings are integrated in the <a class="reference external" href="https://github.com/adesandr/GliderThrow_Meter/blob/master/Includes/Esp_mad.h">esp_mad.h file</a>. The figure above shows the connection diagram used with the Lolin 32 demoboard.</p>
+</div>
+<p>After completing this assembly, you must download the file esp-mad-server.bin obtained after compilation into your ESP32 demo card.</p>
+<dl class="simple">
+<dt>The procedure for using the UI is as follows:</dt><dd><ol class="arabic simple">
+<li><p>Leave the breadboard flat,</p></li>
+<li><p>Connect the « Server » card via its USB port,</p></li>
+<li><p>If your board is equipped with an embedded led, this led will blink very quickly to indicate that the system is in calibration phase of the MPU6050 (leave the breadboard flat during this phase). After a few seconds, the LED will switch to a slower flashing mode to indicate that the MPU6050 has completed its calibration,</p></li>
+<li><p>Connect your PC or mobile phone to the Wifi network of SSID « ESP_MAD »,</p></li>
+<li><p>Launch your internet browser,</p></li>
+<li><p>Type in the URL bar of your browser « <a class="reference external" href="http://192.168.1.1">http://192.168.1.1</a> ».</p></li>
+<li><p>The main page of the UI of the GliderThrow_Meter project will appear,</p></li>
+<li><p>If you move the breadboard on which the MPU6050 is connected, the deflection values (up and down) will be displayed.</p></li>
+</ol>
+</dd>
+</dl>
+</section>
+<section id="second-stage-of-prototyping">
+<h2>Second stage of prototyping<a class="headerlink" href="#second-stage-of-prototyping" title="Lien permanent vers ce titre"></a></h2>
+<p>After this first step, I integrated on a small PCB, a Lolin32 Lite demoboard, an MPU6050 demoboard and a 1A 5V Micro USB Module Charger Module Board with Protection (ref. TP4056).</p>
+<img alt="../_images/prototype-lolin-lite.png" class="align-center" src="../_images/prototype-lolin-lite.png" />
+<p>The result is encouraging and works perfectly, but the board has a form factor of 55 mm x 55 m (i.e. a casing close to 60 mm side) which is off target compared to the initial requirement.</p>
+<p>Finally, I tried to integrate the « clone Wemos » demoboard which is more compact by stacking a PCB that integrates the MPU6050 board and the TP4056 board. We arrive at a form factor (excluding the casing) of 38mm x 38mm x 45mm, which is close to the target, but not totally satisfactory in terms of integration and usability.</p>
+<img alt="../_images/prototype-stack.png" class="align-center" src="../_images/prototype-stack.png" />
+<p>Following these two tests, I came to the conclusion that the integration of off-the-shelf boards would inevitably lead to a form factor that not stick the requirement and a low comfort of implementation.</p>
+<p>However, this second prototyping stage enabled me to target the components needed for the integration of the boards, And I decided to design a new PCB integrating all of the components. So go first to the next chapter for a description of the software.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to the GliderThrow_Meter’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="../software-design/index.html" class="btn btn-neutral float-right" title="Software Design" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Alain Désandré.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
