@@ -1,0 +1,26 @@
+@startuml GliderThrowSequence
+    skinparam style strictuml
+    skinparam SequenceMessageAlignment center
+    entity Browser
+    box "GliderThrow System" #LightBlue
+        entity GliderThrow_Master
+        entity GliderThrow_Slave
+    end box
+
+
+    loop each 10 ms
+        GliderThrow_Master -> GliderThrow_Master : Measure Travel, Voltage\n & Compute Angle
+        GliderThrow_Slave -> GliderThrow_Slave : Measure Travel\n & Voltage
+    end
+
+    loop each 900 ms
+        GliderThrow_Slave -> GliderThrow_Master : Travel, Voltage
+        GliderThrow_Master -> GliderThrow_Master : Compute Angle for Slave
+    end
+
+    loop each 1s
+        Browser -> GliderThrow_Master : GET /
+        GliderThrow_Master -> Browser : Travels, Angles, DeltaTravels,\n DeltaAngles, MaxiTravels, \nMiniTravels, Voltages
+    end
+
+@enduml
