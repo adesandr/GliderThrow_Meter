@@ -2,11 +2,16 @@
     skinparam style strictuml
     skinparam SequenceMessageAlignment center
     entity Browser
+
+    group Once during initialization
+        Browser -> GliderThrow_Master : GET Esp.html /
+        GliderThrow_Master -> Browser : Bootstrap initialization
+    end
+    
     box "GliderThrow System" #LightBlue
         entity GliderThrow_Master
         entity GliderThrow_Slave
     end box
-
 
     loop each 10 ms
         GliderThrow_Master -> GliderThrow_Master : Measure Travel, Voltage\n & Compute Angle
@@ -21,6 +26,12 @@
     loop each 1s
         Browser -> GliderThrow_Master : GET /
         GliderThrow_Master -> Browser : Travels, Angles, DeltaTravels,\n DeltaAngles, MaxiTravels, \nMiniTravels, Voltages
+    end
+
+    group Each time Chord is modified
+        Browser -> GliderThrow_Master : newChord
+        GliderThrow_Master -> GliderThrow_Master : store newChord
+        GliderThrow_Master -> Browser : Chord modified
     end
 
 @enduml
