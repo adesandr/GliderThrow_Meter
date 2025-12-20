@@ -60,5 +60,15 @@
   "idf.flashType": "UART",
   "restructuredtext.confPath": "c:\\Users\\Robin\\esp\\GliderThrow_Meter\\docs",
   "C_Cpp.errorSquiggles": "Disabled",
-  "files.autoSave": "afterDelay"
+  "files.autoSave": "afterDelay",
+  "idf.customExtraVars": {
+    "OPENOCD_SCRIPTS": "/home/nono/.espressif/tools/openocd-esp32/v0.10.0-esp32-20210401/openocd-esp32/share/openocd/scripts",
+    "IDF_TARGET": "esp32"
+  },
+  "clangd.path": "C:\\Users\\Eliot\\.espressif\\tools\\esp-clang\\esp-19.1.2_20250312\\esp-clang\\bin\\clangd.exe",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=C:\\Users\\Eliot\\.espressif\\tools\\xtensa-esp-elf\\esp-14.2.0_20241119\\xtensa-esp-elf\\bin\\xtensa-esp32-elf-gcc.exe",
+    "--compile-commands-dir=c:\\Users\\Eliot\\esp\\GliderThrow_Meter\\Esp_mad_Server\\build"
+  ]
 }

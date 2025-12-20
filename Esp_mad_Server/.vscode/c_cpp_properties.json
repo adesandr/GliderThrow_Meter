@@ -1,26 +1,27 @@
 {
-    "configurations": [
-        {
-            "name": "Linux",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "includePath": [
-                "${config:idf.espIdfPath}/components/**",
-                "${config:idf.espIdfPathWin}/components/**",
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/../Includes/**"
-            ],
-            "browse": {
-                "path": [
-                    "${config:idf.espIdfPath}/components",
-                    "${config:idf.espIdfPathWin}/components",
-                    "${workspaceFolder}",
-                    "${workspaceFolder}/../Includes/"
-                ],
-                "limitSymbolsToIncludedHeaders": false
-            },
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "Linux",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "includePath": [
+        "${config:idf.espIdfPath}/components/**",
+        "${config:idf.espIdfPathWin}/components/**",
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/../Includes/**"
+      ],
+      "browse": {
+        "path": [
+          "${config:idf.espIdfPath}/components",
+          "${config:idf.espIdfPathWin}/components",
+          "${workspaceFolder}",
+          "${workspaceFolder}/../Includes/"
+        ],
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+      "compilerPath": "${config:idf.toolsPathWin}\\tools\\xtensa-esp-elf\\esp-14.2.0_20241119\\xtensa-esp-elf\\bin\\xtensa-esp32-elf-gcc.exe"
+    }
+  ],
+  "version": 4
 }
