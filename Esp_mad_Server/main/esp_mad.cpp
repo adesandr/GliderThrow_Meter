@@ -79,7 +79,7 @@ void app_main(void)
     /*---  functions.). Blinky led.                                       ---*/
     gpio_config_t io_conf;
     //disable interrupt
-    io_conf.intr_type = (gpio_int_type_t)GPIO_PIN_INTR_DISABLE;
+    io_conf.intr_type = (gpio_int_type_t)GPIO_INTR_DISABLE;
     //set as output mode
     io_conf.mode = GPIO_MODE_OUTPUT;
     //bit mask of the pins that you want to set
@@ -94,7 +94,7 @@ void app_main(void)
 	while(1) 
 	{
         /*--- Blinky period set to 100 ms before calibration 2s after ---*/
-        if(BInit && iDelay != 2000)
+        if(BInit && (iDelay != 2000))
             iDelay = 2000;
 
         /* Blink off (output low) */

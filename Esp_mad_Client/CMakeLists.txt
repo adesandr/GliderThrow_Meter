@@ -1,9 +1,9 @@
 # The following lines of boilerplate have to be in your project's
 # CMakeLists in this exact order for cmake to work correctly
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 #Project version
-set(PROJECT_VER "1.2.0")
+set(PROJECT_VER "1.3.0")
 
 #Additional Directories for components
 set(EXTRA_COMPONENT_DIRS "${CMAKE_SOURCE_DIR}/../extra_components")

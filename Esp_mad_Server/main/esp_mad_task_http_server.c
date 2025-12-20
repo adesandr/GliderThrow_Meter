@@ -14,15 +14,21 @@
  *              - when AP station is started, the http server is launched and the uri handles are setup
  *          Uris are embedded in the .rodata DRAM segment (see CMakeList.txt)
  *          Main HTML page is WebsiteFiles/esp.html and used bootstrap framework and jquery.
- *          Ressources for bootstrap and jquery are minified version in WebsiteFiles/ 
- *          
+ *          Ressources for bootstrap and jquery are minified version in WebsiteFiles/
+ *
+ * @remarks 1/08/2025 - Ported to NETIF
+ *          NETIF component is a successor of the tcpip_adapter, former network interface abstraction,
+ *          which has become deprecated since IDF v4.1.
+ *          esp_event_loop has been also deprecated. esp_event is the new component.
+ *
  */
 
 /*-----------------------------------------
- *-            INCLUDES        
+ *-            INCLUDES
  *-----------------------------------------*/
 #include <esp_wifi.h>
-#include <esp_event_loop.h>
+// #include <esp_event_loop.h>
+#include <esp_event.h>
 #include <esp_log.h>
 #include <esp_system.h>
 #include <esp_http_server.h>
@@ -34,43 +40,38 @@
 #include <freertos/task.h>
 #include <freertos/event_groups.h>
 #include <stdlib.h>
+#include "lwip/err.h"
+#include "lwip/sys.h"
+#include "esp_mac.h"
 #include <Esp_mad.h>
 #include <Esp_mad_Globals_Variables.h>
 
 /*-----------------------------------------
- *-            LOCALS VARIABLES        
+ *-            LOCALS VARIABLES
  *-----------------------------------------*/
+float travel2 = 0.0;
+float angle2 = 0.0;
 
-/*--- Used to store value received from client or compute ---*/
-static float travel2   = 0.0;
-static float angle2    = 0.0;
+float maxiTravelSensor1 = 0.0;
+float miniTravelSensor1 = 0.0;
+float maxiTravelSensor2 = 0.0;
+float miniTravelSensor2 = 0.0;
 
-static float maxiTravelSensor1 = 0.0;
-static float miniTravelSensor1 = 0.0;
-static float maxiTravelSensor2 = 0.0;
-static float miniTravelSensor2 = 0.0;
+float voltage2 = 0.0;
 
-static float voltage2 = 0.0;
-
-/*--- Pointer on html page and bootstrap stuff ---*/
 extern const uint8_t esp_html_start[] asm("_binary_esp_html_start");
-extern const uint8_t esp_html_end[]   asm("_binary_esp_html_end");
+extern const uint8_t esp_html_end[] asm("_binary_esp_html_end");
 
 extern const uint8_t bootstrap_min_css_start[] asm("_binary_bootstrap_min_css_start");
-extern const uint8_t bootstrap_min_css_end[]   asm("_binary_bootstrap_min_css_end");
+extern const uint8_t bootstrap_min_css_end[] asm("_binary_bootstrap_min_css_end");
 
 extern const uint8_t bootstrap_min_js_start[] asm("_binary_bootstrap_min_js_start");
-extern const uint8_t bootstrap_min_js_end[]   asm("_binary_bootstrap_min_js_end");
+extern const uint8_t bootstrap_min_js_end[] asm("_binary_bootstrap_min_js_end");
 
 extern const uint8_t jquery_3_3_1_min_js_start[] asm("_binary_jquery_3_3_1_min_js_start");
-extern const uint8_t jquery_3_3_1_min_js_end[]   asm("_binary_jquery_3_3_1_min_js_end");
+extern const uint8_t jquery_3_3_1_min_js_end[] asm("_binary_jquery_3_3_1_min_js_end");
 
-/*--- For event_group management ---*/
-static EventGroupHandle_t wifi_event_group;
-static const int CLIENT_CONNECTED_BIT = BIT0;
-static const int CLIENT_DISCONNECTED_BIT = BIT1;
-
-static const char *TAG="Esp_Server->";
+static const char *TAG = "Esp_Server->";
 
 /**
  *	@fn 	    esp_err_t main_page_get_handler (httpd_req_t *req)
@@ -82,25 +83,25 @@ esp_err_t main_page_get_handler(httpd_req_t *req)
 {
     ESP_LOGI(TAG, "Entering ----> main_page_get-handler()\n");
 
-    httpd_resp_set_type(req,"text/html");
+    httpd_resp_set_type(req, "text/html");
 
-    httpd_resp_send(req, (const char *)esp_html_start, (esp_html_end-1) - esp_html_start);
+    httpd_resp_send(req, (const char *)esp_html_start, (esp_html_end - 1) - esp_html_start);
 
     ESP_LOGI(TAG, "Exit    ----> main_page_get-handler()\n");
-    
+
     return ESP_OK;
-    
+
 } /* end main_page_get_handler() */
 
 httpd_uri_t main_page = {
 
-    .uri       = "/",
+    .uri = "/",
 
-    .method    = HTTP_GET,
+    .method = HTTP_GET,
 
-    .handler   = main_page_get_handler,
+    .handler = main_page_get_handler,
 
-    .user_ctx  = NULL
+    .user_ctx = NULL
 
 };
 
@@ -114,25 +115,25 @@ esp_err_t bootstrap_min_css_handler(httpd_req_t *req)
 {
     ESP_LOGI(TAG, "Entering ----> bootstrap_min_css_handler()\n");
 
-    httpd_resp_set_type(req,"text/css");
+    httpd_resp_set_type(req, "text/css");
 
-    httpd_resp_send(req, (const char *)bootstrap_min_css_start, (bootstrap_min_css_end-1) - bootstrap_min_css_start);
+    httpd_resp_send(req, (const char *)bootstrap_min_css_start, (bootstrap_min_css_end - 1) - bootstrap_min_css_start);
 
     ESP_LOGI(TAG, "Exit    ----> bootstrap_min_css_handler()\n");
 
     return ESP_OK;
-    
+
 } /* end bootstrap_min_css_handler() */
 
 httpd_uri_t bootstrap_min_css_uri = {
 
-    .uri       = "/bootstrap.min.css",
+    .uri = "/bootstrap.min.css",
 
-    .method    = HTTP_GET,
+    .method = HTTP_GET,
 
-    .handler   = bootstrap_min_css_handler,
+    .handler = bootstrap_min_css_handler,
 
-    .user_ctx  = NULL
+    .user_ctx = NULL
 
 };
 
@@ -146,25 +147,25 @@ esp_err_t bootstrap_min_js_handler(httpd_req_t *req)
 {
     ESP_LOGI(TAG, "Entering ----> Bootstrap_min_js Requested()\n");
 
-    httpd_resp_set_type(req,"application/javascript");
+    httpd_resp_set_type(req, "application/javascript");
 
-    httpd_resp_send(req, (const char *)bootstrap_min_js_start, (bootstrap_min_js_end-1) - bootstrap_min_js_start);
+    httpd_resp_send(req, (const char *)bootstrap_min_js_start, (bootstrap_min_js_end - 1) - bootstrap_min_js_start);
 
     ESP_LOGI(TAG, "Exit    ----> Bootstrap_min_js Requested()\n");
 
     return ESP_OK;
-    
+
 } /* end bootstrap_min_js_handler() */
 
 httpd_uri_t bootstrap_min_js_uri = {
 
-    .uri       = "/bootstrap.min.js",
+    .uri = "/bootstrap.min.js",
 
-    .method    = HTTP_GET,
+    .method = HTTP_GET,
 
-    .handler   = bootstrap_min_js_handler,
+    .handler = bootstrap_min_js_handler,
 
-    .user_ctx  = NULL
+    .user_ctx = NULL
 
 };
 
@@ -178,26 +179,25 @@ esp_err_t jquery_3_3_1_min_js_handler(httpd_req_t *req)
 {
     ESP_LOGI(TAG, "Entering ----> jquery_3_3_1_min_js Requested()\n");
 
-    httpd_resp_set_type(req,"application/javascript");
+    httpd_resp_set_type(req, "application/javascript");
 
-    httpd_resp_send(req, (const char *)jquery_3_3_1_min_js_start, (jquery_3_3_1_min_js_end-1) - jquery_3_3_1_min_js_start);
+    httpd_resp_send(req, (const char *)jquery_3_3_1_min_js_start, (jquery_3_3_1_min_js_end - 1) - jquery_3_3_1_min_js_start);
 
     ESP_LOGI(TAG, "Exit     ----> jquery_3_3_1_min_js Requested()\n");
 
     return ESP_OK;
-    
+
 } /* end jquery_3_3_1_min_js_handler() */
 
 httpd_uri_t jquery_3_3_1_min_js_uri = {
 
-    .uri       = "/jquery-3.3.1.min.js",
+    .uri = "/jquery-3.3.1.min.js",
 
-    .method    = HTTP_GET,
+    .method = HTTP_GET,
 
-    .handler   = jquery_3_3_1_min_js_handler,
+    .handler = jquery_3_3_1_min_js_handler,
 
-    .user_ctx  = NULL
-};
+    .user_ctx = NULL};
 
 /**
  *	@fn 	    esp_err_t sensors_get_handler (httpd_req_t *req)
@@ -208,7 +208,7 @@ httpd_uri_t jquery_3_3_1_min_js_uri = {
 esp_err_t sensors_get_handler(httpd_req_t *req)
 {
 
-    char*  buf;
+    char *buf;
 
     size_t buf_len;
 
@@ -225,53 +225,53 @@ esp_err_t sensors_get_handler(httpd_req_t *req)
 
     buf_len = httpd_req_get_hdr_value_len(req, "Host") + 1;
 
-    if (buf_len > 1) {
+    if (buf_len > 1)
+    {
 
         buf = malloc(buf_len);
 
         /* Copy null terminated value string into buffer */
 
-        if (httpd_req_get_hdr_value_str(req, "Host", buf, buf_len) == ESP_OK) {
+        if (httpd_req_get_hdr_value_str(req, "Host", buf, buf_len) == ESP_OK)
+        {
 
             ESP_LOGI(TAG, "Found header => Host: %s", buf);
-
         }
 
         free(buf);
-
     }
 
     buf = malloc(250);
 
-    memset(buf,0,sizeof(buf)-1);
+    memset(buf, 0, sizeof(buf) - 1);
 
     /*--- Compute Min, Max and Deltas for both sensors ---*/
-    DeltaTravel = travel - travel2;
-    DeltaAngle = angle - angle2;
+    DeltaTravel = g_travel - travel2;
+    DeltaAngle = g_angle - angle2;
 
-    if (travel > maxiTravelSensor1)
-        maxiTravelSensor1 = travel;
-    if (travel < miniTravelSensor1)
-        miniTravelSensor1 = travel;
+    if (g_travel > maxiTravelSensor1)
+        maxiTravelSensor1 = g_travel;
+    if (g_travel < miniTravelSensor1)
+        miniTravelSensor1 = g_travel;
 
     if (travel2 > maxiTravelSensor2)
         maxiTravelSensor2 = travel2;
     if (travel2 < miniTravelSensor2)
-        miniTravelSensor2 = travel2; 
+        miniTravelSensor2 = travel2;
 
     /*--- compute voltage in volt ---*/
-    voltage1 = voltage/1000.0;
+    voltage1 = g_voltage / 1000.0;
 
     ESP_LOGI(TAG, "voltage1 %f - voltage2 %f", voltage1, voltage2);
 
     /*--- Preparing the buffer request in json format ---*/
-    sprintf(buf,"{\"travel1\":%0.1f,\"travel2\":%0.1f,\"DeltaTravel\":%0.1f,\"angle1\":%0.1f,\"angle2\":%0.1f,\"DeltaAngle\":%0.1f,\"maxiTravelSensor1\":%0.1f,\"miniTravelSensor1\":%0.1f, \"maxiTravelSensor2\":%0.1f, \"miniTravelSensor2\":%0.1f,\"voltage1\":%0.2f, \"voltage2\":%0.2f}",(travel < 0 ? (-1*travel) : travel), (travel2 < 0 ? (-1*travel2) : travel2), (DeltaTravel < 0 ? (-1*DeltaTravel) : DeltaTravel), (angle < 0 ? (-1*angle) : angle), (angle2 < 0 ? (-1*angle2) : angle2), (DeltaAngle < 0 ? (-1*DeltaAngle) : DeltaAngle), (-1*miniTravelSensor1),maxiTravelSensor1,   (-1*miniTravelSensor2), maxiTravelSensor2, voltage1, voltage2);
+    sprintf(buf, "{\"travel1\":%0.1f,\"travel2\":%0.1f,\"DeltaTravel\":%0.1f,\"angle1\":%0.1f,\"angle2\":%0.1f,\"DeltaAngle\":%0.1f,\"maxiTravelSensor1\":%0.1f,\"miniTravelSensor1\":%0.1f, \"maxiTravelSensor2\":%0.1f, \"miniTravelSensor2\":%0.1f,\"voltage1\":%0.2f, \"voltage2\":%0.2f}", (g_travel < 0 ? (-1 * g_travel) : g_travel), (travel2 < 0 ? (-1 * travel2) : travel2), (DeltaTravel < 0 ? (-1 * DeltaTravel) : DeltaTravel), (g_angle < 0 ? (-1 * g_angle) : g_angle), (angle2 < 0 ? (-1 * angle2) : angle2), (DeltaAngle < 0 ? (-1 * DeltaAngle) : DeltaAngle), (-1 * miniTravelSensor1), maxiTravelSensor1, (-1 * miniTravelSensor2), maxiTravelSensor2, voltage1, voltage2);
 
- 	ESP_LOGI(TAG, "[len = %d]  \n", strlen(buf));
+    ESP_LOGI(TAG, "[len = %d]  \n", strlen(buf));
 
-    ESP_LOGI(TAG,"json = %s\n", buf);
+    ESP_LOGI(TAG, "json = %s\n", buf);
 
-    httpd_resp_set_type(req,"text/plain");
+    httpd_resp_set_type(req, "text/plain");
 
     /*--- Send the request ---*/
     httpd_resp_send(req, buf, strlen(buf));
@@ -286,13 +286,13 @@ esp_err_t sensors_get_handler(httpd_req_t *req)
 
 httpd_uri_t sensors = {
 
-    .uri       = "/sensors",
+    .uri = "/sensors",
 
-    .method    = HTTP_GET,
+    .method = HTTP_GET,
 
-    .handler   = sensors_get_handler,
+    .handler = sensors_get_handler,
 
-    .user_ctx  = NULL
+    .user_ctx = NULL
 
 };
 
@@ -300,7 +300,7 @@ httpd_uri_t sensors = {
  *	@fn 	    esp_err_t chord_post_handler (httpd_req_t *req)
  *	@brief 		An HTTP POST handler.
  *	@param[in]	*req : un http_req_t pointer.
- *	@return		
+ *	@return
  *      - ESP_OK
  *      - ESP_FAIL
  */
@@ -318,26 +318,27 @@ esp_err_t sensor2_post_handler(httpd_req_t *req)
     ESP_LOGI(TAG, "method: %d\n", req->method);
     ESP_LOGI(TAG, "uri: %s\n", req->uri);
 
-    memset(buf,0,sizeof(buf)-1);
+    memset(buf, 0, sizeof(buf) - 1);
 
-    while (remaining > 0) {
+    while (remaining > 0)
+    {
 
         /* Read the data for the request */
 
         if ((ret = httpd_req_recv(req, buf,
 
-                        MIN(remaining, sizeof(buf)))) <= 0) {
+                                  MIN(remaining, sizeof(buf)))) <= 0)
+        {
 
-            if (ret == HTTPD_SOCK_ERR_TIMEOUT) {
+            if (ret == HTTPD_SOCK_ERR_TIMEOUT)
+            {
 
                 /* Retry receiving if timeout occurred */
 
                 continue;
-
             }
 
             return ESP_FAIL;
-
         }
 
         /* Log data received */
@@ -357,15 +358,14 @@ esp_err_t sensor2_post_handler(httpd_req_t *req)
         cJSON_Delete(sensor2_json);
 
         /*--- Compute travel2 ---*/
-        travel2 = chordControlSurface * sin((angle2*(2.0*PI)/360.0)/2.0) * 2.0;
+        travel2 = g_chordControlSurface * sin((angle2 * (2.0 * PI) / 360.0) / 2.0) * 2.0;
 
-        ESP_LOGI(TAG,"angle2 : %.1f - travel2 : %.1f - voltage2 : %.2f\n",angle2, travel2, voltage2);
+        ESP_LOGI(TAG, "angle2 : %.1f - travel2 : %.1f - voltage2 : %.2f\n", angle2, travel2, voltage2);
 
         /* Send response to the client, by default 200 OK status in the mime type */
         httpd_resp_send(req, NULL, 0);
 
         remaining -= ret;
-
     }
 
     ESP_LOGI(TAG, "Exit ----> sensor2_post_handler()\n");
@@ -376,13 +376,13 @@ esp_err_t sensor2_post_handler(httpd_req_t *req)
 
 httpd_uri_t sensor2 = {
 
-    .uri       = "/sensor2",
+    .uri = "/sensor2",
 
-    .method    = HTTP_POST,
+    .method = HTTP_POST,
 
-    .handler   = sensor2_post_handler,
+    .handler = sensor2_post_handler,
 
-    .user_ctx  = NULL
+    .user_ctx = NULL
 
 };
 
@@ -390,7 +390,7 @@ httpd_uri_t sensor2 = {
  *	@fn 	    esp_err_t chord_post_handler (httpd_req_t *req)
  *	@brief 		An HTTP POST handler.
  *	@param[in]	*req : un http_req_t pointer.
- *	@return		
+ *	@return
  *      - ESP_OK
  *      - ESP_FAIL
  */
@@ -401,7 +401,7 @@ esp_err_t chord_post_handler(httpd_req_t *req)
 
     char param[3];
 
-    int oldchordValue = chordControlSurface;
+    int oldchordValue = g_chordControlSurface;
 
     int ret, remaining = req->content_len;
 
@@ -410,25 +410,26 @@ esp_err_t chord_post_handler(httpd_req_t *req)
     ESP_LOGI(TAG, "Entering ----> chord_post_handler()\n");
     ESP_LOGI(TAG, "method: %d\n", req->method);
     ESP_LOGI(TAG, "uri: %s\n", req->uri);
-    
-    while (remaining > 0) {
+
+    while (remaining > 0)
+    {
 
         /* Read the data for the request */
 
         if ((ret = httpd_req_recv(req, buf,
 
-                        MIN(remaining, sizeof(buf)))) <= 0) {
+                                  MIN(remaining, sizeof(buf)))) <= 0)
+        {
 
-            if (ret == HTTPD_SOCK_ERR_TIMEOUT) {
+            if (ret == HTTPD_SOCK_ERR_TIMEOUT)
+            {
 
                 /* Retry receiving if timeout occurred */
 
                 continue;
-
             }
 
             return ESP_FAIL;
-
         }
 
         /* Log data received */
@@ -439,28 +440,27 @@ esp_err_t chord_post_handler(httpd_req_t *req)
 
         ESP_LOGI(TAG, "====================================");
 
-        param[0]=buf[11];
-        param[1]=buf[12];
-        param[2]='\0';
+        param[0] = buf[11];
+        param[1] = buf[12];
+        param[2] = '\0';
 
         iTemp = atoi(param);
 
-        if(iTemp > 0)
+        if (iTemp > 0)
         {
 
-            chordControlSurface = iTemp;
+            g_chordControlSurface = iTemp;
 
-            sprintf(buf, "Changing chord from %d mm to %d mm\n", oldchordValue, chordControlSurface);
+            sprintf(buf, "Changing chord from %d mm to %d mm\n", oldchordValue, g_chordControlSurface);
         }
         else
             sprintf(buf, "ERROR : chord must be a positive value\n");
 
         /* Send response to the client */
-        httpd_resp_set_type(req,"text/plain");
+        httpd_resp_set_type(req, "text/plain");
         httpd_resp_send(req, buf, strlen(buf));
 
         remaining -= ret;
-
     }
 
     ESP_LOGI(TAG, "Exit    ----> chord_post_handler()\n");
@@ -471,58 +471,15 @@ esp_err_t chord_post_handler(httpd_req_t *req)
 
 httpd_uri_t chord = {
 
-    .uri       = "/chord",
+    .uri = "/chord",
 
-    .method    = HTTP_POST,
+    .method = HTTP_POST,
 
-    .handler   = chord_post_handler,
+    .handler = chord_post_handler,
 
-    .user_ctx  = NULL
-
-};
-
-/**
- *	@fn 	    esp_err_t reset_post_handler (httpd_req_t *req)
- *	@brief 		An HTTP POST handler.
- *	@param[in]	*req : un http_req_t pointer.
- *	@return		
- *      - ESP_OK
- *      - ESP_FAIL
- */
-esp_err_t reset_post_handler(httpd_req_t *req)
-{
-    ESP_LOGI(TAG, "Entering ----> reset_post_handler()\n");
-    ESP_LOGI(TAG, "method: %d\n", req->method);
-    ESP_LOGI(TAG, "uri: %s\n", req->uri);
-    ESP_LOGI(TAG, "len %d\n", req->content_len);
-    
-    /*--- Min & Max reset to 0 ---*/
-    maxiTravelSensor1 = 0.0;
-    miniTravelSensor1 = 0.0;
-    maxiTravelSensor2 = 0.0;
-    miniTravelSensor2 = 0.0;
-
-    /* Send response to the client */
-    httpd_resp_send(req, NULL, 0);
-
-    ESP_LOGI(TAG, "Exit    ----> reset_post_handler()\n");
-
-    return ESP_OK;
-
-} /* end reset_post_handler() */
-
-httpd_uri_t reset = {
-
-    .uri       = "/reset",
-
-    .method    = HTTP_POST,
-
-    .handler   = reset_post_handler,
-
-    .user_ctx  = NULL
+    .user_ctx = NULL
 
 };
-
 
 /**
  *	@fn 	    httpd_handle_t start_webserver (void)
@@ -541,7 +498,8 @@ httpd_handle_t start_webserver(void)
 
     ESP_LOGI(TAG, "Starting server on port: '%d'", config.server_port);
 
-    if (httpd_start(&server, &config) == ESP_OK) {
+    if (httpd_start(&server, &config) == ESP_OK)
+    {
 
         // Set URI handlers
 
@@ -557,20 +515,16 @@ httpd_handle_t start_webserver(void)
 
         httpd_register_uri_handler(server, &chord);
 
-        httpd_register_uri_handler(server, &reset);  
-
         httpd_register_uri_handler(server, &sensors);
 
         httpd_register_uri_handler(server, &sensor2);
 
         return server;
-
     }
 
     ESP_LOGI(TAG, "Error starting httpd server!");
 
     return NULL;
-
 }
 
 /**
@@ -589,86 +543,72 @@ void stop_webserver(httpd_handle_t server)
 } /* end stop_webserver() */
 
 /**
- *	@fn 	    esp_err_t event_handler(void *ctx, system_event_t *event).
+ *	@fn 	    esp_err_t wifi_event_handler(void *ctx, system_event_t *event).
  *	@brief 		task launch the function to initialize handler event .
  *	@param[in]	*ctx : httpd_handler_t pointer.
  *	@param[in]	*event : system_event_t event pointer.
  *	@return		ESP_OK
  */
- static esp_err_t event_handler(void *ctx, system_event_t *event)
+static void wifi_event_handler(void *ctx, esp_event_base_t event_base,
+                                    int32_t event_id, void *event_data)
 {
 
-    httpd_handle_t *server = (httpd_handle_t *) ctx;
+    httpd_handle_t *server = (httpd_handle_t *)ctx;
 
-    switch(event->event_id) {
+    switch (event_id)
+    {
 
-        case SYSTEM_EVENT_AP_START:
+    case WIFI_EVENT_AP_START:
 
-	        ESP_LOGI(TAG, "SYSTEM_EVENT_AP_START:ESP32 is started in AP mode\n");
+        ESP_LOGI(TAG, "SYSTEM_EVENT_AP_START:ESP32 is started in AP mode\n");
 
-            if (*server == NULL) {
+        if (*server == NULL)
+        {
 
-	            *server = start_webserver();
+            *server = start_webserver();
+        }
 
-    	    }
+        break;
 
-		break;
-	
-	    case SYSTEM_EVENT_AP_STACONNECTED:
+    case WIFI_EVENT_AP_STACONNECTED:
 
-            ESP_LOGI(TAG, "SYSTEM_EVENT_AP_STACONNECTED: station:"MACSTR" join, AID=%d",
+        ESP_LOGI(TAG, "WIFI_EVENT_AP_STACONNECTED\n");
 
-                    MAC2STR(event->event_info.sta_connected.mac),
+        wifi_event_ap_staconnected_t *event = (wifi_event_ap_staconnected_t *)event_data;
 
-                    event->event_info.sta_connected.aid);
+        ESP_LOGI(TAG, "station "MACSTR" join, AID=%d/n", MAC2STR(event->mac), (int)event->aid);
 
-		    xEventGroupSetBits(wifi_event_group, CLIENT_CONNECTED_BIT);
+        break;
 
-		    break;
+    case WIFI_EVENT_AP_STADISCONNECTED:
 
+        ESP_LOGI(TAG, "WIFI_EVENT_AP_STADISCONNECTED\n");
 
-    	case SYSTEM_EVENT_AP_STADISCONNECTED:
+        wifi_event_ap_stadisconnected_t *event1 = (wifi_event_ap_stadisconnected_t *)event_data;
 
-            ESP_LOGI(TAG, "SYSTEM_EVENT_AP_STADISCONNECTED\n");
+        ESP_LOGI(TAG, "station "MACSTR" leave, AID=%d/n", MAC2STR(event1->mac), (int)event1->aid);
 
-	    	xEventGroupSetBits(wifi_event_group, CLIENT_DISCONNECTED_BIT);
+        break;
 
-            ESP_LOGI(TAG, "station:"MACSTR"leave, AID=%d",
+    case WIFI_EVENT_AP_STOP:
 
-                MAC2STR(event->event_info.sta_disconnected.mac),
+        ESP_LOGI(TAG, "WIFI_EVENT_AP_STOP:ESP32 is stop in AP mode\n");
 
-                 event->event_info.sta_disconnected.aid);
+        if (*server)
+        {
 
-		    break;		
+            stop_webserver(*server);
 
-            case SYSTEM_EVENT_AP_STOP :
+            *server = NULL;
+        }
+        break;
 
-                ESP_LOGI(TAG, "SYSTEM_EVENT_AP_STOP:ESP32 is stop in AP mode\n");
-            	
-                if (*server) {
+    default:
 
-    	        stop_webserver(*server);
+        ESP_LOGI(TAG, "UNKNOW_EVENT:event_id = %d\n", (int)event_id);
 
-        	    *server = NULL;
-
-	            }	
-                break;
-
-            case SYSTEM_EVENT_AP_STAIPASSIGNED :
-
-                ESP_LOGI(TAG, "SYSTEM_EVENT_AP_STAIPASSIGNED\n");
-
-                break;
-                
-        default:
-
-            ESP_LOGI(TAG,"UNKNOW_EVENT:event->event_id = %d\n", event->event_id);
-
-            break;
-
+        break;
     }
-
-    return ESP_OK;
 
 } /* end event_handler() */
 
@@ -678,37 +618,40 @@ void stop_webserver(httpd_handle_t server)
  *	@param[in]	void*
  *	@return		void.
  */
-static void start_dhcp_server(){ 
+/*
+static void start_dhcp_server()
+{
 
-    	// initialize the tcp stack
+    // initialize the tcp stack
 
-	    tcpip_adapter_init();
+    tcpip_adapter_init();
 
-        // stop DHCP server
+    // stop DHCP server
 
-        ESP_ERROR_CHECK(tcpip_adapter_dhcps_stop(TCPIP_ADAPTER_IF_AP));
+    ESP_ERROR_CHECK(tcpip_adapter_dhcps_stop(TCPIP_ADAPTER_IF_AP));
 
-        // assign a static IP to the network interface
+    // assign a static IP to the network interface
 
-        tcpip_adapter_ip_info_t info;
+    tcpip_adapter_ip_info_t info;
 
-        memset(&info, 0, sizeof(info));
+    memset(&info, 0, sizeof(info));
 
-        IP4_ADDR(&info.ip, 192, 168, 1, 1);
+    IP4_ADDR(&info.ip, 192, 168, 1, 1);
 
-        //ESP acts as router, so gw addr will be its own addr
-        IP4_ADDR(&info.gw, 192, 168, 1, 1);
-        
-        IP4_ADDR(&info.netmask, 255, 255, 255, 0);
+    // ESP acts as router, so gw addr will be its own addr
+    IP4_ADDR(&info.gw, 192, 168, 1, 1);
 
-        ESP_ERROR_CHECK(tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_AP, &info));
+    IP4_ADDR(&info.netmask, 255, 255, 255, 0);
 
-        // start the DHCP server   
+    ESP_ERROR_CHECK(tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_AP, &info));
 
-        ESP_ERROR_CHECK(tcpip_adapter_dhcps_start(TCPIP_ADAPTER_IF_AP));
+    // start the DHCP server
 
-        ESP_LOGI(TAG, "DHCP server started \n");
+    ESP_ERROR_CHECK(tcpip_adapter_dhcps_start(TCPIP_ADAPTER_IF_AP));
+
+    ESP_LOGI(TAG, "DHCP server started \n");
 }
+*/
 
 /**
  *	@fn 	    static void initialise_wifi_in_ap(void *arg);
@@ -716,51 +659,44 @@ static void start_dhcp_server(){
  *	@param[in]	void*
  *	@return		void.
  */
-static void initialise_wifi_in_ap(void *arg)
+static void initialise_wifi_in_ap(void)
 {
 
     /*--- disable wifi driver logging ---*/
     esp_log_level_set("wifi", ESP_LOG_NONE);
 
-    ESP_ERROR_CHECK(esp_event_loop_init(event_handler, arg));
-
-    wifi_event_group = xEventGroupCreate();
+    ESP_ERROR_CHECK(esp_netif_init());
+    ESP_ERROR_CHECK(esp_event_loop_create_default());
+    esp_netif_create_default_wifi_ap();
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
 
     ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
 
+    ESP_ERROR_CHECK(esp_event_handler_instance_register(WIFI_EVENT,
+                                                        ESP_EVENT_ANY_ID,
+                                                        &wifi_event_handler,
+                                                        NULL,
+                                                        NULL));
+
     wifi_config_t wifi_config = {
-
         .ap = {
-
             .ssid = AP_WIFI_SSID,
-                        
+            .ssid_len = strlen(AP_WIFI_SSID),
             .channel = 0,
-
-            .authmode = WIFI_AUTH_OPEN,
-
-            .ssid_hidden = 0,
-
             .max_connection = 3,
-
-            .beacon_interval = 100
-
-        },
-
+            .authmode = WIFI_AUTH_OPEN,
+            .beacon_interval = 100},
     };
+
+    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
+    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &wifi_config));
+    ESP_ERROR_CHECK(esp_wifi_start());
 
     ESP_LOGI(TAG, "Setting WiFi configuration SSID %s...", wifi_config.ap.ssid);
 
-    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
-
-    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &wifi_config));
-
-    ESP_ERROR_CHECK(esp_wifi_start());
-
-} /* end initialise wifi */
+} /* end initialise_wifi_in_ap */
 
 /**
  *	@fn 	    task_http_server.
@@ -772,33 +708,31 @@ void task_http_server(void *ignore)
 
 {
 
-    static httpd_handle_t server = NULL;
-
     /*--- Initialize nvs partition ---*/
     esp_err_t ret = nvs_flash_init();
-    
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
 
-      ESP_ERROR_CHECK(nvs_flash_erase());
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)
+    {
 
-      ret = nvs_flash_init();
+        ESP_ERROR_CHECK(nvs_flash_erase());
+
+        ret = nvs_flash_init();
     }
 
     ESP_ERROR_CHECK(ret);
 
     /*--- start dhcp_server to serve stations ---*/
-    start_dhcp_server();
+ //   start_dhcp_server();
 
     /*--- start wifi driver in AP mode ---*/
-    initialise_wifi_in_ap(&server);
+    initialise_wifi_in_ap();
 
     /*--- infinite loop to serve wifi event and http request ---*/
-	while(1)
-	{
-    	vTaskDelay(300/portTICK_PERIOD_MS);
-	} /* end while() */
+    while (1)
+    {
+        vTaskDelay(300 / portTICK_PERIOD_MS);
+    } /* end while() */
 
-    /*--- this part will not be executed but we stick the free rtos recomendation ---*/
-	vTaskDelete(NULL);
-
+    /*--- this part will not be executed but we stick the free rtos reco. ---*/
+    vTaskDelete(NULL);
 }

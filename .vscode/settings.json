@@ -51,5 +51,5 @@
     ],
     "idf.espIdfPathWin": "C:/Users/Eliot/esp/esp-idf/",
     "idf.toolsPathWin": "C:\\Users\\Eliot\\.espressif",
-    "idf.pythonInstallPath": "C:\\Users\\Eliot\\.espressif\\tools\\idf-python\\3.8.7\\python.exe"
+    "idf.pythonInstallPath": "C:\\Users\\Eliot\\.espressif\\tools\\idf-python\\3.11.2\\python.exe"
 } 
