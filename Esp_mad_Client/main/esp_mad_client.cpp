@@ -75,7 +75,7 @@ void app_main(void)
     /*---  functions.). Blinky led.                                       ---*/
      gpio_config_t io_conf;
     //disable interrupt
-    io_conf.intr_type = (gpio_int_type_t)GPIO_PIN_INTR_DISABLE;
+    io_conf.intr_type = (gpio_int_type_t)GPIO_INTR_DISABLE;
     //set as output mode
     io_conf.mode = GPIO_MODE_OUTPUT;
     //bit mask of the pins that you want to set

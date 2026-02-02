@@ -35,5 +35,6 @@
     "octobre",
     "wifi"
   ],
-  "files.autoSave": "afterDelay"
+  "files.autoSave": "afterDelay",
+  "idf.flashType": "UART"
 }
