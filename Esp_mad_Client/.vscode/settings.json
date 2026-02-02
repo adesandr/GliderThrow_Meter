@@ -34,5 +34,6 @@
     "muxed",
     "octobre",
     "wifi"
-  ]
+  ],
+  "files.autoSave": "afterDelay"
 }

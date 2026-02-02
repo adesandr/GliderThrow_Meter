@@ -528,130 +528,27 @@ httpd_handle_t start_webserver(void)
 }
 
 /**
- *	@fn 	    vod stop_webserver (httpd_handle_t server)
- *	@brief 		stop the httpd web server.
- *	@param[in]	http_handle_t server.
- *	@return		void.
- */
-void stop_webserver(httpd_handle_t server)
-{
-
-    // Stop the httpd server
-
-    httpd_stop(server);
-
-} /* end stop_webserver() */
-
-/**
  *	@fn 	    esp_err_t wifi_event_handler(void *ctx, system_event_t *event).
  *	@brief 		task launch the function to initialize handler event .
  *	@param[in]	*ctx : httpd_handler_t pointer.
  *	@param[in]	*event : system_event_t event pointer.
  *	@return		ESP_OK
  */
-static void wifi_event_handler(void *ctx, esp_event_base_t event_base,
+static void wifi_event_handler(void *arg, esp_event_base_t event_base,
                                     int32_t event_id, void *event_data)
 {
 
-    httpd_handle_t *server = (httpd_handle_t *)ctx;
-
-    switch (event_id)
-    {
-
-    case WIFI_EVENT_AP_START:
-
-        ESP_LOGI(TAG, "SYSTEM_EVENT_AP_START:ESP32 is started in AP mode\n");
-
-        if (*server == NULL)
-        {
-
-            *server = start_webserver();
-        }
-
-        break;
-
-    case WIFI_EVENT_AP_STACONNECTED:
-
-        ESP_LOGI(TAG, "WIFI_EVENT_AP_STACONNECTED\n");
-
-        wifi_event_ap_staconnected_t *event = (wifi_event_ap_staconnected_t *)event_data;
-
-        ESP_LOGI(TAG, "station "MACSTR" join, AID=%d/n", MAC2STR(event->mac), (int)event->aid);
-
-        break;
-
-    case WIFI_EVENT_AP_STADISCONNECTED:
-
-        ESP_LOGI(TAG, "WIFI_EVENT_AP_STADISCONNECTED\n");
-
-        wifi_event_ap_stadisconnected_t *event1 = (wifi_event_ap_stadisconnected_t *)event_data;
-
-        ESP_LOGI(TAG, "station "MACSTR" leave, AID=%d/n", MAC2STR(event1->mac), (int)event1->aid);
-
-        break;
-
-    case WIFI_EVENT_AP_STOP:
-
-        ESP_LOGI(TAG, "WIFI_EVENT_AP_STOP:ESP32 is stop in AP mode\n");
-
-        if (*server)
-        {
-
-            stop_webserver(*server);
-
-            *server = NULL;
-        }
-        break;
-
-    default:
-
-        ESP_LOGI(TAG, "UNKNOW_EVENT:event_id = %d\n", (int)event_id);
-
-        break;
+ if (event_id == WIFI_EVENT_AP_STACONNECTED) {
+        wifi_event_ap_staconnected_t* event = (wifi_event_ap_staconnected_t*) event_data;
+        ESP_LOGI(TAG, "station "MACSTR" join, AID=%d",
+                 MAC2STR(event->mac), event->aid);
+    } else if (event_id == WIFI_EVENT_AP_STADISCONNECTED) {
+        wifi_event_ap_stadisconnected_t* event = (wifi_event_ap_stadisconnected_t*) event_data;
+        ESP_LOGI(TAG, "station "MACSTR" leave, AID=%d, reason=%d",
+                 MAC2STR(event->mac), event->aid, event->reason);
     }
 
-} /* end event_handler() */
-
-/**
- *	@fn 	    static void start_dhcp_server(void *arg);
- *	@brief 		DHCP Server initialisation.
- *	@param[in]	void*
- *	@return		void.
- */
-/*
-static void start_dhcp_server()
-{
-
-    // initialize the tcp stack
-
-    tcpip_adapter_init();
-
-    // stop DHCP server
-
-    ESP_ERROR_CHECK(tcpip_adapter_dhcps_stop(TCPIP_ADAPTER_IF_AP));
-
-    // assign a static IP to the network interface
-
-    tcpip_adapter_ip_info_t info;
-
-    memset(&info, 0, sizeof(info));
-
-    IP4_ADDR(&info.ip, 192, 168, 1, 1);
-
-    // ESP acts as router, so gw addr will be its own addr
-    IP4_ADDR(&info.gw, 192, 168, 1, 1);
-
-    IP4_ADDR(&info.netmask, 255, 255, 255, 0);
-
-    ESP_ERROR_CHECK(tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_AP, &info));
-
-    // start the DHCP server
-
-    ESP_ERROR_CHECK(tcpip_adapter_dhcps_start(TCPIP_ADAPTER_IF_AP));
-
-    ESP_LOGI(TAG, "DHCP server started \n");
-}
-*/
+ } /* end event_handler() */
 
 /**
  *	@fn 	    static void initialise_wifi_in_ap(void *arg);
@@ -699,6 +596,54 @@ static void initialise_wifi_in_ap(void)
 } /* end initialise_wifi_in_ap */
 
 /**
+ *	@fn 	    static esp_err_t stop_server(httpd_handle_t server)
+ *	@brief 		Stop the Web_server instance.
+ *	@param[in]	httpd_handle_t server
+ *	@return		esp_err_t
+ */
+static esp_err_t stop_webserver(httpd_handle_t server)
+{
+    // Stop the httpd server
+    return httpd_stop(server);
+}
+
+/**
+ *	@fn 	    static void disconnect_handler(void *arg, esp_event_base_t event_base, int32_t event_id,void* event_data)
+ *	@brief 		Called when Station is disconnected
+ *	@param[in]	see prototype
+ *	@return		void
+ */
+static void disconnect_handler(void* arg, esp_event_base_t event_base,
+                               int32_t event_id, void* event_data)
+{
+    httpd_handle_t* server = (httpd_handle_t*) arg;
+    if (*server) {
+        ESP_LOGI(TAG, "Stopping webserver");
+        if (stop_webserver(*server) == ESP_OK) {
+            *server = NULL;
+        } else {
+            ESP_LOGE(TAG, "Failed to stop http server");
+        }
+    }
+}
+
+/**
+ *	@fn 	    static void connect_handler(void *arg, esp_event_base_t event_base, int32_t event_id,void* event_data)
+ *	@brief 		Called when Station is connected
+ *	@param[in]	see prototype
+ *	@return		void
+ */
+static void connect_handler(void* arg, esp_event_base_t event_base,
+                            int32_t event_id, void* event_data)
+{
+    httpd_handle_t* server = (httpd_handle_t*) arg;
+    if (*server == NULL) {
+        ESP_LOGI(TAG, "Starting webserver");
+        *server = start_webserver();
+    }
+}
+
+/**
  *	@fn 	    task_http_server.
  *	@brief 		task launch the function to initialize the http server .
  *	@param[in]	void*
@@ -707,6 +652,8 @@ static void initialise_wifi_in_ap(void)
 void task_http_server(void *ignore)
 
 {
+
+    static httpd_handle_t server = NULL;
 
     /*--- Initialize nvs partition ---*/
     esp_err_t ret = nvs_flash_init();
@@ -721,11 +668,14 @@ void task_http_server(void *ignore)
 
     ESP_ERROR_CHECK(ret);
 
-    /*--- start dhcp_server to serve stations ---*/
- //   start_dhcp_server();
-
     /*--- start wifi driver in AP mode ---*/
     initialise_wifi_in_ap();
+
+    ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &connect_handler, &server));
+    ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, WIFI_EVENT_STA_DISCONNECTED, &disconnect_handler, &server));
+
+    /* Start the server for the first time */
+    server = start_webserver();
 
     /*--- infinite loop to serve wifi event and http request ---*/
     while (1)

@@ -18,7 +18,7 @@
 
 #define AP_WIFI_SSID    "ESP_MAD" 
 
-#define ESP_MAD_BOARD               /* Update depending your ESP32 dev. board. set to ESP_MAD_BOARD developped for the project */
+#define LOLIN_32 //ESP_MAD_BOARD               /* Update depending your ESP32 dev. board. set to ESP_MAD_BOARD developped for the project */
 
 /*--- Boards used for first prototyping ---*/
 #ifdef X_ESP32
