@@ -498,12 +498,7 @@ esp_err_t reset_post_handler(httpd_req_t *req)
     ESP_LOGI(TAG, "method: %d\n", req->method);
     ESP_LOGI(TAG, "uri: %s\n", req->uri);
 
-    ESP_LOGI(TAG, "=========== RECEIVED DATA ==========");
-
-  //  ESP_LOGI(TAG, "%.*s", ret, buf);
-
-    ESP_LOGI(TAG, "====================================");
-
+    /*--- Reset Maxi and Mini ---*/
     maxiTravelSensor1 = 0.0;
     miniTravelSensor1 = 0.0;
     maxiTravelSensor2 = 0.0;
