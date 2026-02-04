@@ -22,7 +22,7 @@ copyright = '2020, Alain Désandré'
 author = 'Alain Désandré'
 
 # The full version, including alpha/beta/rc tags
-release = 'V1.2.0'
+release = 'V2.0.0'
 
 
 # -- General configuration ---------------------------------------------------

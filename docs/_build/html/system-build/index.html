@@ -1,21 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" >
+<html class="writer-html5" lang="fr" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>System Build &mdash; Documentation GliderThrow_Meter V1.2.0</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>System Build &mdash; Documentation GliderThrow_Meter V2.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=a645b6c6"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
@@ -27,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> GliderThrow_Meter
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            GliderThrow_Meter
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,8 +82,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>System Build</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">System Build</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/system-build/index.rst.txt" rel="nofollow"> Afficher la source de la page</a>
       </li>
@@ -89,63 +94,63 @@
            <div itemprop="articleBody">
              
   <section id="system-build">
-<h1>System Build<a class="headerlink" href="#system-build" title="Lien permanent vers ce titre"></a></h1>
+<h1>System Build<a class="headerlink" href="#system-build" title="Lien vers cette rubrique"></a></h1>
 <section id="what-do-you-need">
-<h2>What do you need<a class="headerlink" href="#what-do-you-need" title="Lien permanent vers ce titre"></a></h2>
+<h2>What do you need<a class="headerlink" href="#what-do-you-need" title="Lien vers cette rubrique"></a></h2>
 <p>Building the components for the project is extremely simple and requires only the following parts.</p>
-<img alt="../_images/glider-throw-parts.png" src="../_images/glider-throw-parts.png" />
+<img alt="../_images/glider-throw-parts.png" class="align-center" src="../_images/glider-throw-parts.png" />
 <section id="stl-files">
-<h3>Stl files<a class="headerlink" href="#stl-files" title="Lien permanent vers ce titre"></a></h3>
+<h3>Stl files<a class="headerlink" href="#stl-files" title="Lien vers cette rubrique"></a></h3>
 <p>All the stl files can be downloaded at this link <a class="reference external" href="https://github.com/adesandr/GliderThrow_Meter/blob/master/docs/_stl/ESP_MAD_stl.zip">zip file</a></p>
 </section>
 <section id="custom-board">
-<h3>Custom board<a class="headerlink" href="#custom-board" title="Lien permanent vers ce titre"></a></h3>
+<h3>Custom board<a class="headerlink" href="#custom-board" title="Lien vers cette rubrique"></a></h3>
 <p>The custom board can be ordered from <a class="reference external" href="https://www.seeedstudio.com/fusion_pcb.html?gclid=Cj0KCQjw8IaGBhCHARIsAGIRRYrDiY9xl_DXK0TnbwQd7Kumivxzm0qlBc7xkKKEj7ldcP0cR-soNcoaAsP_EALw_wcB">seed fusion</a> for example (or other PCB services like Eurocircuit, jlcpcb, etc). Gerber files can be downloaded on the hardware section. I have already made several PCBs at seed Fusion and the service is fast and good. The price for 10 PCBs is around 15€ + the shipping costs. When ordering the PCBs, don’t forget to order the stencil to apply the solder paste.</p>
 <p>Then you have to get the necessary components to assemble the PCB (the BOM is given in the hardware section, and Mouser or Digikey is your friend), assemble the components either with a brussel clamp or using a Pick &amp; Place machine, then use a reflow oven to solder the components. If you assemble the board manually, first pass the board with all the small components through the reflow oven and solder the ESP32 and the JST-PH connector on the bottom of the board by hand.</p>
 <p>Another solution if you don’t want to waste time manually assembling the board is to use the PCB Assembly service from seed Fusion. Under this service, seed Fusion will source your components based on the BOM, manufacture your PCB and do the assembly and soldering of the PCB. The disadvantage of this service is that you will not be able to order less than 10 boards and it will cost you about 140€ for these 10 boards + the shipping costs.</p>
 </section>
 <section id="mm-magnet">
-<h3>20 mm magnet<a class="headerlink" href="#mm-magnet" title="Lien permanent vers ce titre"></a></h3>
+<h3>20 mm magnet<a class="headerlink" href="#mm-magnet" title="Lien vers cette rubrique"></a></h3>
 <p>20 mm neodym magnet can be ordered at <a class="reference external" href="https://www.supermagnete.fr/aimants-disques-neodyme/disque-magnetique-20mm-2mm_S-20-02-N">supermagnet.fr</a></p>
 </section>
 <section id="lipo-1s-battery">
-<h3>Lipo 1S battery<a class="headerlink" href="#lipo-1s-battery" title="Lien permanent vers ce titre"></a></h3>
+<h3>Lipo 1S battery<a class="headerlink" href="#lipo-1s-battery" title="Lien vers cette rubrique"></a></h3>
 <p>A <a class="reference external" href="https://www.flashrc.com/tattu/22927-batterie_tattu_lipo_1s_37v_350mah_30c_prise_molex.html">350 mAh Lipo</a> battery is recommended. <a class="reference external" href="https://hobbyking.com/fr_fr/turnigy-nano-tech-500mah-1s-25-50c-lipo-pack-losi-mini-compatible-1.html?queryID=d166af1407953f939983d0e383a2d794&amp;objectID=79555&amp;indexName=hbk_live_products_analyticsbattery">500 mAh Turnigy lipo</a> from hobbyking is also a good choice.</p>
 <p>With the turnigy 500 mAh battery, the autonomy of one device is around 3h of use.</p>
 </section>
 </section>
 <section id="how-to-build-assemble-one-board">
-<h2>How to build assemble one board<a class="headerlink" href="#how-to-build-assemble-one-board" title="Lien permanent vers ce titre"></a></h2>
+<h2>How to build assemble one board<a class="headerlink" href="#how-to-build-assemble-one-board" title="Lien vers cette rubrique"></a></h2>
 <section id="step-1-mounting-the-magnet-in-the-lower-part-of-the-case">
-<h3>Step 1 : Mounting the magnet in the lower part of the case<a class="headerlink" href="#step-1-mounting-the-magnet-in-the-lower-part-of-the-case" title="Lien permanent vers ce titre"></a></h3>
+<h3>Step 1 : Mounting the magnet in the lower part of the case<a class="headerlink" href="#step-1-mounting-the-magnet-in-the-lower-part-of-the-case" title="Lien vers cette rubrique"></a></h3>
 <p>Use some epoxy glue to secure the magnet.</p>
 <img alt="../_images/magnet-mount-bottom-case.png" class="align-center" src="../_images/magnet-mount-bottom-case.png" />
 </section>
 <section id="step-2-mounting-of-the-magnet-in-the-base-part-of-the-peg">
-<h3>Step 2 : Mounting of the magnet in the base part of the peg<a class="headerlink" href="#step-2-mounting-of-the-magnet-in-the-base-part-of-the-peg" title="Lien permanent vers ce titre"></a></h3>
+<h3>Step 2 : Mounting of the magnet in the base part of the peg<a class="headerlink" href="#step-2-mounting-of-the-magnet-in-the-base-part-of-the-peg" title="Lien vers cette rubrique"></a></h3>
 <p>Use some glue also to secure the magnet.</p>
 <img alt="../_images/magnet-mount-peg.png" class="align-center" src="../_images/magnet-mount-peg.png" />
 </section>
 <section id="step-3-connect-the-lipo-battery-on-the-custom-board">
-<h3>Step 3 : Connect the Lipo battery on the custom board<a class="headerlink" href="#step-3-connect-the-lipo-battery-on-the-custom-board" title="Lien permanent vers ce titre"></a></h3>
+<h3>Step 3 : Connect the Lipo battery on the custom board<a class="headerlink" href="#step-3-connect-the-lipo-battery-on-the-custom-board" title="Lien vers cette rubrique"></a></h3>
 <img alt="../_images/lipo-mount.png" class="align-center" src="../_images/lipo-mount.png" />
 </section>
 <section id="step-4-install-the-lipo-battery-on-the-bottom-case">
-<h3>Step 4 : Install the lipo battery on the bottom case<a class="headerlink" href="#step-4-install-the-lipo-battery-on-the-bottom-case" title="Lien permanent vers ce titre"></a></h3>
+<h3>Step 4 : Install the lipo battery on the bottom case<a class="headerlink" href="#step-4-install-the-lipo-battery-on-the-bottom-case" title="Lien vers cette rubrique"></a></h3>
 <img alt="../_images/lipo-bottom-case-mount.png" class="align-center" src="../_images/lipo-bottom-case-mount.png" />
 </section>
 <section id="step-5-screw-the-custom-board-on-the-bottom-case">
-<h3>Step 5 : Screw the custom board on the bottom case<a class="headerlink" href="#step-5-screw-the-custom-board-on-the-bottom-case" title="Lien permanent vers ce titre"></a></h3>
+<h3>Step 5 : Screw the custom board on the bottom case<a class="headerlink" href="#step-5-screw-the-custom-board-on-the-bottom-case" title="Lien vers cette rubrique"></a></h3>
 <p>Screw the board using only two screw.</p>
 <img alt="../_images/screw-board.png" class="align-center" src="../_images/screw-board.png" />
 </section>
 <section id="step-6-put-the-top-case-on-the-bottom-case">
-<h3>Step 6 : Put the top case on the bottom case<a class="headerlink" href="#step-6-put-the-top-case-on-the-bottom-case" title="Lien permanent vers ce titre"></a></h3>
+<h3>Step 6 : Put the top case on the bottom case<a class="headerlink" href="#step-6-put-the-top-case-on-the-bottom-case" title="Lien vers cette rubrique"></a></h3>
 <p>Two snap fit are provided to secure the top case and facilitate the disassembly</p>
 <img alt="../_images/top-case-mount.png" class="align-center" src="../_images/top-case-mount.png" />
 </section>
 <section id="step-7-assembly-of-the-storage-box">
-<h3>Step 7 : Assembly of the storage box<a class="headerlink" href="#step-7-assembly-of-the-storage-box" title="Lien permanent vers ce titre"></a></h3>
+<h3>Step 7 : Assembly of the storage box<a class="headerlink" href="#step-7-assembly-of-the-storage-box" title="Lien vers cette rubrique"></a></h3>
 <p>The bottom and the top of the box are assembled with two hinges through which a 1.75 mm PETG wire is passed.</p>
 <img alt="../_images/box-mount.png" class="align-center" src="../_images/box-mount.png" />
 <p>The box is designed to receive a set of two devices.</p>
@@ -153,7 +158,7 @@
 </section>
 </section>
 <section id="how-to-use-the-devices">
-<h2>How to use the devices<a class="headerlink" href="#how-to-use-the-devices" title="Lien permanent vers ce titre"></a></h2>
+<h2>How to use the devices<a class="headerlink" href="#how-to-use-the-devices" title="Lien vers cette rubrique"></a></h2>
 <p>TBD.</p>
 </section>
 </section>
@@ -168,7 +173,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, Alain Désandré.</p>
+    <p>&#169; Droits d'auteur 2020, Alain Désandré.</p>
   </div>
 
   Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un

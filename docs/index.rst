@@ -29,11 +29,11 @@ Two extras libraries are used in the project : i2clibdev and MPU6050 from `jrowb
 
 These libraries are in the extra_components directory of the project.
 
-This project is build using the ESP-IDF 4.0.3 CMake Build System. Please refer to the 
+This project is build using the ESP-IDF 5.5.1 CMake Build System. Please refer to the 
 `espressif documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ 
 for more information to setup an ESP-IDF environnement.
 
-.. note:: Take care to build the project with an ESP-IDF framework < v4.1 (tcp_adaptor & event_loop APIs have changed since v4.1).
+.. note:: Take care to build the project with an ESP-IDF framework > v5.0.
 
 I highly recommend you to use the `Vscode <https://code.visualstudio.com/download>`_ IDE and the 
 `espressif ESP-IDF Vscode Extension <https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension>`_ to build the project.

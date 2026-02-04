@@ -8,6 +8,12 @@ Logical design
 The following figure shows the overall logical architecture of the system composed of a server and a client.
 
 .. image:: /_static/software-design-architecture.png
+   :align: center
+
+The following sequence diagram shows the global exchanges between the various components of the system.
+
+.. image:: /_static/GliderThrowSequence.png
+   :align: center
 
 Files organization
 ==================
