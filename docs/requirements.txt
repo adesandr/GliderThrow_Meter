@@ -1,3 +1,4 @@
+# This file contains all the tools requirements needed by ReadTheDocs to build the documentation.
 docutils<0.20,>=0.15.2
 sphinx==6.2.1
 sphinx-rtd-theme==1.2.2
