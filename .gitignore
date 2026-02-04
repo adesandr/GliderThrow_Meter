@@ -7,7 +7,7 @@ Esp_mad_Server/build/*
 !Esp_mad_Server/build/esp-mad-server.bin
 Esp_mad_Server/.vscode/
 resultBuild.txt
-.vscode/
-docs/_build/
-docs/html/
-docs/latex/
+.vscode/*
+docs/_build/*
+docs/html/*
+docs/latex/*
