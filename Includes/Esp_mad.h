@@ -18,7 +18,10 @@
 
 #define AP_WIFI_SSID    "ESP_MAD" 
 
-#define LOLIN_32 //ESP_MAD_BOARD               /* Update depending your ESP32 dev. board. set to ESP_MAD_BOARD developped for the project */
+#define LOLIN_32 //ESP_MAD_BOARD             // Update depending your ESP32 dev. board. set to ESP_MAD_BOARD developped for the project
+
+#define MAXIMUM_CHORD_SIZE  99               // Maximum chord size in mm
+#define MINIMUM_CHORD_SIZE  0                // Minimum chod size in mm
 
 /*--- Boards used for first prototyping ---*/
 #ifdef X_ESP32

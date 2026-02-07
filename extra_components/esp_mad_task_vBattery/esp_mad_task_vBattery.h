@@ -16,12 +16,16 @@
 	 * PROTYPES
 	 *------------------------------------------*/
 	void task_vBattery(void*);
-	static void print_char_val_type(esp_adc_cal_value_t);
 
 	/*------------------------------------------
 	 * DEFINE
 	 *------------------------------------------*/
-	#define DEFAULT_VREF    1100        /* As default 1100 mV for ADC calibration as recommended by espressif */
-	#define NB_ADC_SAMPLE   64          /* Samples number used to read the ADC */ 
+	#define TEMPO_READ_BATT_VOLTAGE	30000       	// Battery Voltage is read each 30s 	
+	#define NB_ADC_SAMPLE   		64          	// Samples number used to read the ADC. Recommanded in the API Guide
+	#define ADC_UNIT				ADC_UNIT_1		// Fisrt ADC unit is used	
+	#define ADC_CHANNEL				ADC_CHANNEL_7	// VBAT Sense on ESP_MAD board is connected to IO35, so channel 7 
+	#define VREF					1000			// 1100 mv Theorical Vref
+	#define K_FACTOR				0.30			// Attenuation factor, empiric rule with a multimeter
+	#define ADC_DMAX				4095			// 4095 unit for 12 bits resolution
 
 #endif

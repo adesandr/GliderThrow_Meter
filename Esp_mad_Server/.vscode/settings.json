@@ -70,5 +70,6 @@
     "--background-index",
     "--query-driver=C:\\Users\\Eliot\\.espressif\\tools\\xtensa-esp-elf\\esp-14.2.0_20241119\\xtensa-esp-elf\\bin\\xtensa-esp32-elf-gcc.exe",
     "--compile-commands-dir=c:\\Users\\Eliot\\esp\\GliderThrow_Meter\\Esp_mad_Server\\build"
-  ]
+  ],
+  "idf.currentSetup": "/home/adesandr/esp/v5.5.1/esp-idf"
 }

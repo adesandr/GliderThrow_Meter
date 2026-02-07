@@ -397,9 +397,7 @@ httpd_uri_t sensor2 = {
 esp_err_t chord_post_handler(httpd_req_t *req)
 {
 
-    char buf[50];
-
-    char param[3];
+    char buf[50] = "\n";
 
     int oldchordValue = g_chordControlSurface;
 
@@ -440,21 +438,30 @@ esp_err_t chord_post_handler(httpd_req_t *req)
 
         ESP_LOGI(TAG, "====================================");
 
-        param[0] = buf[11];
-        param[1] = buf[12];
-        param[2] = '\0';
+        /*--- chord Value recovery ---*/
+        const char * separator = "chordValue=";
+        char * strToken = strtok(buf, separator);
+        iTemp = atoi(strToken);
 
-        iTemp = atoi(param);
-
-        if (iTemp > 0)
+        /*--- check limit ---*/
+        if (iTemp > MINIMUM_CHORD_SIZE)
         {
+            if (iTemp < MAXIMUM_CHORD_SIZE)
+            {
+                if (iTemp != oldchordValue)
+                    {
+                    g_chordControlSurface = iTemp;
 
-            g_chordControlSurface = iTemp;
-
-            sprintf(buf, "Changing chord from %d mm to %d mm\n", oldchordValue, g_chordControlSurface);
+                    sprintf(buf, "Changing chord from %d mm to %d mm\n", oldchordValue, g_chordControlSurface);     
+                    }
+                else
+                    sprintf(buf, "ERROR : you enter the same %d mm chord", iTemp);
+            }
+            else
+                sprintf(buf, "ERROR : chord must be <= %d mm\n", MAXIMUM_CHORD_SIZE); 
         }
         else
-            sprintf(buf, "ERROR : chord must be a positive value\n");
+            sprintf(buf, "ERROR : chord must be > %d mm\n", MINIMUM_CHORD_SIZE);
 
         /* Send response to the client */
         httpd_resp_set_type(req, "text/plain");

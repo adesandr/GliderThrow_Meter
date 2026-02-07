@@ -36,5 +36,6 @@
     "wifi"
   ],
   "files.autoSave": "afterDelay",
-  "idf.flashType": "UART"
+  "idf.flashType": "UART",
+  "idf.currentSetup": "/home/adesandr/esp/v5.5.1/esp-idf"
 }
